@@ -1,0 +1,21 @@
+>v1.0.0 : Release (11.08.2018)
+>>The app is functional.
+
+>v1.0.1 : (11.08.2018)
+>>Creation of this 'Changelog.txt' file.
+>>The name of the database file was changed. This was motivated by a need to store multiple
+  database files in a single location without name collision. A unique identifier was added
+  at the end of the name.
+>>Slight code cleanup in 'Send_database.java'. The email subject was modified, as the 'user ID'
+  is redundant and can be changed.
+
+>v1.0.2 (SP1) : (21.10.2018)
+>>The 'Show Fuel Duration' bug was investigated, but the feature seems to work
+>>The deprecated build.gradle commands that were triggering warnings at compile-time were
+  replaced by their newer counterparts.
+
+>v1.0.3 (SP1) : (01.11.2018)
+>>Minor tutorial text changes
+>>Tutorial: If there is no 'out of fuel penalty', then losing points due to
+  not refueling isn't mentioned.
+

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ Replace com.test.game with the identifier of your game below, e.g.
+     com.gamemaker.game
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.outcar.game"
+    android:installLocation="auto"
+    android:versionCode="1"
+    android:versionName="@string/app_version">
+
+    <!-- minimum:     Android 4.1 "JELLY_BEAN", released mid-2012, ~99% devices eligible -->
+    <!-- recommended: Android 5.0 "LOLLIPOP",   released end-2014, ~82% devices eligible -->
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="21" />
+
+    <!-- OpenGL ES 2.0 -->
+    <uses-feature android:glEsVersion="0x00020000" />
+
+    <!-- Allow writing to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Allow access to the vibrator, but deprecated:
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+
+    <!-- Create a Java class extending SDLActivity and place it in a
+         directory under app/src/main/java matching the package,
+         e.g. app/src/main/java/com/gamemaker/game/MyGame.java
+         then replace "SDLActivity" with the name of your class (e.g. "MyGame")
+         in the XML below.
+         An example Java class can be found in README-android.md -->
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher4"
+        android:label="@string/app_name"
+        android:theme="@style/MenusTheme">
+
+        <!--
+        Example of setting SDL hints from AndroidManifest.xml:
+        <meta-data android:name="SDL_ENV.SDL_ACCELEROMETER_AS_JOYSTICK" android:value="0"/>
+        -->
+
+        <activity
+            android:name=".OutCar"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/CarGameTheme">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+            <!-- Drop file event -->
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            -->
+        </activity>
+        <!-- android:label="@string/app_name" -->
+        <activity
+            android:name="org.libsdl.app.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme" />
+        <!-- android:label="@string/app_name" -->
+        <activity
+            android:name="org.libsdl.app.SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- android:label="@string/title_activity_splash_screen" -->
+        <activity
+            android:name="org.libsdl.app.ChooseLanguage"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme" />
+        <!-- android:label="@string/title_activity_choose_language" -->
+        <activity
+            android:name="org.libsdl.app.GatherInfo"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme" />
+        <!-- android:label="@string/title_activity_gather_info" -->
+        <activity
+            android:name="org.libsdl.app.Tutorial"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme" />
+        <activity android:name="org.libsdl.app.Send_database"
+            android:configChanges="keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenusTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            </intent-filter></activity>
+    </application>
+
+</manifest>

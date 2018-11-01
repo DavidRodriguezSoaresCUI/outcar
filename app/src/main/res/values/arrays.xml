@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Translated text used in the menus -->
+    <!-- Norm : 1st item=English, 2nd item==French, 3rd item=German -->
+    <string-array name="language">
+        <item>English</item>
+        <item>Français</item>
+        <item>Deutsch</item>
+    </string-array>
+    <string-array name="welcome2ask4info">
+        <item>Welcome to</item>
+        <item>Bienvenue à</item>
+        <item>Wilkommen zum</item>
+    </string-array>
+    <string-array name="ask4info">
+        <item>Please enter the following information :</item>
+        <item>S\'il vous plaît, indiquez les données suivantes :</item>
+        <item>Bitte gib folgende Daten an :</item>
+    </string-array>
+    <string-array name="ask4ident">
+        <item>ID code :</item>
+        <item>Code d\'identification :</item>
+        <item>ID-Code :</item>
+    </string-array>
+    <string-array name="ask4age">
+        <item>Age :</item>
+        <item>Âge :</item>
+        <item>Alter :</item>
+    </string-array>
+    <string-array name="ask4gender">
+        <item>Gender :</item>
+        <item>Genre :</item>
+        <item>Geschlecht :</item>
+    </string-array>
+    <string-array name="ask4hand">
+        <item>Handedness :</item>
+        <item>Dominance manuelle :</item>
+        <item>Stärke Hand :</item>
+    </string-array>
+    <string-array name="infoFound">
+        <item>Information found for ID code :</item>
+        <item>Informations trouvées pour le code d\'identification :</item>
+        <item>Gefundene Informationen für den Indentificationscode :</item>
+    </string-array>
+    <string-array name="button_editInfo">
+        <item>Edit informations</item>
+        <item>Modifier les informations</item>
+        <item>Informationen ändern</item>
+    </string-array>
+    <string-array name="button_startGame">
+        <item>Start game</item>
+        <item>Démarrer le jeu</item>
+        <item>Spiel starten</item>
+    </string-array>
+    <string-array name="button_startTutorial">
+        <item>Start tutorial</item>
+        <item>Démarrer le tutoriel</item>
+        <item>Start tutorial</item>
+    </string-array>
+    <string-array name="button_delSave">
+        <item>Delete save file</item>
+        <item>Supprimer la sauvegarde</item>
+        <item>Speicherung löschen</item>
+    </string-array>
+    <string-array name="text_invalidInfo">
+        <item>Invalid info !\nPlease fill al fields.</item>
+        <item>Informations invalides !\nVeuillez compléter tous les champs.</item>
+        <item>Ungültige Informationen!\nBitte füllen Sie alle Felder.</item>
+    </string-array>
+    <string-array name="touch2continue">
+        <item>Touch to continue ..</item>
+        <item>Touchez pour continuer ..</item>
+        <item>Touch to continue ..</item>
+    </string-array>
+    <string-array name="exit_to_main_menu">
+        <item>Return to the main menu</item>
+        <item>Revenir au menu principal</item>
+        <item>Kehre zum Hauptmenü zurück</item>
+    </string-array>
+    <string-array name="send_database_error">
+        <item>Error : Couldn't find the database !</item>
+        <item>Erreur: Impossible de trouver la base de données !</item>
+        <item>Fehler: Die Datenbank konnte nicht gefunden werden !</item>
+    </string-array>
+    <string-array name="send_database_button">
+        <item>Send database via email\n(Please select email app)</item>
+        <item>Envoyer la base de données par e-mail\n
+            (Veuillez sélectionner une application de messagerie)</item>
+        <item>Datenbank per E-Mail senden\n(Bitte E-Mail-App auswählen)</item>
+    </string-array>
+
+
+    <!-- Translated text used in the tutorial -->
+    <!-- Norm : 1st item=English, 2nd item==French, 3rd item=German -->
+    <!-- TODO: English and German translations -->
+    <string-array name="instr_cruiser_0">
+        <item>Cher participant, chère participante,\n\nPendant ce jeu, vous allez conduire une
+            voiture sur une route sur laquelle il y aura également d’autres véhicules. Votre tâche
+            sera de piloter tout en essayant d\'éviter les collisions avec les autres
+            automobilistes.</item>
+        <item>Cher participant, chère participante,\n\nPendant ce jeu, vous allez conduire une
+            voiture sur une route sur laquelle il y aura également d’autres véhicules. Votre tâche
+            sera de piloter tout en essayant d\'éviter les collisions avec les autres
+            automobilistes.</item>
+        <item>Cher participant, chère participante,\n\nPendant ce jeu, vous allez conduire une
+            voiture sur une route sur laquelle il y aura également d’autres véhicules. Votre tâche
+            sera de piloter tout en essayant d\'éviter les collisions avec les autres
+            automobilistes.</item>
+    </string-array>
+    <string-array name="instr_cruiser_1">
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.) ou si vous
+            oubliez de faire le plein (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.) ou si vous
+            oubliez de faire le plein (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.) ou si vous
+            oubliez de faire le plein (-%d pts.).</item>
+    </string-array>
+    <!-- Tutorial scores text when there is no 'out of fuel' penalty -->
+    <string-array name="instr_cruiser_1_no_oof_penalty">
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
+            Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.).</item>
+    </string-array>
+    <string-array name="instr_cruiser_2">
+        <item>L\'interface ressemble à ceci.</item>
+        <item>L\'interface ressemble à ceci.</item>
+        <item>L\'interface ressemble à ceci.</item>
+    </string-array>
+    <string-array name="instr_cruiser_3">
+        <item>Il vous est possible d\'interrompre le jeu en appuyant sur le bouton pause, en haut
+            de l\'écran.\n\nAppuyez à nouveau pour reprendre la partie.</item>
+        <item>Il vous est possible d\'interrompre le jeu en appuyant sur le bouton pause, en haut
+            de l\'écran.\n\nAppuyez à nouveau pour reprendre la partie.</item>
+        <item>Il vous est possible d\'interrompre le jeu en appuyant sur le bouton pause, en haut
+            de l\'écran.\n\nAppuyez à nouveau pour reprendre la partie.</item>
+    </string-array>
+    <string-array name="instr_cruiser_4">
+        <item>La voiture se pilote en touchant une des trois cases qui se trouvent au même niveau
+            que la voiture.</item>
+        <item>La voiture se pilote en touchant une des trois cases qui se trouvent au même niveau
+            que la voiture.</item>
+        <item>La voiture se pilote en touchant une des trois cases qui se trouvent au même niveau
+            que la voiture.</item>
+    </string-array>
+    <string-array name="instr_cruiser_5">
+        <item>La voiture a besoin d\'essence pour avancer. Ainsi, votre tâche
+            sera également de faire le plein de temps en temps. Pour voir combien de carburant il
+            vous reste, vous pouvez appuyer sur la jauge en bas de l\'écran (icône au
+            milieu).</item>
+        <item>La voiture a besoin d\'essence pour avancer. Ainsi, votre tâche
+            sera également de faire le plein de temps en temps. Pour voir combien de carburant il
+            vous reste, vous pouvez appuyer sur la jauge en bas de l\'écran (icône au
+            milieu).</item>
+        <item>La voiture a besoin d\'essence pour avancer. Ainsi, votre tâche
+            sera également de faire le plein de temps en temps. Pour voir combien de carburant il
+            vous reste, vous pouvez appuyer sur la jauge en bas de l\'écran (icône au
+            milieu).</item>
+    </string-array>
+    <string-array name="instr_cruiser_6">
+        <item>Le niveau d\'essence s\'affichera pendant quelques secondes et disparaîtra par la
+            suite.</item>
+        <item>Le niveau d\'essence s\'affichera pendant quelques secondes et disparaîtra par la
+            suite.</item>
+        <item>Le niveau d\'essence s\'affichera pendant quelques secondes et disparaîtra par la
+            suite.</item>
+    </string-array>
+    <string-array name="instr_cruiser_7">
+        <item>Vous pouvez prendre de l\'essence en appuyant sur le tuyau d\'essence en bas de
+            l\'écran.\nVous ne pouvez prendre de l\'essence que lorsque le
+            niveau est dans la zone rouge.</item>
+        <item>Vous pouvez prendre de l\'essence en appuyant sur le tuyau d\'essence en bas de
+            l\'écran.\nVous ne pouvez prendre de l\'essence que lorsque le
+            niveau est dans la zone rouge.</item>
+        <item>Vous pouvez prendre de l\'essence en appuyant sur le tuyau d\'essence en bas de
+            l\'écran.\nVous ne pouvez prendre de l\'essence que lorsque le
+            niveau est dans la zone rouge.</item>
+    </string-array>
+    <string-array name="instr_cruiser_8">
+        <item>Si vous oubliez de prendre de l\'essence et que le réservoir se vide totalement, il
+            se remplit automatiquement mais vous ne recevez aucun point.\n\nPensez donc à vérifier
+            votre niveau de carburant régulièrement !</item>
+        <item>Si vous oubliez de prendre de l\'essence et que le réservoir se vide totalement, il
+            se remplit automatiquement mais vous ne recevez aucun point.\n\nPensez donc à vérifier
+            votre niveau de carburant régulièrement !</item>
+        <item>Si vous oubliez de prendre de l\'essence et que le réservoir se vide totalement, il
+            se remplit automatiquement mais vous ne recevez aucun point.\n\nPensez donc à vérifier
+            votre niveau de carburant régulièrement !</item>
+    </string-array>
+    <string-array name="instr_cruiser_9">
+        <item>Vous êtes arrivé(e) au terme de ce tutoriel.\n\nBonne chance !</item>
+        <item>Vous êtes arrivé(e) au terme de ce tutoriel.\n\nBonne chance !</item>
+        <item>Vous êtes arrivé(e) au terme de ce tutoriel.\n\nBonne chance !</item>
+    </string-array>
+    <string-array name="end_tutorial_checkBox">
+        <item>J\'ai compris le contenu de ce tutoriel</item>
+        <item>J\'ai compris le contenu de ce tutoriel</item>
+        <item>J\'ai compris le contenu de ce tutoriel</item>
+    </string-array>
+    <string-array name="end_tutorial_button_unchecked">
+        <item>Revoir ce tutoriel</item>
+        <item>Revoir ce tutoriel</item>
+        <item>Revoir ce tutoriel</item>
+    </string-array>
+    <string-array name="end_tutorial_button_checked">
+        <item>Continuer</item>
+        <item>Continuer</item>
+        <item>Continuer</item>
+    </string-array>
+
+
+    <!-- Translated text used in the 'Spinners', the standard dropdown menus -->
+    <!-- Norm : STD=Standard, 0=English, 1=French, 2=German -->
+    <!-- The 'STD' string array corresponds to the standardised text used in
+         the CSV file; must have the same number of items than translations -->
+    <string-array name="error">
+        <item>ERROR</item>
+    </string-array>
+    <string-array name="genderSTD">
+        <item>N/A</item>
+        <item>F</item>
+        <item>M</item>
+    </string-array>
+    <string-array name="gender0">
+        <item>...</item>
+        <item>female</item>
+        <item>male</item>
+    </string-array>
+    <string-array name="gender1">
+        <item>...</item>
+        <item>femme</item>
+        <item>homme</item>
+    </string-array>
+    <string-array name="gender2">
+        <item>...</item>
+        <item>weiblich</item>
+        <item>männlich</item>
+    </string-array>
+    <string-array name="handSTD">
+        <item>N/A</item>
+        <item>R</item>
+        <item>L</item>
+    </string-array>
+    <string-array name="hand0">
+        <item>...</item>
+        <item>right-handed</item>
+        <item>left-handed</item>
+    </string-array>
+    <string-array name="hand1">
+        <item>...</item>
+        <item>droitier</item>
+        <item>gaucher</item>
+    </string-array>
+    <string-array name="hand2">
+        <item>...</item>
+        <item>rechtshänder</item>
+        <item>linkshänder</item>
+    </string-array>
+
+    <!-- Earlier version, with 'ambidextruous' : deprecated
+    <string-array name="handSTD">
+        <item>N/A</item>
+        <item>R</item>
+        <item>L</item>
+        <item>LR</item>
+    </string-array>
+    <string-array name="hand0">
+        <item>...</item>
+        <item>right-handed</item>
+        <item>left-handed</item>
+        <item>ambidexterous</item>
+    </string-array>
+    <string-array name="hand1">
+        <item>...</item>
+        <item>droitier</item>
+        <item>gaucher</item>
+        <item>ambidextre</item>
+    </string-array>
+    <string-array name="hand2">
+        <item>...</item>
+        <item>rechtshänder</item>
+        <item>linkshänder</item>
+        <item>beidhändig</item>
+    </string-array>-->
+
+</resources>

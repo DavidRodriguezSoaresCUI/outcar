@@ -1,0 +1,5 @@
+In accordance with Creative Commons-BY license, these are the accreditations 
+that should be visible in the application:
+
+Bitmap Font Pack (geebeeyay-8x8 font) - Zingot Games (www.zingot.com),
+LCD numbers - by Andi Peredri

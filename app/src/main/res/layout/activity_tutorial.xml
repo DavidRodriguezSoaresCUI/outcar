@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tutorial_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="onTutorialClicked"
+    tools:context=".Tutorial">
+
+    <ImageView
+        android:id="@+id/tutoriel_text_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:gravity="center_vertical"
+        android:src="@drawable/txt_bkgrd"/>
+
+    <TextView
+        android:id="@+id/tutorial_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        android:textSize="19sp"/>
+
+    <CheckBox
+        android:id="@+id/end_tutorial_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/do_not_display"
+        android:onClick="onEnd_tutorial_checkBox_Clicked"
+        app:layout_constraintBottom_toTopOf="@id/end_tutorial_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/end_tutorial_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/do_not_display"
+        android:onClick="onEnd_tutorial_button_Clicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/touch_to_continue_imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/finger5_2"
+        android:background="@color/colorTuto"
+        android:layout_marginBottom="20dp"
+        android:text="@string/do_not_display"
+        android:onClick="onTutorialClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

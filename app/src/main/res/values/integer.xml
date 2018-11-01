@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="default_splashscreen_delay">3000</integer>
+    <integer name="magic_number">781584</integer>
+    <integer name="tutorial_pages">10</integer>
+    <integer name="config_items">9</integer>
+    <integer name="pts_index">5</integer>
+
+</resources>

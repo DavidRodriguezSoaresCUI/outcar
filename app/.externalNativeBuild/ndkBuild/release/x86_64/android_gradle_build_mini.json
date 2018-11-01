@@ -1,0 +1,53 @@
+{
+  "buildFiles": [
+    "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk",
+    "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 clean"
+  ],
+  "libraries": {
+    "SDL2-release-x86_64": {
+      "artifactName": "SDL2",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libSDL2.so",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libSDL2.so"
+    },
+    "main-release-x86_64": {
+      "artifactName": "main",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libmain.so",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libmain.so"
+    },
+    "png-release-x86_64": {
+      "artifactName": "png",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libpng.a",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libpng.a"
+    },
+    "SDL2_image-release-x86_64": {
+      "artifactName": "SDL2_image",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libSDL2_image.so",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libSDL2_image.so"
+    },
+    "webpdecoder_static-release-x86_64": {
+      "artifactName": "webpdecoder_static",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libwebpdecoder_static.a",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libwebpdecoder_static.a"
+    },
+    "webp-release-x86_64": {
+      "artifactName": "webp",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libwebp.a",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libwebp.a"
+    },
+    "jpeg-release-x86_64": {
+      "artifactName": "jpeg",
+      "buildCommand": "C:\\Users\\David\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\jni\\Application.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\lib APP_PLATFORM\u003dandroid-14 C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103/app/build/intermediates/ndkBuild/release/obj/local/x86_64/libjpeg.a",
+      "abi": "x86_64",
+      "output": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64\\libjpeg.a"
+    }
+  }
+}

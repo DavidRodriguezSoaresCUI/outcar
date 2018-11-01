@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Edit these when necessary -->
+    <string name="app_name" translatable="false">Cal Cruiser</string>
+    <string name="ori_app_name" translatable="false">Swiss Cruiser</string> <!-- can be ignored -->
+    <string name="app_version" translatable="false">SP1 1.0.3 (pre-release)</string>
+    <string name="email_dest_database">example@example.com</string>
+
+    <string name="title_activity_main" translatable="false">MainActivity</string>
+    <string name="title_activity_splash_screen" translatable="false">SplashScreen</string>
+    <string name="title_activity_choose_language" translatable="false">ChooseLanguage</string>
+    <string name="title_activity_gather_info" translatable="false">GatherInfo</string>
+
+    <!-- Others -->
+    <string name="gather_info" translatable="false">Gather Info</string>
+
+    <!-- Hints -->
+    <string name="identHint" translatable="false">1000~99999</string>
+    <string name="ageHint" translatable="false">5~100</string>
+
+    <!-- Strings used for error/popup -->
+    <string name="do_not_display" translatable="false">This text shouldn\'t be displayed</string>
+    <string name="press2exit">Press back again to exit</string>
+    <string name="no_saved_pers_info">There is no saved personal information.</string>
+    <string name="create_file_error">File/folder creation error.</string>
+    <string name="saved_pers_error">Something went wrong when reading personal information.</string>
+    <string name="std_error_msg">Sorry. Something went wrong.</string>
+    <string name="cant_go_back">You can\'t return now.</string>
+
+    <!-- Strings used in file manipulation -->
+    <string name="pers_info_file">pers_info.csv</string>
+    <string name="game_config_file">cruiser_config.csv</string>
+    <string name="game_config_file_1stline">// Game duration [s],Fuel tank duration [s],Speed [%],
+        Show Fuel duration [ms],Display numeric clock [0=no 1=yes],Avoid crash reward [pts],
+        Refuel Reward [pts],Crash penalty [pts],Out of Fuel penalty [pts]</string>
+    <string name="game_config_file_default_values">300,30,100,2000,1,33,300,100,66</string>
+    <string name="stat_db_file">cruiserdb.%s.csv</string>
+    <string name="stat_db_file_1stline">//Code,Age,Sexe,Main,Date/Heure,
+        Options du jeux,Durée du jeu,Score,Hit Count,Hit Times,Refuel Count,Refuel Times,
+        Auto Refuel Count,Auto Refuel Times,Show Count,Show Times, Void Count,Void Times</string>
+
+    <!-- Strings used in hidden menu (untranslated) -->
+    <string name="send_email_chooser_title">Send email...</string>
+    <string name="send_email_message_subject">Cal Cruiser database submission</string>
+
+
+
+
+
+</resources>
