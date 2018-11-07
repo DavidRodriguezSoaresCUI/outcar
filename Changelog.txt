@@ -19,3 +19,7 @@
 >>Tutorial: If there is no 'out of fuel penalty', then losing points due to
   not refueling isn't mentioned.
 
+>v1.0.4 (SP1) : (05.11.2018)
+>>Tutoriel: Added a 'go back one page' button, resolved a few bugs and slight code
+  optimisation.
+

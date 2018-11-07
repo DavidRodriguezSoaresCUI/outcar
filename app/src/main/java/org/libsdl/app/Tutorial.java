@@ -16,7 +16,7 @@ public class Tutorial extends Activity {
     private View tutorial_view;
     private TextView tutorial_text;
     private ImageView tutorial_text_background;
-    private Button end_tutorial_button, touch_to_continue;
+    private Button end_tutorial_button, touch_to_continue, touch_go_back;
     private CheckBox end_tutorial_checkBox;
     private Resources Res;
 
@@ -34,15 +34,27 @@ public class Tutorial extends Activity {
         end_tutorial_button      = (Button)    findViewById( R.id.end_tutorial_button );
         end_tutorial_checkBox    = (CheckBox)  findViewById( R.id.end_tutorial_checkBox );
         touch_to_continue        = (Button)    findViewById( R.id.touch_to_continue_imageButton );
+        touch_go_back            = (Button)    findViewById( R.id.touch_to_go_back_imageButton );
         Res = getResources();
         state = 0;
         maxState = Res.getInteger( R.integer.tutorial_pages );
 
-        set_background_and_text();
+        // Adds padding to the bottom, moving text higher on screen
+        tutorial_text.setPadding(
+                tutorial_text.getPaddingLeft(),
+                tutorial_text.getPaddingTop(),
+                tutorial_text.getPaddingRight(),
+                tutorial_text.getPaddingBottom() + 100);
+        tutorial_text_background.setPadding(
+                tutorial_text_background.getPaddingLeft(),
+                tutorial_text_background.getPaddingTop(),
+                tutorial_text_background.getPaddingRight(),
+                tutorial_text_background.getPaddingBottom() + 100);
 
+        update_tutorial_page();
     }
 
-    private void set_background_and_text()
+    private void update_tutorial_page()
     {
         switch (state){
             case 0:
@@ -52,24 +64,22 @@ public class Tutorial extends Activity {
                 tutorial_text_background.setVisibility(View.GONE);
                 end_tutorial_checkBox.setVisibility(View.GONE);
                 end_tutorial_button.setVisibility(View.GONE);
+                touch_go_back.setVisibility(View.GONE);
                 break;
             case 1:
                 setTutorialText_forScores();
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_00 );
+                touch_go_back.setText( Res.getStringArray( R.array.touch2goBack )[language] );
+                touch_go_back.setVisibility(View.VISIBLE);
+                touch_to_continue.setVisibility( View.VISIBLE );
+                tutorial_text_background.setVisibility(View.GONE);
                 break;
             case 2:
                 setTutorialText();
-                // Adds padding to the bottom, moving text higher on screen
-                tutorial_text.setPadding( tutorial_text.getPaddingLeft(),
-                        tutorial_text.getPaddingTop(),
-                        tutorial_text.getPaddingRight(),
-                        tutorial_text.getPaddingBottom()+100);
                 tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_01 );
                 touch_to_continue.setVisibility( View.GONE );
                 tutorial_text_background.setVisibility(View.VISIBLE);
-                tutorial_text_background.setPadding( tutorial_text_background.getPaddingLeft(),
-                        tutorial_text_background.getPaddingTop(),
-                        tutorial_text_background.getPaddingRight(),
-                        tutorial_text_background.getPaddingBottom()+100);
+                touch_go_back.setText( "" );
                 break;
             case 3:
                 setTutorialText();
@@ -94,6 +104,9 @@ public class Tutorial extends Activity {
             case 8:
                 setTutorialText();
                 tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_07 );
+                tutorial_text_background.setVisibility(View.VISIBLE);
+                end_tutorial_checkBox.setVisibility(View.GONE);
+                end_tutorial_button.setVisibility(View.GONE);
                 break;
             case 9:
                 setTutorialText();
@@ -222,8 +235,17 @@ public class Tutorial extends Activity {
     }
 
     public void onTutorialClicked( View v ) {
-        if ( ++state < maxState ) {
-            set_background_and_text();
+        if ( state + 1 < maxState ) {
+            state++;
+            update_tutorial_page();
+        }
+    }
+
+    public void onTutorialGoBackClicked( View v ) {
+        if ( 0 <= state - 1 ) {
+            state--;
+            update_tutorial_page();
+            Toast.makeText(Tutorial.this, "State:"+String.valueOf(state), Toast.LENGTH_SHORT).show();
         }
     }
 

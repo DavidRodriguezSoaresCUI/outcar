@@ -1,154 +1,154 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\bcce4de9e1942fc28aa0f46f04822090\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\958d0adb7e6b6b943fde34806ce537ae\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\dc1a8c6896fee6054830096c6428b177\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
-INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:1-112:12
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7ad5cafe2031d8b248407bfa301de8b5\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\d74c6c7a0a7af06a02a7e2f4aa64fbb5\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\bde71ef5a952348ecb4ee304dcada674\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
+INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:1-112:12
 	package
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:6:5-30
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:6:5-30
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:9:5-46
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:9:5-46
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:5:11-69
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:5:11-69
 	android:versionCode
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:8:5-28
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:8:5-28
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml
 	android:installLocation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:7:5-35
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:7:5-35
 uses-sdk
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:13:5-15:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\bcce4de9e1942fc28aa0f46f04822090\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\bcce4de9e1942fc28aa0f46f04822090\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\958d0adb7e6b6b943fde34806ce537ae\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\958d0adb7e6b6b943fde34806ce537ae\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\dc1a8c6896fee6054830096c6428b177\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\dc1a8c6896fee6054830096c6428b177\AndroidManifest.xml:20:5-43
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:13:5-15:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7ad5cafe2031d8b248407bfa301de8b5\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7ad5cafe2031d8b248407bfa301de8b5\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\d74c6c7a0a7af06a02a7e2f4aa64fbb5\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\d74c6c7a0a7af06a02a7e2f4aa64fbb5\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\bde71ef5a952348ecb4ee304dcada674\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\bde71ef5a952348ecb4ee304dcada674\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:15:9-38
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:15:9-38
 	android:minSdkVersion
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:14:9-35
 uses-feature#0x00020000
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:18:5-54
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:18:5-54
 	android:glEsVersion
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:18:19-51
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:18:19-51
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:21:5-81
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:21:5-81
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:21:22-78
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:21:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:22:5-80
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:22:5-80
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:22:22-77
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:22:22-77
 application
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:35:5-110:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\bcce4de9e1942fc28aa0f46f04822090\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\bcce4de9e1942fc28aa0f46f04822090\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\958d0adb7e6b6b943fde34806ce537ae\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\958d0adb7e6b6b943fde34806ce537ae\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\dc1a8c6896fee6054830096c6428b177\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\dc1a8c6896fee6054830096c6428b177\AndroidManifest.xml:22:5-20
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:35:5-110:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7ad5cafe2031d8b248407bfa301de8b5\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\David\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7ad5cafe2031d8b248407bfa301de8b5\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\d74c6c7a0a7af06a02a7e2f4aa64fbb5\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\d74c6c7a0a7af06a02a7e2f4aa64fbb5\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\bde71ef5a952348ecb4ee304dcada674\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\David\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\bde71ef5a952348ecb4ee304dcada674\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:39:9-41
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:39:9-41
 	android:hardwareAccelerated
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:37:9-43
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:37:9-43
 	android:icon
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:38:9-44
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:38:9-44
 	android:allowBackup
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:36:9-35
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:36:9-35
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:40:9-42
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:40:9-42
 activity#com.outcar.game.OutCar
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:47:9-67:20
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:47:9-67:20
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:50:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:50:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:49:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:49:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:51:13-48
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:51:13-48
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:48:13-35
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:48:13-35
 activity#org.libsdl.app.MainActivity
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:69:9-73:49
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:69:9-73:49
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:72:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:72:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:71:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:71:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:73:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:73:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:70:13-55
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:70:13-55
 activity#org.libsdl.app.SplashScreen
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:75:9-84:20
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:75:9-84:20
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:77:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:77:13-49
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:78:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:78:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:76:13-55
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:76:13-55
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:79:13-83:29
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:79:13-83:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:80:17-69
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:80:17-69
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:80:25-66
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:80:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:82:17-77
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:82:17-77
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:82:27-74
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:82:27-74
 activity#org.libsdl.app.ChooseLanguage
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:86:9-90:49
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:86:9-90:49
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:89:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:89:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:88:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:88:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:90:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:90:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:87:13-57
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:87:13-57
 activity#org.libsdl.app.GatherInfo
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:92:9-96:49
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:92:9-96:49
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:95:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:95:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:94:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:94:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:96:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:96:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:93:13-53
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:93:13-53
 activity#org.libsdl.app.Tutorial
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:98:9-102:49
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:98:9-102:49
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:101:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:101:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:100:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:100:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:102:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:102:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:99:13-51
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:99:13-51
 activity#org.libsdl.app.Send_database
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:103:9-109:40
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:103:9-109:40
 	android:screenOrientation
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:105:13-49
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:105:13-49
 	android:configChanges
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:104:13-71
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:104:13-71
 	android:theme
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:106:13-46
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:106:13-46
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:103:19-62
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:103:19-62
 intent-filter#action:name:android.intent.action.SEND
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:107:13-109:29
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:107:13-109:29
 action#android.intent.action.SEND
-ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:108:17-69
+ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:108:17-69
 	android:name
-		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103\app\src\main\AndroidManifest.xml:108:25-66
+		ADDED from C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\src\main\AndroidManifest.xml:108:25-66

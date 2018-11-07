@@ -248,6 +248,11 @@
         <item>Touchez pour continuer ..</item>
         <item>Touch to continue ..</item>
     </string-array>
+    <string-array name="touch2goBack">
+        <item>Back</item>
+        <item>Retour</item>
+        <item>Zurück</item>
+    </string-array>
     <string-array name="welcome2ask4info">
         <item>Welcome to</item>
         <item>Bienvenue à</item>
@@ -409,6 +414,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorTransparent">#FFFFFF</color>
     <color name="colorTuto">#FFFFFF</color>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
