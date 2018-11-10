@@ -23,3 +23,11 @@
 >>Tutoriel: Added a 'go back one page' button, resolved a few bugs and slight code
   optimisation.
 
+>v1.0.5 (SP1) : (10.11.2018)
+>>A lot of code cleanup (C code mostly).
+>>Some more getting accustomed to GitLab's environment (.gitignore and such).
+>>Applied change: now the user-entered code can be as low as '1' (previously '1000'), and
+  age/id-code bounds have been moved to 'res/values/integer.xml'.
+>>Added a 'Todo' file, to keep track of what's left to do.
+
+
