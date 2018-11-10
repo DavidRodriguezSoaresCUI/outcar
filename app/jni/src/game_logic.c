@@ -9,7 +9,7 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     int lane_relative_width = state->road_size * state->scaling_mode;
 
     // handling touch event
-    touch_event_handler( state, lane_relative_width );
+    touch_event_handler(state, lane_relative_width);
 
     // new frame description calculation
     opp_car_list *curr_el = state->opp_cars;
@@ -23,12 +23,14 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     double player_new_add_pos = 0;
 
     // refueling mechanic
-    if ( state->refueling ) {
-        if ( ++(state->fuel) >= state->max_fuel ) {
+    if (state->refueling)
+    {
+        if (++(state->fuel) >= state->max_fuel)
+        {
             state->fuel = state->max_fuel;
             state->refueling = SDL_FALSE;
         }
-        calc_fuel_pointer_position( state );
+        calc_fuel_pointer_position(state);
     }
 
     // adding scroll/movement values (only if player has fuel!)
@@ -50,16 +52,19 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
                 if (state->player_car_pos_renderer + player_new_add_pos >= goal_pos)
                 {
                     state->player_car_pos_renderer = goal_pos;
-                } else
+                }
+                else
                 {
                     state->player_car_pos_renderer += player_new_add_pos;
                 }
-            } else
+            }
+            else
             {
                 if (state->player_car_pos_renderer + player_new_add_pos <= goal_pos)
                 {
                     state->player_car_pos_renderer = goal_pos;
-                } else
+                }
+                else
                 {
                     state->player_car_pos_renderer -= player_new_add_pos;
                 }
@@ -85,12 +90,13 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
                 state->player_hit = SDL_FALSE;
             else
             {
-                SCORE_AVOID( state )
+                SCORE_AVOID(state)
             }
 
             free_slots(curr_el);
             curr_el = NULL;
-        } else
+        }
+        else
         {
             // new opponent line (cars) generation
             if (3000 < time_curr - state->time_last_car_gen)
@@ -122,17 +128,19 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     if (time_curr - state->time_last_second_tick >= 1000)
     {
         // fuel
-        if (state->fuel > MIN_FUEL+1)
+        if (state->fuel > MIN_FUEL + 1)
         {
             state->fuel--;
+#ifdef DISPLAY_DEBUG_MSG
             char tmp[100];
             sprintf( tmp, "fuel:%03d", state->fuel );
             push_string_linked( &(state->debug_messages), tmp );
+#endif
         }
         else
-            out_of_fuel( state );
+            out_of_fuel(state);
 
-        calc_fuel_pointer_position( state );
+        calc_fuel_pointer_position(state);
 
         // remaining time update
         if (state->time_left > 0)
@@ -146,8 +154,8 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             show_end_screen(NULL, NULL, 0, SDL_TRUE); // Necessary to bugfix (see implementation)
         }
         // |-> for the renderer
-        uint8_t temp_min = state->time_left/60;
-        uint8_t temp_sec = state->time_left%60;
+        uint8_t temp_min = (uint8_t) (state->time_left / 60);
+        uint8_t temp_sec = (uint8_t) (state->time_left % 60);
 
         if (temp_min < 100)
             sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
@@ -164,9 +172,10 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     return 0;
 }
 
-void touch_event_handler( info_exchange *state, int lane_relative_width ) {
-    int touch_relative_x = state->e_touch.x * state->display.w;
-    int touch_relative_y = state->e_touch.y * state->display.h;
+void touch_event_handler(info_exchange *state, int lane_relative_width)
+{
+    int touch_relative_x = (int) (state->e_touch.x * state->display.w);
+    int touch_relative_y = (int) (state->e_touch.y * state->display.h);
 
     // handling touch event
     if (!state->e_touch_processed)
@@ -183,14 +192,16 @@ void touch_event_handler( info_exchange *state, int lane_relative_width ) {
             {
                 // Left lane selected
                 state->player_car_pos_logical = LEFT_LANE;
-            } else if (
+            }
+            else if (
                     touch_relative_x >= lane_relative_width &&
                     touch_relative_x <= lane_relative_width * 2
                     )
             {
                 // Middle lane selected
                 state->player_car_pos_logical = MIDDLE_LANE;
-            } else
+            }
+            else
             {
                 // Right lane selected
                 state->player_car_pos_logical = RIGHT_LANE;
@@ -202,23 +213,23 @@ void touch_event_handler( info_exchange *state, int lane_relative_width ) {
         {
             // A touch event happened on the fuel control area
             int touch_x_handed = touch_relative_x;
-            if ( RIGHT_HANDED == (state->hand & RIGHT_HANDED) ) // horizontal flip for handedness
+            if (RIGHT_HANDED == (state->hand & RIGHT_HANDED)) // horizontal flip for handedness
                 touch_x_handed = state->menu_area.w - touch_relative_x;
 
-            if ( touch_x_handed > state->menu_area.x &&
-                 touch_x_handed < state->menu_area.x + state->menu_area.w - 3 * state->menu_area.h )
+            if (touch_x_handed > state->menu_area.x &&
+                touch_x_handed < state->menu_area.x + state->menu_area.w - 3 * state->menu_area.h)
             {
                 // A touch event happened on the 'refuel' button
-                manual_refuel( state );
+                manual_refuel(state);
                 state->e_touch_processed = SDL_TRUE;
             }
             else if (
                     touch_x_handed > state->menu_area.x + state->menu_area.h &&
                     touch_x_handed <
-                    state->menu_area.x + state->menu_area.w - 2 * state->menu_area.h )
+                    state->menu_area.x + state->menu_area.w - 2 * state->menu_area.h)
             {
                 // A touch event happened on the 'show' button
-                show_fuel( state );
+                show_fuel(state);
                 state->e_touch_processed = SDL_TRUE;
             }
         }
@@ -226,9 +237,10 @@ void touch_event_handler( info_exchange *state, int lane_relative_width ) {
     }
 }
 
-void calc_fuel_pointer_position( info_exchange *state ) {
+void calc_fuel_pointer_position(info_exchange *state)
+{
     state->fuel_pointer_position =
-            (uint8_t) round( (double) state->fuel / (state->max_fuel) * 132.0 );
+            (uint8_t) round((double) state->fuel / (state->max_fuel) * 132.0);
 }
 
 // freeing up memory starting from a point in the chained list until the end
@@ -241,12 +253,12 @@ void free_slots(opp_car_list *in)
     }
 }
 
-void player_collision( info_exchange *state )
+void player_collision(info_exchange *state)
 {
     state->player_hit = SDL_TRUE;
-    SCORE_CRASH( state )
+    SCORE_CRASH(state)
 
-    push_uint16_linked( state->hit_times, get_timer( state ) );
+    push_uint16_linked(state->hit_times, get_timer(state));
     // play crash sound effect
     if (play_sfx(state->audio_device_id, state->sfx_wav_length, state->sfx_wav_buffer) != 0)
     {
@@ -255,33 +267,36 @@ void player_collision( info_exchange *state )
     }
 }
 
-uint16_t get_timer( info_exchange *state )
+uint16_t get_timer(info_exchange *state)
 {
-    return (uint16_t) floor( (state->time_last_check_tick - state->time_game_start) / 1000.0 );
+    return (uint16_t) floor((state->time_last_check_tick - state->time_game_start) / 1000.0);
 }
 
-void out_of_fuel( info_exchange * state )
+void out_of_fuel(info_exchange *state)
 {
     state->fuel = MIN_FUEL;
     state->refueling = SDL_TRUE;
-    push_uint16_linked( state->auto_refuel_times, get_timer( state ) );
-    SCORE_NOFUEL( state )
+    push_uint16_linked(state->auto_refuel_times, get_timer(state));
+    SCORE_NOFUEL(state)
 }
 
-void manual_refuel( info_exchange *state )
+void manual_refuel(info_exchange *state)
 {
-    if ( state->fuel <= state->max_fuel * 0.25 ) {
-        SCORE_REFUEL( state )
+    if (state->fuel <= state->max_fuel * 0.25)
+    {
+        SCORE_REFUEL(state)
         state->refueling = SDL_TRUE;
-        push_uint16_linked( state->refuel_times, get_timer( state ) );
-    } else {
-        push_uint16_linked( state->void_times, get_timer( state ) );
+        push_uint16_linked(state->refuel_times, get_timer(state));
+    }
+    else
+    {
+        push_uint16_linked(state->void_times, get_timer(state));
     }
 }
 
-void show_fuel( info_exchange *state )
+void show_fuel(info_exchange *state)
 {
-    push_uint16_linked( state->show_times, get_timer( state ) );
+    push_uint16_linked(state->show_times, get_timer(state));
     state->time_last_show_fuel_tick = SDL_GetTicks();
 }
 
@@ -289,15 +304,12 @@ void generate_new_opp_car_line(info_exchange *state)
 {
     opp_car_list *new_opp_car_line = (opp_car_list *) malloc(sizeof(opp_car_list));
 
-    if ( state->opp_cars != NULL )
-        state->opp_cars->spawned_new = SDL_TRUE;
+    new_opp_car_line->gap = (uint8_t) (rand() % 3);
+    new_opp_car_line->pos = -state->car_size;
+    new_opp_car_line->car_design[0] = (uint8_t) (rand() % 4);
+    new_opp_car_line->car_design[1] = (uint8_t) (rand() % 4);
+    new_opp_car_line->next_el = state->opp_cars;
 
-    new_opp_car_line->gap           = (uint8_t) rand() % 3;
-    new_opp_car_line->spawned_new   = SDL_FALSE;
-    new_opp_car_line->pos           = -state->car_size;
-    new_opp_car_line->car_design[0] = (uint8_t) rand() % 4;
-    new_opp_car_line->car_design[1] = (uint8_t) rand() % 4;
-    new_opp_car_line->next_el       = state->opp_cars;
-    state->opp_cars                 = new_opp_car_line;
-    state->time_last_car_gen        = SDL_GetTicks();
+    state->opp_cars = new_opp_car_line;
+    state->time_last_car_gen = SDL_GetTicks();
 }

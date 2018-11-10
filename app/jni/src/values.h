@@ -74,16 +74,16 @@
      * 7: uint16_t, Crash penalty [pts]
      * 8: uint16_t, Out of Fuel penalty [pts]
      */
-    #define CONF_GAME_DURATION  0
-    #define CONF_FUEL_DURATION  1
-    #define CONF_REL_SPEED      2
-    #define CONF_SHOW_DURATION  3
-    #define CONF_DSPLY_NUM_CLK  4
-    #define CONF_AVOID_REWARD   5
-    #define CONF_REFUEL_REWARD  6
-    #define CONF_CRASH_PENALTY  7
-    #define CONF_NOFUEL_PENALTY 8
-    #define CONF_EXPECTED_NB_ITEMS 9
+    #define CONF_GAME_DURATION      0
+    #define CONF_FUEL_DURATION      1
+    #define CONF_REL_SPEED          2
+    #define CONF_SHOW_DURATION      3
+    #define CONF_DSPLY_NUM_CLK      4
+    #define CONF_AVOID_REWARD       5
+    #define CONF_REFUEL_REWARD      6
+    #define CONF_CRASH_PENALTY      7
+    #define CONF_NOFUEL_PENALTY     8
+    #define CONF_EXPECTED_NB_ITEMS  9
 
     /* Norm :
      *  19 < CONF_GAME_DURATION  <  601
@@ -95,29 +95,29 @@
      *  -1 < CONF_CRASH_PENALTY  < 1001
      *  -1 < CONF_NOFUEL_PENALTY < 1001
      */
-    #define CONF_GAME_DURATION_MIN   19
-    #define CONF_GAME_DURATION_MAX  601
+    #define CONF_GAME_DURATION_MIN  20
+    #define CONF_GAME_DURATION_MAX  600
     #define CONF_GAME_DURATION_STD  120
-    #define CONF_FUEL_DURATION_MIN   19
-    #define CONF_FUEL_DURATION_MAX  301
-    #define CONF_FUEL_DURATION_STD   40
-    #define CONF_REL_SPEED_MIN       49
-    #define CONF_REL_SPEED_MAX      201
+    #define CONF_FUEL_DURATION_MIN  20
+    #define CONF_FUEL_DURATION_MAX  300
+    #define CONF_FUEL_DURATION_STD  40
+    #define CONF_REL_SPEED_MIN      50
+    #define CONF_REL_SPEED_MAX      200
     #define CONF_REL_SPEED_STD      100
-    #define CONF_SHOW_DURATION_MIN  999
-    #define CONF_SHOW_DURATION_MAX 5001
-    #define CONF_SHOW_DURATION_STD 2000
-    #define CONF_AVOID_REWARD_MIN    -1
-    #define CONF_AVOID_REWARD_MAX  1001
-    #define CONF_AVOID_REWARD_STD    33
-    #define CONF_REFUEL_REWARD_MIN   -1
-    #define CONF_REFUEL_REWARD_MAX 3001
+    #define CONF_SHOW_DURATION_MIN  1000
+    #define CONF_SHOW_DURATION_MAX  5000
+    #define CONF_SHOW_DURATION_STD  2000
+    #define CONF_AVOID_REWARD_MIN   0
+    #define CONF_AVOID_REWARD_MAX   1000
+    #define CONF_AVOID_REWARD_STD   33
+    #define CONF_REFUEL_REWARD_MIN  0
+    #define CONF_REFUEL_REWARD_MAX  3000
     #define CONF_REFUEL_REWARD_STD  300
-    #define CONF_CRASH_PENALTY_MIN   -1
-    #define CONF_CRASH_PENALTY_MAX 1001
+    #define CONF_CRASH_PENALTY_MIN  0
+    #define CONF_CRASH_PENALTY_MAX  1000
     #define CONF_CRASH_PENALTY_STD  100
-    #define CONF_NOFUEL_PENALTY_MIN   -1
-    #define CONF_NOFUEL_PENALTY_MAX 1001
-    #define CONF_NOFUEL_PENALTY_STD  100
+    #define CONF_NOFUEL_PENALTY_MIN 0
+    #define CONF_NOFUEL_PENALTY_MAX 1000
+    #define CONF_NOFUEL_PENALTY_STD 100
 
 #endif

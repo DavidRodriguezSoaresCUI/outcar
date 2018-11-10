@@ -1,5 +1,6 @@
 #ifndef INFOSTRUCT
     #define INFOSTRUCT
+    //#define DISPLAY_DEBUG_MSG
 
     #include <stdint.h>
     #include <stdlib.h>
@@ -11,17 +12,16 @@
     //#include "utils.h" // Cross-include issues
 
     // enumeration for screen orientation state (is it necessary?)
-    typedef enum screen_orient
+    /*typedef enum screen_orient
     {
         portrait,
         landscape
-    } screen_orient;
+    } screen_orient;*/
 
     // structure that defines a single line of cars
     typedef struct opp_car_list
     {
         uint8_t gap;
-        uint8_t spawned_new; // boolean: SDL_FALSE or SDL_TRUE
         double pos;
         uint8_t car_design[2];
         struct opp_car_list* next_el;
@@ -57,7 +57,7 @@
         NO_HANDED=0b00,
         LEFT_HANDED=0b01,
         RIGHT_HANDED=0b10,
-        AMBIDEXTRUOUS=0b11
+        //AMBIDEXTRUOUS=0b11
     } handedness_e;
 
     /**
@@ -71,7 +71,7 @@
         char **argv;
 
         // -- screen state --
-        uint8_t orientation_change;
+        //uint8_t orientation_change;
         uint8_t scaling_mode;
         SDL_DisplayMode display;
         int road_size;
@@ -94,7 +94,7 @@
         uint16_t max_fuel;  // Config
         uint8_t rel_speed; // Config
         uint16_t time_total; // Config
-        uint8_t difficulty;
+        //uint8_t difficulty;
         uint8_t display_numeric_clock; // boolean: SDL_FALSE or SDL_TRUE
         uint16_t avoid_reward;
         uint16_t refuel_reward;
@@ -105,7 +105,6 @@
         uint16_t time_left;
     	char *numeric_clock;
 	    uint16_t scroll_state; // between 0 and 89
-        uint8_t collision ; // boolean: SDL_FALSE or SDL_TRUE
         uint8_t pause;      // boolean: SDL_FALSE or SDL_TRUE
         uint8_t quit;       // boolean: SDL_FALSE or SDL_TRUE
         uint8_t end;        // boolean: SDL_FALSE or SDL_TRUE
@@ -137,8 +136,9 @@
         SDL_AudioDeviceID audio_device_id;
         uint32_t sfx_wav_length;
         uint8_t *sfx_wav_buffer;
-
+#ifdef DISPLAY_DEBUG_MSG
         string_linked debug_messages;
+#endif
 
     } info_exchange;
 
@@ -156,8 +156,9 @@
                                            exit( EXIT_FAILURE ); }
 
 
-    void     check_bounds8( uint8_t *val, string_linked *err_msg, int min, int max, int std );
-    void     check_bounds16( uint16_t *val, string_linked *err_msg, int min, int max, int std );
+    int
+    check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t std);
+    int check_bounds16(uint16_t *val, char *err_msg, uint16_t min, uint16_t max, uint16_t std);
     void     strip_char( char *str, const char c );
     void     strip_comments( char *str );
     uint32_t count_char_instances( const char *str, const char c );

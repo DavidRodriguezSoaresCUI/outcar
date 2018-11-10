@@ -86,6 +86,7 @@ render_text_8x8_capital(SDL_Texture *font, SDL_Renderer *ren, char *text, int si
  * bitmap font rendering using only text and a single texture with only
  * capital letters of 8x8px ordered in a single horizontal line
  */
+
 void render_text_8x8_capital_align_right(SDL_Texture *font, SDL_Renderer *ren, char *text,
                                          int size, int x, int y)
 {
