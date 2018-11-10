@@ -160,7 +160,7 @@ public class GatherInfo extends Activity {
              Res.getInteger(R.integer.max_ident) < ident )
             valid = false;
         if ( age < Res.getInteger(R.integer.min_age) ||
-             Res.getInteger(R.integer.min_age) < age )
+             Res.getInteger(R.integer.max_age) < age )
             valid = false;
         if ( gender_index < 1 || hand_index < 1 )
             valid = false;
