@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\David\\Desktop\\outcar-SP1\\outcar-android-SP1-103.1\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "/home/reedwolf/projects/outcar/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v14/values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\David\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\d74c6c7a0a7af06a02a7e2f4aa64fbb5\\res\\values-v14\\values-v14.xml",
+                    "source": "/home/reedwolf/.gradle/caches/transforms-1/files-1.1/appcompat-v7-22.2.1.aar/e59ca82ac04dbf4a0adcbdb239759771/res/values-v14/values-v14.xml",
                     "from": {
                         "startLines": "4,11,12,13,19,27,28,29,32,33",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

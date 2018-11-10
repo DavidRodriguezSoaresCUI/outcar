@@ -1,14 +1,14 @@
-Executable : C:\Users\David\AppData\Local\Android\sdk\ndk-bundle\ndk-build.cmd
+Executable : /home/reedwolf/android-sdk/ndk-bundle/ndk-build
 arguments : 
 NDK_PROJECT_PATH=null
-APP_BUILD_SCRIPT=C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\jni\Android.mk
-NDK_APPLICATION_MK=C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\jni\Application.mk
+APP_BUILD_SCRIPT=/home/reedwolf/projects/outcar/app/jni/Android.mk
+NDK_APPLICATION_MK=/home/reedwolf/projects/outcar/app/jni/Application.mk
 APP_ABI=x86
 NDK_ALL_ABIS=x86
 NDK_DEBUG=0
 APP_PLATFORM=android-14
-NDK_OUT=C:/Users/David/Desktop/outcar-SP1/outcar-android-SP1-103.1/app/build/intermediates/ndkBuild/release/obj
-NDK_LIBS_OUT=C:\Users\David\Desktop\outcar-SP1\outcar-android-SP1-103.1\app\build\intermediates\ndkBuild\release\lib
+NDK_OUT=/home/reedwolf/projects/outcar/app/build/intermediates/ndkBuild/release/obj
+NDK_LIBS_OUT=/home/reedwolf/projects/outcar/app/build/intermediates/ndkBuild/release/lib
 APP_PLATFORM=android-14
 APP_SHORT_COMMANDS=false
 LOCAL_SHORT_COMMANDS=false

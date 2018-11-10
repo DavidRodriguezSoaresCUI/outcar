@@ -586,7 +586,7 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="ageHint" translatable="false">5~100</string>
     <string name="app_name" translatable="false">Cal Cruiser</string>
-    <string name="app_version" translatable="false">SP1 1.0.3 (pre-release)</string>
+    <string name="app_version" translatable="false">SP1 1.0.4 (pre-release)</string>
     <string name="cant_go_back">You can\'t return now.</string>
     <string name="create_file_error">File/folder creation error.</string>
     <string name="do_not_display" translatable="false">This text shouldn\'t be displayed</string>
