@@ -156,9 +156,11 @@ public class GatherInfo extends Activity {
     public Boolean argumentsAreValid( int ident, int age, int gender_index, int hand_index  ) {
         Boolean valid = true;
 
-        if ( ident < 1000 || 99999 < ident )
+        if ( ident < Res.getInteger(R.integer.min_ident) ||
+             Res.getInteger(R.integer.max_ident) < ident )
             valid = false;
-        if ( age < 5 || 100 < age )
+        if ( age < Res.getInteger(R.integer.min_age) ||
+             Res.getInteger(R.integer.max_age) < age )
             valid = false;
         if ( gender_index < 1 || hand_index < 1 )
             valid = false;

@@ -2,4 +2,5 @@
 .idea/
 app/build/
 app/.externalNativeBuild/
+build
 local.properties
