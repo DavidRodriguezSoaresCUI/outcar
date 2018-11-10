@@ -118,6 +118,7 @@
         uint32_t time_last_second_tick;
         uint32_t time_last_check_tick;
         uint32_t time_last_show_fuel_tick;
+        uint32_t time_last_car_gen;
         SDL_Rect play_area;
         SDL_Rect menu_area;
 
@@ -157,17 +158,12 @@
 
     void     check_bounds8( uint8_t *val, string_linked *err_msg, int min, int max, int std );
     void     check_bounds16( uint16_t *val, string_linked *err_msg, int min, int max, int std );
-    void     strip_last_LF( char *str );
-    void     strip_outer_spaces( char *str );
-    void     strip_spaces( char *str );
-    void     strip_nonNumerals( char *str );
     void     strip_char( char *str, const char c );
     void     strip_comments( char *str );
     uint32_t count_char_instances( const char *str, const char c );
     uint32_t count_items_CSV_line( const char *str );
     char**   split_CSV_line( char *str, uint32_t *nb_items );
     char**   split_str_lines( char *str, uint32_t *nb_lines );
-    char*    read_file_STD( const char *file_path );
     char*    read_file_SDL( const char *file_path );
     void     init_uint16_linked( uint16_linked **ptr );
     void     push_uint16_linked( uint16_linked *chain, uint16_t val );

@@ -93,8 +93,7 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         } else
         {
             // new opponent line (cars) generation
-            if (curr_el->pos > 200 && !curr_el->spawned_new &&
-                    3000 < time_curr - state->time_game_start)
+            if (3000 < time_curr - state->time_last_car_gen)
             {
                 generate_new_opp_car_line(state);
             }
@@ -110,7 +109,7 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         }
     }
     // if there's EVER a case where there's absolutely NO cars then we generate one forcibly
-    if (state->opp_cars == NULL && 3000 < time_curr - state->time_game_start)
+    if (state->opp_cars == NULL)
     {
         // new opponent line (cars) generation
         generate_new_opp_car_line(state);
@@ -293,11 +292,12 @@ void generate_new_opp_car_line(info_exchange *state)
     if ( state->opp_cars != NULL )
         state->opp_cars->spawned_new = SDL_TRUE;
 
-    new_opp_car_line->gap         = (uint8_t) rand() % 3;
-    new_opp_car_line->spawned_new = SDL_FALSE;
-    new_opp_car_line->pos         = -state->car_size;
+    new_opp_car_line->gap           = (uint8_t) rand() % 3;
+    new_opp_car_line->spawned_new   = SDL_FALSE;
+    new_opp_car_line->pos           = -state->car_size;
     new_opp_car_line->car_design[0] = (uint8_t) rand() % 4;
     new_opp_car_line->car_design[1] = (uint8_t) rand() % 4;
-    new_opp_car_line->next_el     = state->opp_cars;
-    state->opp_cars               = new_opp_car_line;
+    new_opp_car_line->next_el       = state->opp_cars;
+    state->opp_cars                 = new_opp_car_line;
+    state->time_last_car_gen        = SDL_GetTicks();
 }

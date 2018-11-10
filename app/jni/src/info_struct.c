@@ -133,66 +133,6 @@ void check_bounds16(
     }
 }
 
-void strip_last_LF( char *str )
-{
-    char *ptr =  NULL;
-    if ( (ptr = strrchr(str, '\n')) != NULL )
-        ptr[0] = ' ';
-}
-
-void strip_outer_spaces( char *str )
-{
-    char *firstChar = NULL, *lastChar = NULL;
-    size_t len = strlen(str);
-    for( int i = 0; i < len; i++ )
-    {
-        if ( firstChar == NULL  && str[i] != ' ' )
-        {
-            firstChar = &str[i];
-            lastChar = &str[i];
-            continue;
-        }
-        if ( firstChar != NULL && str[i] != ' ' )
-        {
-            lastChar = &str[i];
-        }
-    }
-    size_t content_len = lastChar - firstChar + 2;
-    snprintf( str, content_len, "%s", firstChar );
-}
-
-void strip_spaces( char *str )
-{
-    char *buffer = NULL;
-    size_t len = (strlen(str)+1);
-    while( ( buffer = (char *) malloc( len * sizeof(char) ) ) == NULL );
-    uint16_t i = 0, j = 0;
-    for( i = 0; i < len; i++ )
-    {
-        if ( str[i] != ' ' )
-            buffer[j++] = str[i];
-    }
-    buffer[j] = '\0';
-    snprintf( str, len, "%s", buffer );
-    free(buffer);
-}
-
-void strip_nonNumerals( char *str )
-{
-    char *buffer = NULL;
-    size_t len = (strlen(str)+1);
-    while( ( buffer = (char *) malloc( len * sizeof(char) ) ) == NULL );
-    uint16_t i = 0, j = 0;
-    for( i = 0; i < len; i++ )
-    {
-        if ( '0' <= str[i] && str[i] <= '9' )
-            buffer[j++] = str[i];
-    }
-    buffer[j] = '\0';
-    snprintf( str, len, "%s", buffer );
-    free(buffer);
-}
-
 void strip_char( char *str, const char c )
 {
     char *buffer = NULL;
@@ -340,44 +280,6 @@ char** split_str_lines( char *str, uint32_t *nb_lines )
     *nb_lines = actual_lines;
 
     return lines;
-}
-
-// Reads the content of a file to a string, using standard C methods
-char* read_file_STD( const char *file_path ) {
-    // Code form SDL_RWread documentation, used to read a whole file in a buffer
-    FILE *rw = fopen( file_path, "r" );
-    if ( rw == NULL )
-    {
-        // Error
-        return NULL;
-    }
-
-    fseek( rw, 0L, SEEK_END);
-    size_t file_size = (size_t) ftell( rw );
-    fseek( rw, 0L, SEEK_SET);
-
-    char *buffer = (char*) malloc(file_size+1);
-    ASSERT_NOT_NULL( buffer )
-
-    size_t nb_read_total = 0, nb_read = 1;
-    while (nb_read_total < file_size && nb_read != 0) {
-        nb_read = fread(&buffer[nb_read_total],
-                        1,
-                        (file_size - nb_read_total),
-                        rw);
-        nb_read_total += nb_read;
-    }
-
-    fclose(rw);
-
-    // Data size mismatch -> abort
-    if ( 1 < abs( nb_read_total - file_size ) ) {
-        free(buffer);
-        return NULL;
-    }
-
-    buffer[file_size] = '\0';
-    return buffer;
 }
 
 // Reads the content of a file to a string, using SDL methods
