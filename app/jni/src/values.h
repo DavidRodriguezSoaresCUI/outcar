@@ -86,14 +86,14 @@
     #define CONF_EXPECTED_NB_ITEMS  9
 
     /* Norm :
-     *  19 < CONF_GAME_DURATION  <  601
-     *  19 < CONF_FUEL_DURATION  <  301
-     *  49 < CONF_REL_SPEED      <  201
-     * 999 < CONF_SHOW_DURATION  < 5001
-     *  -1 < CONF_AVOID_REWARD   < 1001
-     *  -1 < CONF_REFUEL_REWARD  < 3001
-     *  -1 < CONF_CRASH_PENALTY  < 1001
-     *  -1 < CONF_NOFUEL_PENALTY < 1001
+     *   20 <= CONF_GAME_DURATION  <=  600
+     *   20 <= CONF_FUEL_DURATION  <=  300
+     *   50 <= CONF_REL_SPEED      <=  200
+     * 1000 <= CONF_SHOW_DURATION  <= 5000
+     *    0 <= CONF_AVOID_REWARD   <= 1000
+     *    0 <= CONF_REFUEL_REWARD  <= 3000
+     *    0 <= CONF_CRASH_PENALTY  <= 1000
+     *    0 <= CONF_NOFUEL_PENALTY <= 1000
      */
     #define CONF_GAME_DURATION_MIN  20
     #define CONF_GAME_DURATION_MAX  600
