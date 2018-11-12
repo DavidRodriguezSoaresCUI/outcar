@@ -148,6 +148,7 @@
     void init_handedness( info_exchange *init_var );
     void calc_scaling(info_exchange *state);
 
+
     // UTILS
 
     #define ASSERT_NOT_NULL( var ) if ( var == NULL ) { \
@@ -155,22 +156,53 @@
                                                    __FILE__, __LINE__ ); \
                                            exit( EXIT_FAILURE ); }
 
+    int check_bounds8(
+            uint8_t *val,
+            const char *err_msg,
+            const uint8_t min,
+            const uint8_t max,
+            const uint8_t std);
 
-    int
-    check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t std);
-    int check_bounds16(uint16_t *val, char *err_msg, uint16_t min, uint16_t max, uint16_t std);
-    void     strip_char( char *str, const char c );
-    void     strip_comments( char *str );
-    uint32_t count_char_instances( const char *str, const char c );
-    uint32_t count_items_CSV_line( const char *str );
-    char**   split_CSV_line( char *str, uint32_t *nb_items );
-    char**   split_str_lines( char *str, uint32_t *nb_lines );
-    char*    read_file_SDL( const char *file_path );
-    void     init_uint16_linked( uint16_linked **ptr );
-    void     push_uint16_linked( uint16_linked *chain, uint16_t val );
-    char *   uint16_linked_toString( uint16_linked *chain );
-    uint16_t uint16_linked_count( uint16_linked *chain );
-    void     push_string_linked( string_linked *chain, char *str );
+    int check_bounds16(
+        uint16_t *val,
+        const char *err_msg,
+        const uint16_t min,
+        const uint16_t max,
+        const uint16_t std);
+
+    void strip_char(
+        char *str,
+        const char c);
+
+    void strip_comments(char *str);
+
+    uint32_t count_char_instances(
+        const char *str,
+        const char c);
+
+    uint32_t count_items_CSV_line(const char *str);
+
+    char** split_CSV_line(
+        char *str,
+        uint32_t *nb_items);
+
+    char** split_str_lines(
+        char *str,
+        uint32_t *nb_lines);
+
+    char* read_file_SDL(const char *file_path);
+    void  init_uint16_linked(uint16_linked **ptr);
+
+    void push_uint16_linked(
+        uint16_linked *chain,
+        uint16_t val);
+
+    char*    uint16_linked_toString(const uint16_linked *chain);
+    uint16_t uint16_linked_count(const uint16_linked *chain);
+
+    void push_string_linked(
+        string_linked *chain,
+        const char *str);
     void     free_string_linked( string_linked *chain );
 
 #endif
