@@ -143,8 +143,15 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         calc_fuel_pointer_position(state);
 
         // remaining time update
-        if (state->time_left > 0)
-            state->time_left--;
+        if (state->time_left > (time_curr - state->time_last_second_tick))
+        {
+            state->time_left = state->time_left + state->time_last_second_tick - time_curr;
+#ifdef DISPLAY_DEBUG_MSG
+            char tmp[20];
+            sprintf(tmp, "timer: %d", state->time_left);
+            push_string_linked(&(state->debug_messages), tmp);
+#endif
+        }
         else
         {
             state->time_left = 0;
@@ -154,8 +161,8 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             show_end_screen(NULL, NULL, 0, SDL_TRUE); // Necessary to bugfix (see implementation)
         }
         // |-> for the renderer
-        uint8_t temp_min = (uint8_t) (state->time_left / 60);
-        uint8_t temp_sec = (uint8_t) (state->time_left % 60);
+        uint8_t temp_min = (uint8_t) (state->time_left / 60000);
+        uint8_t temp_sec = (uint8_t) ((state->time_left / 1000) % 60);
 
         if (temp_min < 100)
             sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
