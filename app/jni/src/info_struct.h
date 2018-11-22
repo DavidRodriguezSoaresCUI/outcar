@@ -102,16 +102,16 @@
         uint16_t nofuel_penalty;
 
         // -- game state --
-        uint32_t time_left;
+        uint32_t time_left; // in milliseconds
     	char *numeric_clock;
 	    uint16_t scroll_state; // between 0 and 89
-        uint8_t pause;      // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t quit;       // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t end;        // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t player_hit; // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t refueling;  // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  pause;      // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  quit;       // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  end;        // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  player_hit; // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  refueling;  // boolean: SDL_FALSE or SDL_TRUE
         uint16_t fuel;
-        uint8_t fuel_pointer_position;
+        uint8_t  fuel_pointer_position;
         uint32_t time_game_start;
         uint32_t time_game_end;
         uint32_t time_last_second_tick;
@@ -136,6 +136,7 @@
         SDL_AudioDeviceID audio_device_id;
         uint32_t sfx_wav_length;
         uint8_t *sfx_wav_buffer;
+
 #ifdef DISPLAY_DEBUG_MSG
         string_linked debug_messages;
 #endif
@@ -152,16 +153,15 @@
     // UTILS
 
     #define ASSERT_NOT_NULL( var ) if ( var == NULL ) { \
-                                           printf( "Assert fail: var was NULL (file '%s', line %d)\n", \
-                                                   __FILE__, __LINE__ ); \
-                                           exit( EXIT_FAILURE ); }
+           printf( "Assert fail: var was NULL (file '%s', line %d)\n", __FILE__, __LINE__ ); \
+           exit( EXIT_FAILURE ); }
 
     int check_bounds8(
-            uint8_t *val,
-            const char *err_msg,
-            const uint8_t min,
-            const uint8_t max,
-            const uint8_t std);
+        uint8_t *val,
+        const char *err_msg,
+        const uint8_t min,
+        const uint8_t max,
+        const uint8_t std);
 
     int check_bounds16(
         uint16_t *val,
@@ -203,6 +203,6 @@
     void push_string_linked(
         string_linked *chain,
         const char *str);
-    void     free_string_linked( string_linked *chain );
+    void free_string_linked( string_linked *chain );
 
 #endif
