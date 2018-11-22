@@ -248,10 +248,10 @@ void verify_conf(info_exchange *state)
     state->display_numeric_clock =
             (state->display_numeric_clock == 0) ? (uint8_t) SDL_FALSE : (uint8_t) SDL_TRUE;
 
-    state->time_left = state->time_total;
+    state->time_left = (uint32_t)state->time_total*1000;
     state->fuel = state->max_fuel;
 
-    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60, state->time_left % 60);
+    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60000, (state->time_left / 1000) % 60);
 #ifdef DISPLAY_DEBUG_MSG
     push_string_linked(&(state->debug_messages), "Conf. verfied !");
 #endif

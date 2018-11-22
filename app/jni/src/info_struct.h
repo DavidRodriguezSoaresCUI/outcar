@@ -102,7 +102,7 @@
         uint16_t nofuel_penalty;
 
         // -- game state --
-        uint16_t time_left;
+        uint32_t time_left;
     	char *numeric_clock;
 	    uint16_t scroll_state; // between 0 and 89
         uint8_t pause;      // boolean: SDL_FALSE or SDL_TRUE
