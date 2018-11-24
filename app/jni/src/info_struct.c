@@ -71,6 +71,7 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     //init_var->e_accel_pos; //unused
     //init_var->e_screen_rot; //unused
 
+    init_var->fuel_countdown = SDL_FALSE;
     //init_var->debug_messages = (string_linked*) malloc( sizeof(string_linked) );
 #ifdef DISPLAY_DEBUG_MSG
     (init_var->debug_messages).first = NULL;

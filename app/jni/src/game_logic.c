@@ -1,8 +1,7 @@
 #include "game_logic.h"
 
-// the game logic function, used in main loop, calculates changements for everything
-// based on time passed between frames (if <1FPS, it might fall appart, 
-// but the game would be unplayable anyways...)
+// the game logic function, used in main loop, calculates changes for everything
+// based on time passed between frames
 // dynamic memory allocation system for opponent cars (cars only limited by RAM)
 int game_logic(info_exchange *state, double *partial_scroll_state)
 {
@@ -25,12 +24,20 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     // refueling mechanic
     if (state->refueling)
     {
-        if (++(state->fuel) >= state->max_fuel)
+        if (state->fuel + time_diff < state->max_fuel) state->fuel += time_diff;
+        else
         {
             state->fuel = state->max_fuel;
             state->refueling = SDL_FALSE;
         }
         calc_fuel_pointer_position(state);
+    }
+
+    if (state->fuel_countdown)
+    {
+        if (state->fuel_up_msg_time_left > time_diff)
+            state->fuel_up_msg_time_left -= time_diff;
+        else state->fuel_countdown = SDL_FALSE;
     }
 
     // adding scroll/movement values (only if player has fuel!)
@@ -293,6 +300,8 @@ void manual_refuel(info_exchange *state)
     {
         SCORE_REFUEL(state)
         state->refueling = SDL_TRUE;
+        state->fuel_countdown = SDL_TRUE;
+        state->fuel_up_msg_time_left = 3000;
         push_uint16_linked(state->refuel_times, get_timer(state));
     }
     else

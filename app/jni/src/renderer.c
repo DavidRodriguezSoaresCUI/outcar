@@ -22,6 +22,12 @@ SDL_Texture *score_background = NULL;
 SDL_Texture *dark_fader = NULL;
 SDL_Texture *hit_fx = NULL;
 SDL_Texture *hit_fx2 = NULL;
+SDL_Texture *fuel_up = NULL;
+
+char score_txt[6];
+
+int fuel_up_w;
+int fuel_up_h;
 
 // load textures into vram
 int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
@@ -42,11 +48,12 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     lane_touch_guide = load_texture("res/road_lane_touch_guide_120px.png", renderer);
     score_background = load_texture("res/score_background.png", renderer);
     dark_fader = load_texture("res/dark_fader.png", renderer);
+    fuel_up = load_texture("res/fuel_up.png", renderer);
 
     hit_fx = load_texture("res/crash_b_fx.png", renderer);
     hit_fx2 = load_texture("res/crash_fx_360x240.png", renderer);
 
-    if ( LEFT_HANDED == (state->hand & LEFT_HANDED) )
+    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
     {
         // the user is right-handed
         btn_fuel_refill = load_texture("res/buton_refuel_dark_90px_padded_2.png", renderer);
@@ -64,18 +71,21 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
         btn_fuel_gauge_show = load_texture("res/buton_display_fuel_dark_90px_padded.png", renderer);
         btn_fuel_refill = load_texture("res/buton_refuel_dark_90px_padded_1.png", renderer);
     }
-    
+
     if (road_left == NULL || road_middle == NULL || road_right == NULL || opp_car[0] == NULL ||
         opp_car[1] == NULL || opp_car[2] == NULL || opp_car[3] == NULL ||
         player_car == NULL || font == NULL || btn_pause == NULL || btn_play == NULL ||
         btn_fuel_refill == NULL || btn_fuel_gauge_show == NULL || clock_texture == NULL ||
         fuel_gauge == NULL || fuel_gauge_blank == NULL || fuel_pointer == NULL ||
-        lane_touch_guide == NULL || score_background == NULL || hit_fx == NULL || hit_fx2 == NULL )
+        lane_touch_guide == NULL || score_background == NULL || hit_fx == NULL || hit_fx2 == NULL ||
+        fuel_up == NULL)
     {
         SDL_Log("load error: %s\n", IMG_GetError());
         textures_free();
         return 1;
     }
+
+    SDL_QueryTexture(fuel_up, NULL, NULL, &fuel_up_w, &fuel_up_h);
 
     // player car can become transparent when hit
     SDL_SetTextureBlendMode(player_car, SDL_BLENDMODE_BLEND);
@@ -147,7 +157,8 @@ void calc_rendering_areas(info_exchange *state)
     {
         state->play_area.x = (state->display.w - state->play_area.w) >> 1;
         state->menu_area.x = state->play_area.x;
-    } else
+    }
+    else
     {
         state->play_area.x = 0;
         state->menu_area.x = 0;
@@ -193,7 +204,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
             {
                 j = (j == 0) ? 1 : 0;
                 int car_choice = curr_el->car_design[j];
-                if ( car_choice < 0 || 3 < car_choice )
+                if (car_choice < 0 || 3 < car_choice)
                     car_choice = 0;
                 render_texture_scaling(opp_car[car_choice], renderer,
                                        10 * state->scaling_mode + i * scaled_road_size,
@@ -222,7 +233,8 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
             render_texture_scaling(hit_fx, renderer,
                                    scaled_road_size * 2 + (scaled_road_size - scaled_car_size),
                                    state->play_area.y, scaled_car_size, scaled_car_size, NULL);*/
-    } else
+    }
+    else
         SDL_SetTextureAlphaMod(player_car, 255);
 
     render_texture_scaling(player_car, renderer,
@@ -236,6 +248,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
                            scaled_road_size, scaled_road_size, NULL);
     render_texture_scaling(lane_touch_guide, renderer, 2 * scaled_road_size, 4 * scaled_road_size,
                            scaled_road_size, scaled_road_size, NULL);
+
     // rendering menu
     if (SDL_RenderSetViewport(renderer, &state->menu_area))
     {
@@ -244,7 +257,8 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         return;
     }
     int pos01, pos02, pos03;
-    if ( LEFT_HANDED == (state->hand & LEFT_HANDED) ) {
+    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+    {
         pos01 = 0;
         pos02 = state->menu_area.h;
         pos03 = state->menu_area.h * 2;
@@ -260,7 +274,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
                            state->menu_area.h, NULL);
     render_texture_scaling(btn_fuel_gauge_show, renderer, pos02, 0, state->menu_area.h,
                            state->menu_area.h, NULL);
-    if ( show_fuel_gauge( state ) )
+    if (show_fuel_gauge(state))
     {
         render_texture_scaling(fuel_gauge, renderer, pos03, 0, state->menu_area.h * 2,
                                state->menu_area.h, NULL);
@@ -269,16 +283,18 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
                                pos03 + (15 + state->fuel_pointer_position) * state->scaling_mode,
                                10 * state->scaling_mode, 18 * state->scaling_mode,
                                80 * state->scaling_mode, NULL);
-    } else {
+    }
+    else
+    {
         render_texture_scaling(fuel_gauge_blank, renderer, pos03, 0, state->menu_area.h * 2,
                                state->menu_area.h, NULL);
-        if( state->display_numeric_clock )
+        if (state->display_numeric_clock)
         {
             SDL_Rect rect_clock_temp;
             rect_clock_temp.w = state->menu_area.h * 2 - 20 * state->scaling_mode;
             rect_clock_temp.h = state->menu_area.h - 20 * state->scaling_mode;
 
-            if ( LEFT_HANDED == (state->hand & LEFT_HANDED) )
+            if (LEFT_HANDED == (state->hand & LEFT_HANDED))
                 rect_clock_temp.x = state->menu_area.h * 2 + 10 * state->scaling_mode;
             else
                 rect_clock_temp.x = 10 * state->scaling_mode;
@@ -297,134 +313,138 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         return;
     }
 
-    if ( !state->end )
+    if (!state->end)
     {
         // render pause/play button
-        int pause_btn_location = ( LEFT_HANDED == (state->hand & LEFT_HANDED) ) ?
-                state->play_area.x + 20 * state->scaling_mode :
-                state->play_area.x + 20 * state->scaling_mode +
-                                         2 * state->road_size * state->scaling_mode;
+        int pause_btn_location = (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+                                 state->play_area.x + 20 * state->scaling_mode :
+                                 state->play_area.x + 20 * state->scaling_mode +
+                                 2 * state->road_size * state->scaling_mode;
         render_texture_scaling((state->pause) ? btn_play : btn_pause, renderer,
                                pause_btn_location,
                                20 * state->scaling_mode, 80 * state->scaling_mode,
                                80 * state->scaling_mode, NULL);
 
         // render the score display
-        render_texture_scaling( score_background, renderer, state->play_area.x + scaled_road_size, 0, scaled_road_size,
-                                scaled_road_size, NULL );
-        char *score_txt;
-        asprintf( &score_txt, "%05d", state->score );
+        render_texture_scaling(score_background, renderer, state->play_area.x + scaled_road_size, 0,
+                               scaled_road_size,
+                               scaled_road_size, NULL);
+        sprintf(score_txt, "%05d", state->score);
         render_text_8x8_capital(font, renderer, "score", state->scaling_mode * 16,
                                 state->play_area.x + scaled_road_size + state->scaling_mode * 20,
                                 state->scaling_mode * 4);
         render_text_8x8_capital(font, renderer, score_txt, state->scaling_mode * 16,
                                 state->play_area.x + scaled_road_size + state->scaling_mode * 20,
                                 state->scaling_mode * 24);
-        free( score_txt );
+
+        if (state->fuel_countdown)
+            render_texture_scaling(fuel_up, renderer, 10 * state->scaling_mode,
+                                   10 * state->scaling_mode, fuel_up_w * state->scaling_mode,
+                                   fuel_up_h * state->scaling_mode, NULL);
     }
 
-    #ifdef DISPLAY_DEBUG_MSG
+#ifdef DISPLAY_DEBUG_MSG
 
-        string_lt *currentMsg = (state->debug_messages).first;
-        for( int i = 0; currentMsg != NULL; i+=20 )
+    string_lt *currentMsg = (state->debug_messages).first;
+    for( int i = 0; currentMsg != NULL; i+=20 )
+    {
+        if( (SDL_GetTicks() - currentMsg->timestamp) < DEBUG_MSG_TIMEOUT )
         {
-            if( (SDL_GetTicks() - currentMsg->timestamp) < DEBUG_MSG_TIMEOUT )
-            {
-                render_text_8x8_capital(font,
-                                        renderer,
-                                        currentMsg->str, state->scaling_mode * 8,
-                                        10, i);
-            } else {
-                i -= 20;
-            }
-
-            currentMsg = currentMsg->next;
+            render_text_8x8_capital(font,
+                                    renderer,
+                                    currentMsg->str, state->scaling_mode * 8,
+                                    10, i);
+        } else {
+            i -= 20;
         }
 
-    #endif
+        currentMsg = currentMsg->next;
+    }
 
-    #ifdef DISPLAY_DEBUG_INFO
-        // Debug info
-        char *text_curr_fuel, *text_info_1, *text_info_2, *text_info_3, *text_info_4, *text_info_5, *text_info_6, *text_info_7, *text_temp_timer, *text_score;
-        if (asprintf(&text_curr_fuel, "fuel: %d", state->fuel) == -1 ||
-            asprintf(&text_info_1, "argc: %d", state->argc) == -1 ||
-            asprintf(&text_info_2, "argv: 0='%s'", state->argv[0]) == -1 ||
-            asprintf(&text_info_3, "argv: 1='%s', 2='%s'", state->argv[1], state->argv[2]) == -1 ||
-            asprintf(&text_info_4, "      3='%s', 4='%s'", state->argv[3], state->argv[4]) == -1 ||
-            asprintf(&text_info_5, "5='%s'", state->argv[5]) == -1 ||
-            asprintf(&text_info_6, "6='%s'", state->argv[6]) == -1 ||
-            asprintf(&text_info_7, "hand='%d'", state->hand) == -1 ||
-            asprintf(&text_temp_timer, "time left: %d", state->time_left) == -1 ||
-            asprintf(&text_score, "score: %d", state->score) == -1) {
-            state->quit = SDL_TRUE;
-            SDL_Log("ALLOCATION ERROR!\n");
-            return;
-        }
-        render_text_8x8_capital(font, renderer, text_curr_fuel, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                0);
-        render_text_8x8_capital(font, renderer, text_info_1, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                20);
-        render_text_8x8_capital(font, renderer, text_info_2, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                40);
-        render_text_8x8_capital(font, renderer, text_info_3, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                60);
-        render_text_8x8_capital(font, renderer, text_info_4, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                80);
-        render_text_8x8_capital(font, renderer, text_info_5, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                43 * 8 * state->scaling_mode,
-                                100);
-        render_text_8x8_capital(font, renderer, text_info_6, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                43 * 8 * state->scaling_mode,
-                                120);
-        render_text_8x8_capital(font, renderer, state->date_at_launch, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                140);
-        char *str01 = uint16_linked_toString(state->hit_times);
-        render_text_8x8_capital(font, renderer, str01, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                35 * 8 * state->scaling_mode,
-                                160);
-        render_text_8x8_capital(font, renderer, text_info_7, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                180);
-        /*render_text_8x8_capital(font, renderer, state->debug_message, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                43 * 8 * state->scaling_mode,
-                                200);*/
-        render_text_8x8_capital(font, renderer, text_temp_timer, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                220);
-        render_text_8x8_capital(font, renderer, text_score, state->scaling_mode * 8,
-                                state->play_area.x + state->play_area.w -
-                                25 * 8 * state->scaling_mode,
-                                240);
+#endif
 
-        free(str01);
-        free(text_curr_fuel);
-        free(text_info_1);
-        free(text_info_2);
-        free(text_info_3);
-        free(text_info_4);
-        free(text_info_5);
-        free(text_info_6);
-        free(text_info_7);
-        free(text_temp_timer);
-    #endif
+#ifdef DISPLAY_DEBUG_INFO
+    // Debug info
+    char *text_curr_fuel, *text_info_1, *text_info_2, *text_info_3, *text_info_4, *text_info_5, *text_info_6, *text_info_7, *text_temp_timer, *text_score;
+    if (asprintf(&text_curr_fuel, "fuel: %d", state->fuel) == -1 ||
+        asprintf(&text_info_1, "argc: %d", state->argc) == -1 ||
+        asprintf(&text_info_2, "argv: 0='%s'", state->argv[0]) == -1 ||
+        asprintf(&text_info_3, "argv: 1='%s', 2='%s'", state->argv[1], state->argv[2]) == -1 ||
+        asprintf(&text_info_4, "      3='%s', 4='%s'", state->argv[3], state->argv[4]) == -1 ||
+        asprintf(&text_info_5, "5='%s'", state->argv[5]) == -1 ||
+        asprintf(&text_info_6, "6='%s'", state->argv[6]) == -1 ||
+        asprintf(&text_info_7, "hand='%d'", state->hand) == -1 ||
+        asprintf(&text_temp_timer, "time left: %d", state->time_left) == -1 ||
+        asprintf(&text_score, "score: %d", state->score) == -1) {
+        state->quit = SDL_TRUE;
+        SDL_Log("ALLOCATION ERROR!\n");
+        return;
+    }
+    render_text_8x8_capital(font, renderer, text_curr_fuel, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            0);
+    render_text_8x8_capital(font, renderer, text_info_1, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            20);
+    render_text_8x8_capital(font, renderer, text_info_2, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            40);
+    render_text_8x8_capital(font, renderer, text_info_3, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            60);
+    render_text_8x8_capital(font, renderer, text_info_4, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            80);
+    render_text_8x8_capital(font, renderer, text_info_5, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            43 * 8 * state->scaling_mode,
+                            100);
+    render_text_8x8_capital(font, renderer, text_info_6, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            43 * 8 * state->scaling_mode,
+                            120);
+    render_text_8x8_capital(font, renderer, state->date_at_launch, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            140);
+    char *str01 = uint16_linked_toString(state->hit_times);
+    render_text_8x8_capital(font, renderer, str01, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            35 * 8 * state->scaling_mode,
+                            160);
+    render_text_8x8_capital(font, renderer, text_info_7, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            180);
+    /*render_text_8x8_capital(font, renderer, state->debug_message, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            43 * 8 * state->scaling_mode,
+                            200);*/
+    render_text_8x8_capital(font, renderer, text_temp_timer, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            220);
+    render_text_8x8_capital(font, renderer, text_score, state->scaling_mode * 8,
+                            state->play_area.x + state->play_area.w -
+                            25 * 8 * state->scaling_mode,
+                            240);
+
+    free(str01);
+    free(text_curr_fuel);
+    free(text_info_1);
+    free(text_info_2);
+    free(text_info_3);
+    free(text_info_4);
+    free(text_info_5);
+    free(text_info_6);
+    free(text_info_7);
+    free(text_temp_timer);
+#endif
 
 
     if (state->end)
@@ -439,47 +459,49 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     SDL_RenderPresent(renderer);
 }
 
-int show_fuel_gauge( info_exchange *state )
+int show_fuel_gauge(info_exchange *state)
 {
     return (
             (state->time_last_check_tick - state->time_last_show_fuel_tick <
-            state->show_fuel_duration_ms && state->time_last_show_fuel_tick != 0)
-            || state->refueling );
+             state->show_fuel_duration_ms && state->time_last_show_fuel_tick != 0)
+            || state->refueling);
 }
 
-int show_end_screen(info_exchange *state, SDL_Renderer *renderer, int scaled_road_size, int reset )
+int show_end_screen(info_exchange *state, SDL_Renderer *renderer, int scaled_road_size, int reset)
 {
     static uint8_t recalculate_transparency = SDL_TRUE, fader_trans = 0;
 
     /* This is necessary because the static variables may not be reset automatically on the next
      * instance of the game
      */
-    if ( reset )
+    if (reset)
     {
         recalculate_transparency = SDL_TRUE;
         fader_trans = 0;
         return 0;
     }
 
-    if ( recalculate_transparency )
+    if (recalculate_transparency)
     {
         double fader_trans_tmp = floor((SDL_GetTicks() - state->time_game_end) / 5.0);
 
-        if ( fader_trans_tmp > GAME_OVER_MAX_TRANSPARENCY )
+        if (fader_trans_tmp > GAME_OVER_MAX_TRANSPARENCY)
         {
             recalculate_transparency = SDL_FALSE;
             fader_trans = GAME_OVER_MAX_TRANSPARENCY;
-        } else
+        }
+        else
         {
             fader_trans = (uint8_t) fader_trans_tmp;
         }
         SDL_SetTextureAlphaMod(dark_fader, fader_trans);
     }
     //SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h, SDL_Rect *clip
-    render_texture_scaling( dark_fader, renderer, state->play_area.x, state->play_area.y, scaled_road_size*3,
-                            scaled_road_size * 6, NULL );
+    render_texture_scaling(dark_fader, renderer, state->play_area.x, state->play_area.y,
+                           scaled_road_size * 3,
+                           scaled_road_size * 6, NULL);
 
-    if ( !recalculate_transparency )
+    if (!recalculate_transparency)
     {
         /*
         char *score = NULL;
@@ -518,7 +540,7 @@ int show_end_screen(info_exchange *state, SDL_Renderer *renderer, int scaled_roa
                                 state->display.h / 40);
 
         char your_score[50];
-        snprintf( your_score, 50, "Your score: %05d", state->score );
+        snprintf(your_score, 50, "Your score: %05d", state->score);
 
         render_text_8x8_capital(font, renderer, your_score, state->display.h / 40,
                                 state->display.w / 2 - (16 * state->display.h / 40) / 2,
