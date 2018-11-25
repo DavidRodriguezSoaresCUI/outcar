@@ -120,6 +120,10 @@
         uint32_t time_last_car_gen;
         SDL_Rect play_area;
         SDL_Rect menu_area;
+        // |->fuel up message countdown data
+        uint8_t fuel_countdown;
+        uint32_t fuel_up_msg_time_left;
+
 
         // -- misc --
         int player_car_pos_logical; // values in {0,1,2}

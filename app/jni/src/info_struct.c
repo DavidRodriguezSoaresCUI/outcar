@@ -71,7 +71,8 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     //init_var->e_accel_pos; //unused
     //init_var->e_screen_rot; //unused
 
-    //init_var->debug_messages;
+    init_var->fuel_countdown = SDL_FALSE;
+    //init_var->debug_messages = (string_linked*) malloc( sizeof(string_linked) );
 #ifdef DISPLAY_DEBUG_MSG
     (init_var->debug_messages).first = NULL;
     (init_var->debug_messages).last = NULL;
@@ -114,50 +115,29 @@ void calc_scaling(info_exchange *state)
 
 // UTILS
 
-/* Checks whether 'min <= val <= max' is true or not. Also prints err_msg to stderr when false
- * Returns a SDL_bool (int)
- */
-int check_bounds8(
-    uint8_t *val,
-    const char *err_msg,
-    const uint8_t min,
-    const uint8_t max,
-    const uint8_t std)
+int check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t std)
 {
     if (*val < min || max < *val)
     {
         *val = (uint8_t) std;
         fprintf(stderr, "%s", err_msg);
-        return SDL_FALSE;
+        return 0;
     }
-    return SDL_TRUE;
+    return 1;
 }
 
-/* Checks whether 'min <= val <= max' is true or not. Also prints err_msg to stderr when false
- * Returns a SDL_bool (int)
- */
-int check_bounds16(
-    uint16_t *val,
-    const char *err_msg,
-    const uint16_t min,
-    const uint16_t max,
-    const uint16_t std)
+int check_bounds16(uint16_t *val, char *err_msg, uint16_t min, uint16_t max, uint16_t std)
 {
     if (*val < min || max < *val)
     {
         *val = (uint16_t) std;
         fprintf(stderr, "%s", err_msg);
-        return SDL_FALSE;
+        return 0;
     }
-    return SDL_TRUE;
+    return 1;
 }
 
-/* Modifies string 'str' as to strip it from every instance of the 'c' character.
- * Returns nothing (void)
- */
-void strip_char(
-    char *str,
-    const char c)
+void strip_char(char *str, const char c)
 {
     size_t len = (strlen(str) + 1);
     char *buffer = (char *) malloc(len * sizeof(char));
@@ -173,10 +153,6 @@ void strip_char(
     free(buffer);
 }
 
-/* Modifies string 'str' as to strip it from text past the characters '//' (included).
- * Note: to avoid unpredictable errors, only use it on "multi-line" strings.
- * Returns nothing (void)
- */
 void strip_comments(char *str)
 {
     char *ptr = NULL;
@@ -188,12 +164,7 @@ void strip_comments(char *str)
 
 }
 
-/* Count how many instances of the 'c' character there are in the 'str' string
- * Returns that number (uint32_t)
- */
-uint32_t count_char_instances(
-    const char *str,
-    const char c)
+uint32_t count_char_instances(const char *str, const char c)
 {
     uint32_t count = 0;
     size_t len = strlen(str);
@@ -207,10 +178,6 @@ uint32_t count_char_instances(
     return count;
 }
 
-/* Count how many CSV items there are in the 'str' string. CSV items are separated by commas.
- * Items with commas inside them must be inside '"' (double quotation marks).
- * Returns that number (uint32_t)
- */
 uint32_t count_items_CSV_line(const char *str)
 {
     uint32_t nb_items = 1;
@@ -240,15 +207,10 @@ uint32_t count_items_CSV_line(const char *str)
     return nb_items;
 }
 
-/* Splits the CSV-compliant line 'str' into its items (without modifying it). 'nb_items' is here
- * to hold the number of found items, since returned string array's size is necessary to use it.
- */
-char** split_CSV_line(
-    char *str,
-    uint32_t *nb_items)
+char **split_CSV_line(char *str, uint32_t *nb_items)
 {
     *nb_items = count_items_CSV_line(str);
-    char **items = (char **) malloc( (size_t) (*nb_items * sizeof(char *)) );
+    char **items = (char **) malloc((size_t) *nb_items * sizeof(char *));
     ASSERT_NOT_NULL(items)
 
     uint32_t item_nber = 0;
@@ -295,12 +257,7 @@ char** split_CSV_line(
     return items;
 }
 
-/* Splits the multi-line 'str' into its items (without modifying it). 'nb_items' is here
- * to hold the number of found items, since returned string array's size is necessary to use it.
- */
-char** split_str_lines(
-    char *str,
-    uint32_t *nb_lines)
+char **split_str_lines(char *str, uint32_t *nb_lines)
 {
     *nb_lines = count_char_instances(str, '\n') + 1;
     char **lines = (char **) malloc((size_t) *nb_lines * sizeof(char *));
@@ -329,7 +286,7 @@ char** split_str_lines(
     return lines;
 }
 
-// Reads the content of a file to a string, using SDL methods. Returns a string with its content
+// Reads the content of a file to a string, using SDL methods
 char *read_file_SDL(const char *file_path)
 {
     // Code form SDL_RWread documentation, used to read a whole file in a buffer
@@ -367,8 +324,6 @@ char *read_file_SDL(const char *file_path)
     return buffer;
 }
 
-/* Initiates a uint16_linked chain
- */
 void init_uint16_linked(uint16_linked **ptr)
 {
     if ((*ptr = (uint16_linked *) malloc(sizeof(uint16_linked))) == NULL)
@@ -378,11 +333,7 @@ void init_uint16_linked(uint16_linked **ptr)
     (*ptr)->last = NULL;
 }
 
-/* Appends a value to an uint16_linked chain (at the end)
- */
-void push_uint16_linked(
-    uint16_linked *chain,
-    uint16_t val)
+void push_uint16_linked(uint16_linked *chain, uint16_t val)
 {
     // We allocate a new uint16_lt ..
     uint16_lt *new = NULL;
@@ -406,9 +357,7 @@ void push_uint16_linked(
     chain->last = new; // .. and put it as the last element
 }
 
-/* Mainly a debug feature. Converts a uint16_linked chain to a string
- */
-char* uint16_linked_toString(const uint16_linked *chain)
+char *uint16_linked_toString(uint16_linked *chain)
 {
     // For debug only ! Not overflow safe !
     char *buffer;
@@ -427,9 +376,7 @@ char* uint16_linked_toString(const uint16_linked *chain)
     return buffer;
 }
 
-/* Count the number of values stored in a uint16_linked chain.
- */
-uint16_t uint16_linked_count(const uint16_linked *chain)
+uint16_t uint16_linked_count(uint16_linked *chain)
 {
     // Counts how many values are stored in the linked list
     uint16_t count = 0;
@@ -442,13 +389,9 @@ uint16_t uint16_linked_count(const uint16_linked *chain)
     return count;
 }
 
-/* Appends a string to a string_linked chain (at the end)
- */
-void push_string_linked(
-    string_linked *chain,
-    const char *str)
+void push_string_linked(string_linked *chain, char *str)
 {
-    // We allocate a new string_lt ..
+    // We allocate a new uint16_lt ..
     string_lt *newLink = NULL;
     char *newStr = NULL;
     size_t len = (strlen(str) + 1) * sizeof(char);
@@ -476,10 +419,9 @@ void push_string_linked(
     chain->last = newLink; // .. and put it as the last element
 }
 
-/* Frees a string_linked chain
- */
 void free_string_linked(string_linked *chain)
 {
+    // We allocate a new uint16_lt ..
     string_lt *currLink = NULL, *nextLink = NULL;
     currLink = chain->first;
 
@@ -491,5 +433,4 @@ void free_string_linked(string_linked *chain)
         currLink = nextLink;
     }
 }
-
 

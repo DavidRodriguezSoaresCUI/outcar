@@ -1,4 +1,30 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include "sdl2_func.h"
+#include "info_struct.h"
+#include "input_events.h"
+#include "game_logic.h"
+#include "renderer.h"
+#include "audio_sfx.h"
+#include "values.h"
+
+#define EXIT_ON_FAILURE IMG_Quit(); \
+                            SDL_Quit(); \
+                            return 1;
+#define NEWLINE(fileStream) SDL_RWwrite( fileStream, "\n", 1, 1 );
+
+void load_conf(info_exchange *state);
+
+void verify_conf(info_exchange *state);
+
+void log_results(const info_exchange state);
+
+int load_score(info_exchange *state);
+
 
 int main(int argc, char **argv)
 {
@@ -109,8 +135,6 @@ int main(int argc, char **argv)
         input_events(&program_state, &e);
         if (!program_state.pause)
             game_logic(&program_state, &f_scrollstate);
-        else
-            program_state.time_last_check_tick = SDL_GetTicks();
 
         rendering_state(&program_state, renderer);
     }
@@ -248,10 +272,11 @@ void verify_conf(info_exchange *state)
     state->display_numeric_clock =
             (state->display_numeric_clock == 0) ? (uint8_t) SDL_FALSE : (uint8_t) SDL_TRUE;
 
-    state->time_left = (uint32_t)state->time_total*1000;
+    state->time_left = (uint32_t) state->time_total * 1000;
     state->fuel = state->max_fuel;
 
-    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60000, (state->time_left / 1000) % 60);
+    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60000,
+            (state->time_left / 1000) % 60);
 #ifdef DISPLAY_DEBUG_MSG
     push_string_linked(&(state->debug_messages), "Conf. verfied !");
 #endif
