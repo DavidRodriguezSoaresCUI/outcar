@@ -22,7 +22,9 @@ SDL_Texture *score_background = NULL;
 SDL_Texture *dark_fader = NULL;
 SDL_Texture *hit_fx = NULL;
 SDL_Texture *hit_fx2 = NULL;
+SDL_Texture *no_fuel_fx = NULL;
 SDL_Texture *fuel_up = NULL;
+SDL_Texture *texture_fx[FX_NONE];
 
 char score_txt[6];
 
@@ -52,6 +54,9 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
 
     hit_fx = load_texture("res/crash_b_fx.png", renderer);
     hit_fx2 = load_texture("res/crash_fx_360x240.png", renderer);
+    no_fuel_fx = load_texture("res/no_fuel_fx_360x240.png", renderer);
+    texture_fx[0] = hit_fx2;
+    texture_fx[1] = no_fuel_fx;
 
     if (LEFT_HANDED == (state->hand & LEFT_HANDED))
     {
@@ -78,7 +83,7 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
         btn_fuel_refill == NULL || btn_fuel_gauge_show == NULL || clock_texture == NULL ||
         fuel_gauge == NULL || fuel_gauge_blank == NULL || fuel_pointer == NULL ||
         lane_touch_guide == NULL || score_background == NULL || hit_fx == NULL || hit_fx2 == NULL ||
-        fuel_up == NULL)
+        fuel_up == NULL || no_fuel_fx == NULL)
     {
         SDL_Log("load error: %s\n", IMG_GetError());
         textures_free();
@@ -97,7 +102,11 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     SDL_SetTextureAlphaMod(btn_play, 120);
     SDL_SetTextureBlendMode(hit_fx2, SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(hit_fx2, 120);
+    SDL_SetTextureBlendMode(no_fuel_fx, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(no_fuel_fx, 120);
     SDL_SetTextureBlendMode(dark_fader, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(lane_touch_guide, 80);
+    SDL_SetTextureBlendMode(lane_touch_guide, SDL_BLENDMODE_BLEND);
 
     rescale_size(state);
 
@@ -214,34 +223,39 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         }
         curr_el = curr_el->next_el;
     }
-    // player car rendering
-    if (state->player_hit)
+
+    // texture FX rendering
+    if ((state->current_texture_fx).texture != FX_NONE)
     {
-        SDL_SetTextureAlphaMod(player_car, 100);
-        // effect
-        //(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h, SDL_Rect *clip)
-        /*render_texture_scaling(hit_fx, renderer,
-                               scaled_road_size * 2 + (scaled_road_size - scaled_car_size),
-                               abs(state->play_area.y), scaled_car_size, scaled_car_size, NULL);*/
-        render_texture_scaling(hit_fx2, renderer, 0, scaled_road_size * 2,
-                               scaled_road_size * 3, scaled_road_size * 2, NULL);
-        /*if (state->play_area.y < 0)
-            render_texture_scaling(hit_fx, renderer,
-                                   scaled_road_size * 2 + (scaled_road_size - scaled_car_size),
-                                   -state->play_area.y, scaled_car_size, scaled_car_size, NULL);
+        timed_texture_fx *t_fx = &(state->current_texture_fx);
+
+        if (t_fx->end_timestamp < state->time_last_check_tick)
+        {
+            t_fx->texture = FX_NONE;
+            t_fx->end_timestamp = 0;
+            SDL_SetTextureAlphaMod(player_car, 255);
+        }
         else
-            render_texture_scaling(hit_fx, renderer,
-                                   scaled_road_size * 2 + (scaled_road_size - scaled_car_size),
-                                   state->play_area.y, scaled_car_size, scaled_car_size, NULL);*/
+        {
+            render_texture_scaling(texture_fx[t_fx->texture], renderer, 0, scaled_road_size * 2,
+                                   scaled_road_size * 3, scaled_road_size * 2, NULL);
+        }
+        if (t_fx->texture != FX_CRASH)
+        {
+            SDL_SetTextureAlphaMod(player_car, 100);
+        }
     }
     else
+    {
         SDL_SetTextureAlphaMod(player_car, 255);
+    }
+    // player car rendering
 
     render_texture_scaling(player_car, renderer,
                            (int) round(state->player_car_pos_renderer),
                            5 * scaled_car_size, scaled_car_size, scaled_car_size, NULL);
-    // Alpha correction
-    SDL_SetTextureAlphaMod(lane_touch_guide, 80);
+
+    // Lane touch guide rendering
     render_texture_scaling(lane_touch_guide, renderer, 0, 4 * scaled_road_size, scaled_road_size,
                            scaled_road_size, NULL);
     render_texture_scaling(lane_touch_guide, renderer, scaled_road_size, 4 * scaled_road_size,
@@ -249,13 +263,14 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     render_texture_scaling(lane_touch_guide, renderer, 2 * scaled_road_size, 4 * scaled_road_size,
                            scaled_road_size, scaled_road_size, NULL);
 
-    // rendering menu
+    // rendering bottom menu
     if (SDL_RenderSetViewport(renderer, &state->menu_area))
     {
         log_SDL_error("Viewport");
         state->quit = SDL_TRUE;
         return;
     }
+    // Handedness correction
     int pos01, pos02, pos03;
     if (LEFT_HANDED == (state->hand & LEFT_HANDED))
     {
@@ -336,6 +351,32 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         render_text_8x8_capital(font, renderer, score_txt, state->scaling_mode * 16,
                                 state->play_area.x + scaled_road_size + state->scaling_mode * 20,
                                 state->scaling_mode * 24);
+
+        // Render the new points
+        int_lt *curr = (state->new_score_points).first;
+        int_lt *next = NULL;
+        while (curr != NULL)
+        {
+            next = curr->next;
+            uint32_t time_diff = state->time_last_check_tick - curr->timestamp;
+            if (SCORE_POINT_MSG_TIMEOUT < time_diff || curr->val == 0) {
+                delete_int_linked(&(state->new_score_points), curr);
+            }
+            else
+            {
+                float pos_y = ((float)time_diff / SCORE_POINT_MSG_TIMEOUT) * 40.0f;
+                char *points = points_s_to_i(curr->val);
+                if (points)
+                {
+                    render_text_8x8_capital(font, renderer, points, state->scaling_mode * 16,
+                                state->play_area.x + scaled_road_size + state->scaling_mode * 20,
+                                (int) (state->scaling_mode * 64 - state->scaling_mode * pos_y));
+                    free(points);
+                }
+            }
+
+            curr = next;
+        }
 
         if (state->fuel_countdown)
             render_texture_scaling(fuel_up, renderer, 10 * state->scaling_mode,

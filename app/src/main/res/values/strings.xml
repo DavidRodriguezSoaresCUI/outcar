@@ -37,7 +37,8 @@
     <string name="stat_db_file">cruiserdb.%s.csv</string>
     <string name="stat_db_file_1stline">//Code,Age,Sexe,Main,Date/Heure,
         Options du jeux,Durée du jeu,Score,Hit Count,Hit Times,Refuel Count,Refuel Times,
-        Auto Refuel Count,Auto Refuel Times,Show Count,Show Times, Void Count,Void Times</string>
+        Auto Refuel Count,Auto Refuel Times,Show Count,Show Times,Void Count,Void Times,
+        Pause Times,Pause Duration [ms]</string>
 
     <!-- Strings used in hidden menu (untranslated) -->
     <string name="send_email_chooser_title">Send email...</string>

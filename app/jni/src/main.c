@@ -296,7 +296,7 @@ void log_results(const info_exchange state)
     // Creating the CSV-compliant data line
     char *dataline = NULL;
     if (asprintf(&dataline,
-                 "%s,%s,%s,%s,%s,\"%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s",
+                 "%s,%s,%s,%s,%s,\"%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
                  argv[ARGV_IDCODE],
                  argv[ARGV_AGE],
                  argv[ARGV_SEX],
@@ -317,7 +317,9 @@ void log_results(const info_exchange state)
                  uint16_linked_count(state.show_times),
                  uint16_linked_toString(state.show_times),
                  uint16_linked_count(state.void_times),
-                 uint16_linked_toString(state.void_times)) != -1)
+                 uint16_linked_toString(state.void_times),
+                 uint16_linked_toString(state.pause_time),
+                 uint32_linked_toString(state.pause_duration)) != -1)
     {
         strip_char(dataline, '\n');
 

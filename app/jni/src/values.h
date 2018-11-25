@@ -14,6 +14,7 @@
     //#define DISPLAY_DEBUG_MSG
     //#define DISPLAY_DEBUG_INFO
     #define DEBUG_MSG_TIMEOUT 5000
+    #define SCORE_POINT_MSG_TIMEOUT 1500
 
     #define GAME_OVER_MAX_TRANSPARENCY 210
 
@@ -32,15 +33,19 @@
     #define MAX_SCORE 99999
     #define SCORE_AVOID( state )  state->score += state->avoid_reward; \
                 /*push_string_linked( &(state->debug_messages), "Avoided!" );*/ \
+                push_int_linked( &(state->new_score_points), (state->avoid_reward) ); \
                 if (MAX_SCORE < state->score) { state->score = MAX_SCORE; }
     #define SCORE_REFUEL( state ) state->score += state->refuel_reward; \
                 /*push_string_linked( &(state->debug_messages), "Refueled!" );*/ \
+                push_int_linked( &(state->new_score_points), (state->refuel_reward) ); \
                 if (MAX_SCORE < state->score) { state->score = MAX_SCORE; }
     #define SCORE_CRASH( state )  state->score -= state->crash_penalty; \
                 /*push_string_linked( &(state->debug_messages), "Crashed!" );*/ \
+                push_int_linked( &(state->new_score_points), -(state->crash_penalty) ); \
                 if (state->score < MIN_SCORE) { state->score = MIN_SCORE; }
     #define SCORE_NOFUEL( state ) state->score -= state->nofuel_penalty; \
                 /*push_string_linked( &(state->debug_messages), "No Fuel!" );*/ \
+                push_int_linked( &(state->new_score_points), -(state->nofuel_penalty) ); \
                 if (state->score < MIN_SCORE) { state->score = MIN_SCORE; }
 
     /* Argument norm :

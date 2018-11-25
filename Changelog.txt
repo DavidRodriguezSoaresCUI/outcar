@@ -30,4 +30,11 @@
   age/id-code bounds have been moved to 'res/values/integer.xml'.
 >>Added a 'Todo' file, to keep track of what's left to do.
 
+>v1.0.6 (SP1) : (25.11.2018)
+>>Some code cleanup, mostly aesthetic to make the header files more readable.
+>>New and improved way of displaying 'image_fx' on the screen
+>>>New 'image_fx' as proof-of-concept: out-of-fuel
+>>Now, when there is a point loss/gain, its value will scroll up (near the score box) in a visually
+  pleasant way.
+>>User interaction with the pause button is now logged as well.
 

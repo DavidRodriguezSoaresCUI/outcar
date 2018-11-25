@@ -4,12 +4,14 @@
 >Record when the pause button is pressed and for how long the game is paused in new fields of
  the database.
 >>A job for anyone.
+>>>Done in v1.0.6
 
 >Show something when refueling (positive feedback to the user).
 >>A job for anyone.
 
 >Show something when gaining/losing points (feedback to the user).
 >>A job for DRS (There is something I want to try with this).
+>>>Done in v1.0.6
 
 >Add a configuration option, to enable/disable the need to refuel. This will also affect the
  tutorial and the in-game user interface.
