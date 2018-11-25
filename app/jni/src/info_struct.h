@@ -124,7 +124,6 @@
         uint8_t fuel_countdown;
         uint32_t fuel_up_msg_time_left;
 
-
         // -- misc --
         int player_car_pos_logical; // values in {0,1,2}
         double player_car_pos_renderer;
@@ -201,12 +200,13 @@
         uint16_linked *chain,
         uint16_t val);
 
-    char*    uint16_linked_toString(const uint16_linked *chain);
-    uint16_t uint16_linked_count(const uint16_linked *chain);
+    char*    uint16_linked_toString(uint16_linked *chain);
+    uint16_t uint16_linked_count(uint16_linked *chain);
 
     void push_string_linked(
         string_linked *chain,
-        const char *str);
-    void free_string_linked( string_linked *chain );
+        char *str);
+
+    void free_string_linked(string_linked *chain);
 
 #endif

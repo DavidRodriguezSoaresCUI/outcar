@@ -14,20 +14,47 @@
 
     void log_SDL_error(const char *msg);
 
-    SDL_Texture *load_texture(const char *file, SDL_Renderer *ren);
+    SDL_Texture *load_texture(
+        const char *file,
+        SDL_Renderer *ren);
 
-    void render_texture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, SDL_Rect *clip);
+    void render_texture(
+        SDL_Texture *tex,
+        SDL_Renderer *ren,
+        int x,
+        int y,
+        SDL_Rect *clip);
 
-    void render_texture_scaling(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h,
-                                SDL_Rect *clip);
+    void render_texture_scaling(
+        SDL_Texture *tex,
+        SDL_Renderer *ren,
+        int x,
+        int y,
+        int w,
+        int h,
+        SDL_Rect *clip);
 
-    void render_text_8x8_capital(SDL_Texture *font, SDL_Renderer *ren, char *text, int size,
-                                 int x, int y);
+    void render_text_8x8_capital(
+        SDL_Texture *font,
+        SDL_Renderer *ren,
+        char *text,
+        int size,
+        int x,
+        int y);
 
-    void render_text_8x8_capital_align_right(SDL_Texture *font, SDL_Renderer *ren, char *text,
-                                         int size, int x, int y);
+    void render_text_8x8_capital_align_right(
+        SDL_Texture *font,
+        SDL_Renderer *ren,
+        char *text,
+        int size,
+        int x,
+        int y);
 
-    int render_lcd_clock(SDL_Texture *clock_texture, SDL_Renderer *ren, SDL_Rect clipsize,
-                         char *clock, SDL_Rect render_area);
+    int render_lcd_clock(
+        SDL_Texture *clock_texture,
+        SDL_Renderer *ren,
+        SDL_Rect clipsize,
+        char *clock,
+        SDL_Rect render_area);
 
 #endif
