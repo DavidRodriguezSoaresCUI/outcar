@@ -102,16 +102,16 @@
         uint16_t nofuel_penalty;
 
         // -- game state --
-        uint32_t time_left;
+        uint32_t time_left; // in milliseconds
     	char *numeric_clock;
 	    uint16_t scroll_state; // between 0 and 89
-        uint8_t pause;      // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t quit;       // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t end;        // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t player_hit; // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t refueling;  // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  pause;      // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  quit;       // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  end;        // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  player_hit; // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  refueling;  // boolean: SDL_FALSE or SDL_TRUE
         uint16_t fuel;
-        uint8_t fuel_pointer_position;
+        uint8_t  fuel_pointer_position;
         uint32_t time_game_start;
         uint32_t time_game_end;
         uint32_t time_last_second_tick;
@@ -139,6 +139,7 @@
         SDL_AudioDeviceID audio_device_id;
         uint32_t sfx_wav_length;
         uint8_t *sfx_wav_buffer;
+
 #ifdef DISPLAY_DEBUG_MSG
         string_linked debug_messages;
 #endif
@@ -154,26 +155,58 @@
     // UTILS
 
     #define ASSERT_NOT_NULL( var ) if ( var == NULL ) { \
-                                           printf( "Assert fail: var was NULL (file '%s', line %d)\n", \
-                                                   __FILE__, __LINE__ ); \
-                                           exit( EXIT_FAILURE ); }
+            printf( "Assert fail: var was NULL (file '%s', line %d)\n", __FILE__, __LINE__ ); \
+            exit( EXIT_FAILURE ); }
 
 
-    int
-    check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t std);
-    int check_bounds16(uint16_t *val, char *err_msg, uint16_t min, uint16_t max, uint16_t std);
-    void     strip_char( char *str, const char c );
-    void     strip_comments( char *str );
-    uint32_t count_char_instances( const char *str, const char c );
-    uint32_t count_items_CSV_line( const char *str );
-    char**   split_CSV_line( char *str, uint32_t *nb_items );
-    char**   split_str_lines( char *str, uint32_t *nb_lines );
-    char*    read_file_SDL( const char *file_path );
-    void     init_uint16_linked( uint16_linked **ptr );
-    void     push_uint16_linked( uint16_linked *chain, uint16_t val );
-    char *   uint16_linked_toString( uint16_linked *chain );
-    uint16_t uint16_linked_count( uint16_linked *chain );
-    void     push_string_linked( string_linked *chain, char *str );
-    void     free_string_linked( string_linked *chain );
+    int check_bounds8(
+        uint8_t *val,
+        char *err_msg,
+        uint8_t min,
+        uint8_t max,
+        uint8_t std);
+
+    int check_bounds16(
+        uint16_t *val,
+        char *err_msg,
+        uint16_t min,
+        uint16_t max,
+        uint16_t std);
+
+    void strip_char(
+        char *str,
+        const char c);
+
+    void strip_comments(char *str);
+
+    uint32_t count_char_instances(
+        const char *str,
+        const char c);
+
+    uint32_t count_items_CSV_line(const char *str);
+
+    char** split_CSV_line(
+        char *str,
+        uint32_t *nb_items);
+
+    char** split_str_lines(
+        char *str,
+        uint32_t *nb_lines);
+
+    char* read_file_SDL(const char *file_path);
+    void  init_uint16_linked(uint16_linked **ptr);
+
+    void push_uint16_linked(
+        uint16_linked *chain,
+        uint16_t val);
+
+    char*    uint16_linked_toString(uint16_linked *chain);
+    uint16_t uint16_linked_count(uint16_linked *chain);
+
+    void push_string_linked(
+        string_linked *chain,
+        char *str);
+
+    void free_string_linked(string_linked *chain);
 
 #endif
