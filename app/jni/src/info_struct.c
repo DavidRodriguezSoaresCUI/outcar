@@ -115,7 +115,12 @@ void calc_scaling(info_exchange *state)
 
 // UTILS
 
-int check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t std)
+int check_bounds8(
+        uint8_t *val,
+        const char *err_msg,
+        const uint8_t min,
+        const uint8_t max,
+        const uint8_t std)
 {
     if (*val < min || max < *val)
     {
@@ -126,7 +131,12 @@ int check_bounds8(uint8_t *val, char *err_msg, uint8_t min, uint8_t max, uint8_t
     return 1;
 }
 
-int check_bounds16(uint16_t *val, char *err_msg, uint16_t min, uint16_t max, uint16_t std)
+int check_bounds16(
+        uint16_t *val,
+        const char *err_msg,
+        const uint16_t min,
+        const uint16_t max,
+        const uint16_t std)
 {
     if (*val < min || max < *val)
     {
