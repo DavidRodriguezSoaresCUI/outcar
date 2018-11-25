@@ -562,4 +562,3 @@ int show_end_screen(info_exchange *state, SDL_Renderer *renderer, int scaled_roa
 
     return 0;
 }
-

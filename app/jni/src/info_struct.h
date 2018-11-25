@@ -152,26 +152,26 @@
     void init_handedness( info_exchange *init_var );
     void calc_scaling(info_exchange *state);
 
+
     // UTILS
 
     #define ASSERT_NOT_NULL( var ) if ( var == NULL ) { \
-            printf( "Assert fail: var was NULL (file '%s', line %d)\n", __FILE__, __LINE__ ); \
-            exit( EXIT_FAILURE ); }
-
+           printf( "Assert fail: var was NULL (file '%s', line %d)\n", __FILE__, __LINE__ ); \
+           exit( EXIT_FAILURE ); }
 
     int check_bounds8(
         uint8_t *val,
-        char *err_msg,
-        uint8_t min,
-        uint8_t max,
-        uint8_t std);
+        const char *err_msg,
+        const uint8_t min,
+        const uint8_t max,
+        const uint8_t std);
 
     int check_bounds16(
         uint16_t *val,
-        char *err_msg,
-        uint16_t min,
-        uint16_t max,
-        uint16_t std);
+        const char *err_msg,
+        const uint16_t min,
+        const uint16_t max,
+        const uint16_t std);
 
     void strip_char(
         char *str,

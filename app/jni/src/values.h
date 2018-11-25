@@ -22,10 +22,9 @@
     #define HIST_SCORES 5
     #define HIST_SCORES_LEN 9
 
-    /* Score norm :
-     * avoid cars  +33 points
-     * crash      -100 points
-     * refuel     +300 points
+    /* Score norm : values given by configuration file (only positive numbers)
+     * >rewards : avoid cars, refuel
+     * >penalties : crash, out of fuel
      *
      * Note: MIN_SCORE and MAX_SCORE were selected because we want a 5-digit score
      */
@@ -86,14 +85,17 @@
     #define CONF_EXPECTED_NB_ITEMS  9
 
     /* Norm :
-     *   20 <= CONF_GAME_DURATION  <=  600
-     *   20 <= CONF_FUEL_DURATION  <=  300
-     *   50 <= CONF_REL_SPEED      <=  200
-     * 1000 <= CONF_SHOW_DURATION  <= 5000
-     *    0 <= CONF_AVOID_REWARD   <= 1000
-     *    0 <= CONF_REFUEL_REWARD  <= 3000
-     *    0 <= CONF_CRASH_PENALTY  <= 1000
-     *    0 <= CONF_NOFUEL_PENALTY <= 1000
+     *   20 <= CONF_GAME_DURATION  <=  600; STD= 120
+     *   20 <= CONF_FUEL_DURATION  <=  300; STD=  40
+     *   50 <= CONF_REL_SPEED      <=  200; STD= 100
+     * 1000 <= CONF_SHOW_DURATION  <= 5000; STD=2000
+     *    0 <= CONF_AVOID_REWARD   <= 1000; STD=  33
+     *    0 <= CONF_REFUEL_REWARD  <= 3000; STD= 300
+     *    0 <= CONF_CRASH_PENALTY  <= 1000; STD= 100
+     *    0 <= CONF_NOFUEL_PENALTY <= 1000; STD= 100
+     *
+     *    Note : When the configuration file's values are outside the defined bounds,
+     *    the 'STD' value is used instead.
      */
     #define CONF_GAME_DURATION_MIN  20
     #define CONF_GAME_DURATION_MAX  600

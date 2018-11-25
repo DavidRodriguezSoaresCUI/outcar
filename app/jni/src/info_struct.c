@@ -434,4 +434,3 @@ void free_string_linked(string_linked *chain)
     }
 }
 
-
