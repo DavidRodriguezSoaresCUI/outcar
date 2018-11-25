@@ -136,7 +136,7 @@ int check_bounds16(
         const char *err_msg,
         const uint16_t min,
         const uint16_t max,
-        const uint16_t std)
+        const uint16_t std) //just a comment
 {
     if (*val < min || max < *val)
     {
