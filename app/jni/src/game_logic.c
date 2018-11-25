@@ -273,6 +273,8 @@ void player_collision(info_exchange *state)
     SCORE_CRASH(state)
 
     push_uint16_linked(state->hit_times, get_timer(state));
+    (state->current_texture_fx).texture = FX_CRASH;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
     // play crash sound effect
     if (play_sfx(state->audio_device_id, state->sfx_wav_length, state->sfx_wav_buffer) != 0)
     {
@@ -291,6 +293,9 @@ void out_of_fuel(info_exchange *state)
     state->fuel = MIN_FUEL;
     state->refueling = SDL_TRUE;
     push_uint16_linked(state->auto_refuel_times, get_timer(state));
+    (state->current_texture_fx).texture = FX_NO_FUEL;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
+
     SCORE_NOFUEL(state)
 }
 

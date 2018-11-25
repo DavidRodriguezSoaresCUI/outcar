@@ -21,6 +21,8 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     init_uint16_linked(&(init_var->auto_refuel_times));
     init_uint16_linked(&(init_var->show_times));
     init_uint16_linked(&(init_var->void_times));
+    init_uint16_linked(&(init_var->pause_time));
+    init_uint32_linked(&(init_var->pause_duration));
     init_var->score = 0;
     for (int i = 0; i < HIST_SCORES; i++)
     {
@@ -57,6 +59,10 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     init_var->time_last_show_fuel_tick = 0;
     //init_var->play_area;
     //init_var->menu_area;
+    (init_var->new_score_points).first = NULL;
+    (init_var->new_score_points).last = NULL;
+    (init_var->current_texture_fx).texture = FX_NONE;
+    (init_var->current_texture_fx).end_timestamp = 0;
 
     // -- positions --
     init_var->player_car_pos_logical = 1;
@@ -91,6 +97,8 @@ void free_info_exchange(info_exchange *free_var)
 
     // -- game state --
     free(free_var->numeric_clock);
+    free_int_linked(&(free_var->new_score_points));
+
 #ifdef DISPLAY_DEBUG_MSG
     free_string_linked(&(free_var->debug_messages));
 #endif
@@ -343,11 +351,44 @@ void init_uint16_linked(uint16_linked **ptr)
     (*ptr)->last = NULL;
 }
 
+void init_uint32_linked(uint32_linked **ptr)
+{
+    if ((*ptr = (uint32_linked *) malloc(sizeof(uint32_linked))) == NULL)
+        exit(EXIT_FAILURE);
+
+    (*ptr)->first = NULL;
+    (*ptr)->last = NULL;
+}
+
 void push_uint16_linked(uint16_linked *chain, uint16_t val)
 {
     // We allocate a new uint16_lt ..
     uint16_lt *new = NULL;
     if ((new = (uint16_lt *) malloc(sizeof(uint16_lt))) == NULL)
+        exit(EXIT_FAILURE);
+    // .. initialize it ..
+    new->value = val;
+    new->next = NULL;
+
+    if (chain->first == NULL)
+    {
+        // The chain contains no element
+        chain->first = new; // .. and put it as the first element ..
+    }
+    else
+    {
+        // The chain contains at least one element
+        (chain->last)->next = new; // .. and put it after the last element
+    }
+
+    chain->last = new; // .. and put it as the last element
+}
+
+void push_uint32_linked(uint32_linked *chain, uint32_t val)
+{
+    // We allocate a new uint32_lt ..
+    uint32_lt *new = NULL;
+    if ((new = (uint32_lt *) malloc(sizeof(uint32_lt))) == NULL)
         exit(EXIT_FAILURE);
     // .. initialize it ..
     new->value = val;
@@ -386,6 +427,25 @@ char *uint16_linked_toString(uint16_linked *chain)
     return buffer;
 }
 
+char *uint32_linked_toString(uint32_linked *chain)
+{
+    // For debug only ! Not overflow safe !
+    char *buffer;
+    if ((buffer = malloc(150)) == NULL)
+        exit(EXIT_FAILURE);
+    uint32_lt *curr = chain->first;
+    int i = 0;
+    i += sprintf(&buffer[i], "\"");
+    while (curr != NULL && i < 140)
+    {
+        i += sprintf(&buffer[i], "%d,", curr->value);
+        curr = curr->next;
+    }
+    if (1 < i) i--;
+    sprintf(&buffer[i], "\"");
+    return buffer;
+}
+
 uint16_t uint16_linked_count(uint16_linked *chain)
 {
     // Counts how many values are stored in the linked list
@@ -401,7 +461,7 @@ uint16_t uint16_linked_count(uint16_linked *chain)
 
 void push_string_linked(string_linked *chain, char *str)
 {
-    // We allocate a new uint16_lt ..
+    // We allocate a new link
     string_lt *newLink = NULL;
     char *newStr = NULL;
     size_t len = (strlen(str) + 1) * sizeof(char);
@@ -411,6 +471,7 @@ void push_string_linked(string_linked *chain, char *str)
 
     // .. initialize it ..
     snprintf(newStr, len, "%s", str);
+    free(str);
     newLink->str = newStr;
     newLink->timestamp = SDL_GetTicks();
     newLink->next = NULL;
@@ -429,18 +490,131 @@ void push_string_linked(string_linked *chain, char *str)
     chain->last = newLink; // .. and put it as the last element
 }
 
+void delete_string_linked(string_linked *chain, string_lt *link)
+{
+    string_lt *currLink = chain->first;
+
+    if (currLink == link)
+    {
+        chain->first = currLink->next;
+        if(currLink->str != NULL) { free(currLink->str); }
+        free(currLink);
+        return;
+    }
+
+    string_lt *prevLink = NULL;
+    while(currLink != NULL)
+    {
+        if (currLink == link)
+        {
+            if(currLink == chain->last)
+            {
+                chain->last = prevLink;
+            }
+            prevLink->next = currLink->next;
+            free(currLink->str);
+            free(currLink);
+            return;
+        }
+        else
+        {
+            prevLink = currLink;
+        }
+        currLink = currLink->next;
+    }
+}
+
 void free_string_linked(string_linked *chain)
 {
-    // We allocate a new uint16_lt ..
+    // We allocate a new link
     string_lt *currLink = NULL, *nextLink = NULL;
     currLink = chain->first;
 
     while (currLink != NULL)
     {
         nextLink = currLink->next;
-        free(currLink->str);
+        if(currLink->str != NULL) { free(currLink->str); }
         free(currLink);
         currLink = nextLink;
     }
+}
+
+void push_int_linked(int_linked *chain, int val)
+{
+    // We allocate a new link
+    int_lt *newLink = NULL;
+    if ((newLink = (int_lt *) malloc(sizeof(int_lt))) == NULL)
+        exit(EXIT_FAILURE);
+
+    // .. initialize it ..
+    newLink->val = val;
+    newLink->timestamp = SDL_GetTicks();
+    newLink->next = NULL;
+
+    if (chain->first == NULL)
+    {
+        // The chain contains no element
+        chain->first = newLink; // .. and put it as the first element ..
+    }
+    else
+    {
+        // The chain contains at least one element
+        (chain->last)->next = newLink; // .. and put it after the last element
+    }
+
+    chain->last = newLink; // .. and put it as the last element
+}
+
+void delete_int_linked(int_linked *chain, int_lt *link)
+{
+    int_lt *currLink = chain->first;
+
+    if (currLink == link)
+    {
+        chain->first = currLink->next;
+        free(currLink);
+        return;
+    }
+
+    int_lt *prevLink = NULL;
+    while(currLink != NULL)
+    {
+        if (currLink == link)
+        {
+            if(currLink == chain->last)
+            {
+                chain->last = prevLink;
+            }
+            prevLink->next = currLink->next;
+            free(currLink);
+            return;
+        }
+        else
+        {
+            prevLink = currLink;
+        }
+        currLink = currLink->next;
+    }
+}
+
+void free_int_linked(int_linked *chain)
+{
+    // We allocate a new link
+    int_lt *currLink = NULL, *nextLink = NULL;
+    currLink = chain->first;
+
+    while (currLink != NULL)
+    {
+        nextLink = currLink->next;
+        free(currLink);
+        currLink = nextLink;
+    }
+}
+
+char* points_s_to_i(int val)
+{
+    char *points = NULL;
+    asprintf(&points, "%c%04d", (val < 0) ? '-' : '+', abs(val));
+    return points;
 }
 

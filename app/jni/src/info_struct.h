@@ -39,6 +39,18 @@
         struct uint16_lt *last;
     } uint16_linked;
 
+    typedef struct uint32_lt
+    {
+        uint32_t value;
+        struct uint32_lt *next;
+    } uint32_lt;
+
+    typedef struct uint32_linked
+    {
+        struct uint32_lt *first;
+        struct uint32_lt *last;
+    } uint32_linked;
+
     typedef struct string_lt
     {
         char *str;
@@ -51,6 +63,31 @@
         struct string_lt *first;
         struct string_lt *last;
     } string_linked;
+
+    typedef struct int_lt
+    {
+        int val;
+        uint32_t timestamp;
+        struct int_lt *next;
+    } int_lt;
+
+    typedef struct int_linked
+    {
+        struct int_lt *first;
+        struct int_lt *last;
+    } int_linked;
+
+    typedef enum texture_fx_e {
+        FX_CRASH = 0,
+        FX_NO_FUEL = 1,
+        FX_ELSE = 2,
+        FX_NONE = 3} texture_fx_e;
+
+    typedef struct timed_texture_fx
+    {
+        texture_fx_e texture;
+        uint32_t end_timestamp;
+    } timed_texture_fx;
 
     typedef enum handedness
     {
@@ -85,6 +122,8 @@
         uint16_linked *auto_refuel_times;
         uint16_linked *show_times;
         uint16_linked *void_times;
+        uint16_linked *pause_time; // in s
+        uint32_linked *pause_duration; // in ms
         int32_t score;
         char score_hist[HIST_SCORES][HIST_SCORES_LEN];
 
@@ -123,6 +162,8 @@
         // |->fuel up message countdown data
         uint8_t fuel_countdown;
         uint32_t fuel_up_msg_time_left;
+        int_linked new_score_points;
+        timed_texture_fx current_texture_fx;
 
         // -- misc --
         int player_car_pos_logical; // values in {0,1,2}
@@ -195,18 +236,32 @@
 
     char* read_file_SDL(const char *file_path);
     void  init_uint16_linked(uint16_linked **ptr);
+    void  init_uint32_linked(uint32_linked **ptr);
 
     void push_uint16_linked(
-        uint16_linked *chain,
-        uint16_t val);
+            uint16_linked *chain,
+            uint16_t val);
+
+    void push_uint32_linked(
+            uint32_linked *chain,
+            uint32_t val);
 
     char*    uint16_linked_toString(uint16_linked *chain);
+    char*    uint32_linked_toString(uint32_linked *chain);
     uint16_t uint16_linked_count(uint16_linked *chain);
 
     void push_string_linked(
         string_linked *chain,
         char *str);
 
+    void delete_string_linked(
+        string_linked *chain,
+        string_lt *link);
+
     void free_string_linked(string_linked *chain);
+    void push_int_linked(int_linked *chain, int val);
+    void delete_int_linked(int_linked *chain, int_lt *link);
+    void free_int_linked(int_linked *chain);
+    char* points_s_to_i(int val);
 
 #endif

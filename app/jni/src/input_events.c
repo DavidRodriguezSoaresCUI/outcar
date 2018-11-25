@@ -1,5 +1,6 @@
 #include "input_events.h"
 
+
 uint32_t tmp_time_diff;
 
 int input_events(info_exchange *state, SDL_Event *events)
@@ -88,11 +89,13 @@ int input_events(info_exchange *state, SDL_Event *events)
                         state->time_last_check_tick += tmp_time_diff;
                         state->time_last_car_gen += tmp_time_diff;
                         state->time_last_second_tick += tmp_time_diff;
+                        push_uint32_linked(state->pause_duration, tmp_time_diff);
                         state->pause = SDL_FALSE;
                     }
                     else
                     {
                         state->pause = SDL_TRUE;
+                        push_uint16_linked(state->pause_time, get_timer(state));
                         // storing difference between last second tick and current tick at the
                         // moment of pausing
                     }
