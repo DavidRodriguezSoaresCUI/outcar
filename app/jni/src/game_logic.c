@@ -135,17 +135,20 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     if (time_curr - state->time_last_second_tick >= 1000)
     {
         // fuel
-        if (state->fuel > MIN_FUEL + 1)
+        if (state->need_to_refuel)
         {
-            state->fuel--;
+            if (state->fuel > MIN_FUEL + 1)
+            {
+                state->fuel--;
 #ifdef DISPLAY_DEBUG_MSG
             char tmp[100];
             sprintf( tmp, "fuel:%03d", state->fuel );
             push_string_linked( &(state->debug_messages), tmp );
 #endif
+            }
+            else
+                out_of_fuel(state);
         }
-        else
-            out_of_fuel(state);
 
         calc_fuel_pointer_position(state);
 
@@ -231,7 +234,8 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
                 touch_x_handed = state->menu_area.w - touch_relative_x;
 
             if (touch_x_handed > state->menu_area.x &&
-                touch_x_handed < state->menu_area.x + state->menu_area.w - 3 * state->menu_area.h)
+                touch_x_handed < state->menu_area.x + state->menu_area.w - 3 * state->menu_area.h &&
+                state->need_to_refuel)
             {
                 // A touch event happened on the 'refuel' button
                 manual_refuel(state);
@@ -240,7 +244,8 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
             else if (
                     touch_x_handed > state->menu_area.x + state->menu_area.h &&
                     touch_x_handed <
-                    state->menu_area.x + state->menu_area.w - 2 * state->menu_area.h)
+                    state->menu_area.x + state->menu_area.w - 2 * state->menu_area.h &&
+                    state->need_to_refuel)
             {
                 // A touch event happened on the 'show' button
                 show_fuel(state);

@@ -134,9 +134,9 @@ int check_bounds8(
     {
         *val = (uint8_t) std;
         fprintf(stderr, "%s", err_msg);
-        return 0;
+        return SDL_FALSE;
     }
-    return 1;
+    return SDL_TRUE;
 }
 
 int check_bounds16(
@@ -150,9 +150,23 @@ int check_bounds16(
     {
         *val = (uint16_t) std;
         fprintf(stderr, "%s", err_msg);
-        return 0;
+        return SDL_FALSE;
     }
-    return 1;
+    return SDL_TRUE;
+}
+
+int check_bounds8_bool(
+        uint8_t *val,
+        const char *err_msg,
+        const uint8_t std)
+{
+    if (*val != SDL_TRUE && *val != SDL_FALSE)
+    {
+        *val = (uint8_t) std;
+        fprintf(stderr, "%s", err_msg);
+        return SDL_FALSE;
+    }
+    return SDL_TRUE;
 }
 
 void strip_char(char *str, const char c)

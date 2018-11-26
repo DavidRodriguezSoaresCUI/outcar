@@ -38,3 +38,14 @@
   pleasant way.
 >>User interaction with the pause button is now logged as well.
 
+>v1.0.7 (SP1) : (26.11.2018)
+>>Applied changes to tutorial background 2,3,4 and 6 (marked as 'v2'); Making the fingerprint
+  more visible (bigger and slightly highlighted. Also, the previously missing 'score box' is now
+  present in the tutorial background.
+>>Changed 'Tutorial.java' accordingly.
+>>Reorganised 'Todo.txt'.
+>>Applied changes to the game configuration : added 'Need to refuel' and 'Display Pause button'
+  These are switches to modify key aspects of the game, along with the already-present
+   'Display numeric clock'.
+>>>Note: these may still be buggy
+

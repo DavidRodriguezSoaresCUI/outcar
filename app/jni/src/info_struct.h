@@ -135,6 +135,8 @@
         uint16_t time_total; // Config
         //uint8_t difficulty;
         uint8_t display_numeric_clock; // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t need_to_refuel;        // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t display_pause_button;  // boolean: SDL_FALSE or SDL_TRUE
         uint16_t avoid_reward;
         uint16_t refuel_reward;
         uint16_t crash_penalty;
@@ -213,6 +215,11 @@
         const uint16_t min,
         const uint16_t max,
         const uint16_t std);
+
+    int check_bounds8_bool(
+        uint8_t *val,
+        const char *err_msg,
+        const uint8_t std);
 
     void strip_char(
         char *str,
