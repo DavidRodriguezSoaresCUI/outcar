@@ -76,34 +76,34 @@ public class Tutorial extends Activity {
                 break;
             case 2:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_01 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_01_v3 );
                 touch_to_continue.setVisibility( View.GONE );
                 tutorial_text_background.setVisibility(View.VISIBLE);
                 touch_go_back.setText( "" );
                 break;
             case 3:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_02 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_02_v3 );
                 break;
             case 4:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_03 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_03_v3 );
                 break;
             case 5:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_04 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_04_v3 );
                 break;
             case 6:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_05 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_05_v3 );
                 break;
             case 7:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_06 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_06_v3 );
                 break;
             case 8:
                 setTutorialText();
-                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_07 );
+                tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_07_v3 );
                 tutorial_text_background.setVisibility(View.VISIBLE);
                 end_tutorial_checkBox.setVisibility(View.GONE);
                 end_tutorial_button.setVisibility(View.GONE);
@@ -160,6 +160,26 @@ public class Tutorial extends Activity {
                 + File.separator + getString( R.string.app_name );
         String game_config_file =  pers_info_file_folder
                 + File.separator + getString(R.string.game_config_file);
+
+        // We make sure that the configuration file exists
+        File game_config = new File( game_config_file );
+        if ( !game_config.exists() )
+        {
+            try{
+                game_config.createNewFile();
+                BufferedWriter writer = new BufferedWriter( new FileWriter( game_config ));
+                try {
+                    writer.append( Res.getString( R.string.game_config_file_1stline ) );
+                    writer.append( '\n' );
+                    writer.append( Res.getString( R.string.game_config_file_default_values ) );
+                    writer.close();
+                } catch ( Exception e ) {
+                    e.printStackTrace(); // Dealing with exceptions ..
+                }
+            } catch ( IOException e ) {
+                e.printStackTrace(); // Dealing with exceptions ..
+            }
+        }
 
         try {
             File file = new File(game_config_file);

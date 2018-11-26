@@ -1,25 +1,32 @@
->Modify the tutorial : make fingerprint more visible.
->>A job for DRS.
+
+>Show something when refueling (positive feedback to the user).
+>>A job for anyone.
+>>>Done in v1.0.5, but may need more work on the aesthetic front
+
+>Show something when gaining/losing points (feedback to the user).
+>>A job for DRS (There is something I want to try with this).
+>>>Done in v1.0.6, but may need more work on the aesthetic front
+
+>Bonus ? : Change how the score is displayed in the configuration file (size?/color?).
+>New idea : Make it possible to disable the score display in the configuration.
+>>A job for anyone.
+
+#############################################################################
 
 >Record when the pause button is pressed and for how long the game is paused in new fields of
  the database.
 >>A job for anyone.
 >>>Done in v1.0.6
 
->Show something when refueling (positive feedback to the user).
->>A job for anyone.
-
->Show something when gaining/losing points (feedback to the user).
->>A job for DRS (There is something I want to try with this).
->>>Done in v1.0.6
+>Modify the tutorial : make fingerprint more visible.
+>>A job for DRS.
+>>>Done in v1.0.7
 
 >Add a configuration option, to enable/disable the need to refuel. This will also affect the
  tutorial and the in-game user interface.
 >>A job for anyone.
+>>>Done in v1.0.7
 
 >Add a configuration option, to enable/disable the pause button.
 >>A job for anyone.
-
->Bonus ? : Change how the score is displayed in the configuration file (size?/color?).
->New idea : Make it possible to disable the score display in the configuration.
->>A job for anyone.
+>>>Done in v1.0.7

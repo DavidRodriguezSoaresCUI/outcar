@@ -140,9 +140,9 @@
             Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.).</item>
     </string-array>
     <string-array name="instr_cruiser_2">
-        <item>L\'interface ressemble à ceci.</item>
-        <item>L\'interface ressemble à ceci.</item>
-        <item>L\'interface ressemble à ceci.</item>
+        <item>L\'interface ressemble à ceci.\n\nVotre score est affiché en haut de l\'écran</item>
+        <item>L\'interface ressemble à ceci.\n\nVotre score est affiché en haut de l\'écran</item>
+        <item>L\'interface ressemble à ceci.\n\nVotre score est affiché en haut de l\'écran</item>
     </string-array>
     <string-array name="instr_cruiser_3">
         <item>Il vous est possible d\'interrompre le jeu en appuyant sur le bouton pause, en haut

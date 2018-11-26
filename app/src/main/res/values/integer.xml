@@ -4,8 +4,8 @@
     <integer name="default_splashscreen_delay">3000</integer>
     <integer name="magic_number">781584</integer>
     <integer name="tutorial_pages">10</integer>
-    <integer name="config_items">9</integer>
-    <integer name="pts_index">5</integer>
+    <integer name="config_items">11</integer>
+    <integer name="pts_index">7</integer>
     <integer name="min_ident">1</integer>
     <integer name="max_ident">99999</integer>
     <integer name="min_age">5</integer>

@@ -202,21 +202,17 @@ void load_conf(info_exchange *state)
         conf_data_i[i] = atoi(conf_data[i]);
     }
 
-    state->time_total = (uint16_t) conf_data_i[CONF_GAME_DURATION];
-    state->max_fuel = (uint8_t) conf_data_i[CONF_FUEL_DURATION];
-    state->rel_speed = (uint8_t) conf_data_i[CONF_REL_SPEED];
+    state->time_total            = (uint16_t) conf_data_i[CONF_GAME_DURATION];
+    state->max_fuel              = (uint8_t)  conf_data_i[CONF_FUEL_DURATION];
+    state->rel_speed             = (uint8_t)  conf_data_i[CONF_REL_SPEED];
     state->show_fuel_duration_ms = (uint16_t) conf_data_i[CONF_SHOW_DURATION];
-    state->display_numeric_clock = (uint8_t) conf_data_i[CONF_DSPLY_NUM_CLK];
-    state->avoid_reward = (uint16_t) conf_data_i[CONF_AVOID_REWARD];
-    state->refuel_reward = (uint16_t) conf_data_i[CONF_REFUEL_REWARD];
-    state->crash_penalty = (uint16_t) conf_data_i[CONF_CRASH_PENALTY];
-    state->nofuel_penalty = (uint16_t) conf_data_i[CONF_NOFUEL_PENALTY];
-
-    /*
-     * 5: uint16_t, Avoid crash reward [pts]
-     * 6: uint16_t, Refuel reward [pts]
-     * 7: uint16_t, Crash penalty [pts]
-     * 8: uint16_t, Out of Fuel penalty [pts]*/
+    state->display_numeric_clock = (uint8_t)  conf_data_i[CONF_DSPLY_NUM_CLK];
+    state->need_to_refuel        = (uint8_t)  conf_data_i[CONF_NEED_TO_REFUEL];
+    state->display_pause_button  = (uint8_t)  conf_data_i[CONF_DSPLY_PAUSE_BTN];
+    state->avoid_reward          = (uint16_t) conf_data_i[CONF_AVOID_REWARD];
+    state->refuel_reward         = (uint16_t) conf_data_i[CONF_REFUEL_REWARD];
+    state->crash_penalty         = (uint16_t) conf_data_i[CONF_CRASH_PENALTY];
+    state->nofuel_penalty        = (uint16_t) conf_data_i[CONF_NOFUEL_PENALTY];
 
     for (i = 0; i < nb_items; i++) // freeing memory
     {
@@ -252,22 +248,67 @@ void verify_conf(info_exchange *state)
                    CONF_NOFUEL_PENALTY_MIN, CONF_NOFUEL_PENALTY_MAX, CONF_NOFUEL_PENALTY_STD))
         push_string_linked(&(state->debug_messages), "Conf. OOB errors !");
 #else
-    check_bounds16(&(state->time_total), "warning: time_total OOB\n", CONF_GAME_DURATION_MIN,
-                   CONF_GAME_DURATION_MAX, CONF_GAME_DURATION_STD);
-    check_bounds16(&(state->max_fuel), "warning: max_fuel OOB\n", CONF_FUEL_DURATION_MIN,
-                   CONF_FUEL_DURATION_MAX, CONF_FUEL_DURATION_STD);
-    check_bounds8(&(state->rel_speed), "warning: rel_speed OOB\n", CONF_REL_SPEED_MIN,
-                  CONF_REL_SPEED_MAX, CONF_REL_SPEED_STD);
-    check_bounds16(&(state->show_fuel_duration_ms), "warning: show_fuel_duration_ms OOB\n",
-                   CONF_SHOW_DURATION_MIN, CONF_SHOW_DURATION_MAX, CONF_SHOW_DURATION_STD);
-    check_bounds16(&(state->avoid_reward), "warning: avoid_reward OOB\n", CONF_AVOID_REWARD_MIN,
-                   CONF_AVOID_REWARD_MAX, CONF_AVOID_REWARD_STD);
-    check_bounds16(&(state->refuel_reward), "warning: refuel_reward OOB\n", CONF_REFUEL_REWARD_MIN,
-                   CONF_REFUEL_REWARD_MAX, CONF_REFUEL_REWARD_STD);
-    check_bounds16(&(state->crash_penalty), "warning: crash_penalty OOB\n", CONF_CRASH_PENALTY_MIN,
-                   CONF_CRASH_PENALTY_MAX, CONF_CRASH_PENALTY_STD);
-    check_bounds16(&(state->nofuel_penalty), "warning: nofuel_penalty OOB\n",
-                   CONF_NOFUEL_PENALTY_MIN, CONF_NOFUEL_PENALTY_MAX, CONF_NOFUEL_PENALTY_STD);
+
+    check_bounds16(&(state->time_total),
+                   "warning: time_total OOB\n",
+                   CONF_GAME_DURATION_MIN,
+                   CONF_GAME_DURATION_MAX,
+                   CONF_GAME_DURATION_STD);
+
+    check_bounds16(&(state->max_fuel),
+                   "warning: max_fuel OOB\n",
+                   CONF_FUEL_DURATION_MIN,
+                   CONF_FUEL_DURATION_MAX,
+                   CONF_FUEL_DURATION_STD);
+
+    check_bounds8(&(state->rel_speed),
+                  "warning: rel_speed OOB\n",
+                  CONF_REL_SPEED_MIN,
+                  CONF_REL_SPEED_MAX,
+                  CONF_REL_SPEED_STD);
+
+    check_bounds16(&(state->show_fuel_duration_ms),
+                   "warning: show_fuel_duration_ms OOB\n",
+                   CONF_SHOW_DURATION_MIN,
+                   CONF_SHOW_DURATION_MAX,
+                   CONF_SHOW_DURATION_STD);
+
+    check_bounds8_bool(&(state->display_numeric_clock),
+                  "warning: display_numeric_clock OOB\n",
+                  CONF_DSPLY_NUM_CLK_STD);
+
+    check_bounds8_bool(&(state->need_to_refuel),
+                  "warning: need_to_refuel OOB\n",
+                  CONF_NEED_TO_REFUEL_STD);
+
+    check_bounds8_bool(&(state->display_pause_button),
+                  "warning: display_pause_button OOB\n",
+                  CONF_DSPLY_PAUSE_BTN_STD);
+
+    check_bounds16(&(state->avoid_reward),
+                   "warning: avoid_reward OOB\n",
+                   CONF_AVOID_REWARD_MIN,
+                   CONF_AVOID_REWARD_MAX,
+                   CONF_AVOID_REWARD_STD);
+
+    check_bounds16(&(state->refuel_reward),
+                   "warning: refuel_reward OOB\n",
+                   CONF_REFUEL_REWARD_MIN,
+                   CONF_REFUEL_REWARD_MAX,
+                   CONF_REFUEL_REWARD_STD);
+
+    check_bounds16(&(state->crash_penalty),
+                   "warning: crash_penalty OOB\n",
+                   CONF_CRASH_PENALTY_MIN,
+                   CONF_CRASH_PENALTY_MAX,
+                   CONF_CRASH_PENALTY_STD);
+
+    check_bounds16(&(state->nofuel_penalty),
+                   "warning: nofuel_penalty OOB\n",
+                   CONF_NOFUEL_PENALTY_MIN,
+                   CONF_NOFUEL_PENALTY_MAX,
+                   CONF_NOFUEL_PENALTY_STD);
+
 #endif
     state->display_numeric_clock =
             (state->display_numeric_clock == 0) ? (uint8_t) SDL_FALSE : (uint8_t) SDL_TRUE;
@@ -296,30 +337,33 @@ void log_results(const info_exchange state)
     // Creating the CSV-compliant data line
     char *dataline = NULL;
     if (asprintf(&dataline,
-                 "%s,%s,%s,%s,%s,\"%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
-                 argv[ARGV_IDCODE],
-                 argv[ARGV_AGE],
-                 argv[ARGV_SEX],
-                 argv[ARGV_HAND],
-                 state.date_at_launch,
-                 state.time_total,
-                 state.max_fuel,
-                 state.rel_speed,
-                 state.show_fuel_duration_ms,
-                 timer,
-                 state.score,
-                 uint16_linked_count(state.hit_times),
-                 uint16_linked_toString(state.hit_times),
-                 uint16_linked_count(state.refuel_times),
-                 uint16_linked_toString(state.refuel_times),
-                 uint16_linked_count(state.auto_refuel_times),
-                 uint16_linked_toString(state.auto_refuel_times),
-                 uint16_linked_count(state.show_times),
-                 uint16_linked_toString(state.show_times),
-                 uint16_linked_count(state.void_times),
-                 uint16_linked_toString(state.void_times),
-                 uint16_linked_toString(state.pause_time),
-                 uint32_linked_toString(state.pause_duration)) != -1)
+             "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
+             argv[ARGV_IDCODE],
+             argv[ARGV_AGE],
+             argv[ARGV_SEX],
+             argv[ARGV_HAND],
+             state.date_at_launch,
+             state.time_total,
+             state.max_fuel,
+             state.rel_speed,
+             state.show_fuel_duration_ms,
+             state.display_numeric_clock,
+             state.need_to_refuel,
+             state.display_pause_button,
+             timer,
+             state.score,
+             uint16_linked_count(state.hit_times),
+             uint16_linked_toString(state.hit_times),
+             uint16_linked_count(state.refuel_times),
+             uint16_linked_toString(state.refuel_times),
+             uint16_linked_count(state.auto_refuel_times),
+             uint16_linked_toString(state.auto_refuel_times),
+             uint16_linked_count(state.show_times),
+             uint16_linked_toString(state.show_times),
+             uint16_linked_count(state.void_times),
+             uint16_linked_toString(state.void_times),
+             uint16_linked_toString(state.pause_time),
+             uint32_linked_toString(state.pause_duration)) != -1)
     {
         strip_char(dataline, '\n');
 

@@ -12,3 +12,4 @@ release.
 
 * 'outcar' is the internal/developper name for this app. The user-visible name is 'Cal 
 Cruiser'.
+* You can find a compiled and signed APK in the 'release' folder

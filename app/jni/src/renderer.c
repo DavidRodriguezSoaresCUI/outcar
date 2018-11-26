@@ -16,6 +16,7 @@ SDL_Texture *fuel_pointer = NULL;
 SDL_Texture *lane_touch_guide = NULL;
 SDL_Texture *btn_fuel_refill = NULL;
 SDL_Texture *btn_fuel_gauge_show = NULL;
+SDL_Texture *action_button_replacement = NULL;
 SDL_Texture *btn_pause = NULL;
 SDL_Texture *btn_play = NULL;
 SDL_Texture *score_background = NULL;
@@ -60,21 +61,31 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
 
     if (LEFT_HANDED == (state->hand & LEFT_HANDED))
     {
-        // the user is right-handed
-        btn_fuel_refill = load_texture("res/buton_refuel_dark_90px_padded_2.png", renderer);
+        // the user is either left-handed or ambidextruous
+        btn_fuel_refill     = load_texture("res/buton_refuel_dark_90px_padded_2.png", renderer);
         btn_fuel_gauge_show = load_texture("res/buton_display_fuel_dark_90px_padded.png", renderer);
-        fuel_gauge = load_texture("res/fuel_display_180x90_padded_2.png", renderer);
-        fuel_gauge_blank = load_texture("res/diplay_background_blank_180x90px_padded_2.png",
+        fuel_gauge          = load_texture("res/fuel_display_180x90_padded_2.png", renderer);
+        fuel_gauge_blank    = load_texture("res/diplay_background_blank_180x90px_padded_2.png",
                                         renderer);
+        if (!state->need_to_refuel)
+        {
+            action_button_replacement = load_texture(
+                    "res/diplay_background_blank_180x90px_padded_1.png", renderer);
+        }
     }
     else
     {
-        // the user is either left-handed or ambidextruous
+        // the user is right-handed
         fuel_gauge = load_texture("res/fuel_display_180x90_padded_1.png", renderer);
         fuel_gauge_blank = load_texture("res/diplay_background_blank_180x90px_padded_1.png",
                                         renderer);
         btn_fuel_gauge_show = load_texture("res/buton_display_fuel_dark_90px_padded.png", renderer);
         btn_fuel_refill = load_texture("res/buton_refuel_dark_90px_padded_1.png", renderer);
+        if (!state->need_to_refuel)
+        {
+            action_button_replacement = load_texture(
+                    "res/diplay_background_blank_180x90px_padded_2.png", renderer);
+        }
     }
 
     if (road_left == NULL || road_middle == NULL || road_right == NULL || opp_car[0] == NULL ||
@@ -280,20 +291,29 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     }
     else
     {
-        pos01 = state->menu_area.h * 3;
+        pos01 = (state->need_to_refuel) ? state->menu_area.h * 3 : state->menu_area.h * 2;
         pos02 = state->menu_area.h * 2;
         pos03 = 0;
     }
 
-    render_texture_scaling(btn_fuel_refill, renderer, pos01, 0, state->menu_area.h,
-                           state->menu_area.h, NULL);
-    render_texture_scaling(btn_fuel_gauge_show, renderer, pos02, 0, state->menu_area.h,
-                           state->menu_area.h, NULL);
+    if (state->need_to_refuel)
+    {
+        render_texture_scaling(btn_fuel_refill, renderer, pos01, 0, state->menu_area.h,
+                               state->menu_area.h, NULL);
+        render_texture_scaling(btn_fuel_gauge_show, renderer, pos02, 0, state->menu_area.h,
+                               state->menu_area.h, NULL);
+    }
+    else
+    {
+        render_texture_scaling(action_button_replacement, renderer, pos01, 0,
+                               state->menu_area.h * 2, state->menu_area.h, NULL);
+    }
+
     if (show_fuel_gauge(state))
     {
         render_texture_scaling(fuel_gauge, renderer, pos03, 0, state->menu_area.h * 2,
                                state->menu_area.h, NULL);
-        //SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h,        SDL_Rect *clip
+        //SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h, DL_Rect *clip
         render_texture_scaling(fuel_pointer, renderer,
                                pos03 + (15 + state->fuel_pointer_position) * state->scaling_mode,
                                10 * state->scaling_mode, 18 * state->scaling_mode,
@@ -331,14 +351,17 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     if (!state->end)
     {
         // render pause/play button
-        int pause_btn_location = (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
-                                 state->play_area.x + 20 * state->scaling_mode :
-                                 state->play_area.x + 20 * state->scaling_mode +
-                                 2 * state->road_size * state->scaling_mode;
-        render_texture_scaling((state->pause) ? btn_play : btn_pause, renderer,
-                               pause_btn_location,
-                               20 * state->scaling_mode, 80 * state->scaling_mode,
-                               80 * state->scaling_mode, NULL);
+        if (state->display_pause_button)
+        {
+            int pause_btn_location = (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+                                     state->play_area.x + 20 * state->scaling_mode :
+                                     state->play_area.x + 20 * state->scaling_mode +
+                                     2 * state->road_size * state->scaling_mode;
+            render_texture_scaling((state->pause) ? btn_play : btn_pause, renderer,
+                                   pause_btn_location,
+                                   20 * state->scaling_mode, 80 * state->scaling_mode,
+                                   80 * state->scaling_mode, NULL);
+        }
 
         // render the score display
         render_texture_scaling(score_background, renderer, state->play_area.x + scaled_road_size, 0,
