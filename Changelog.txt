@@ -39,7 +39,7 @@
 >>User interaction with the pause button is now logged as well.
 
 >v1.0.7 (SP1) : (26.11.2018)
->>Applied changes to tutorial background 2,3,4 and 6 (marked as 'v2'); Making the fingerprint
+>>Applied changes to tutorial background 2,3,4 and 6; Making the fingerprint
   more visible (bigger and slightly highlighted. Also, the previously missing 'score box' is now
   present in the tutorial background.
 >>Changed 'Tutorial.java' accordingly.
@@ -48,4 +48,12 @@
   These are switches to modify key aspects of the game, along with the already-present
    'Display numeric clock'.
 >>>Note: these may still be buggy
+>>Added a 'release' folder where we'll put compiled ans signes APKs of each version.
 
+>v1.0.8 (SP1) : (26.11.2018)
+>>Tutorial: It's now aware of the 'Need to refuel' and 'Display Pause button' configuration options
+  and will skip the concerned pages when appropriate. Also the 'go back' option is removed from the
+  last page for technical and design-related concerns.
+>>Bugfix: the tutorial will now create a 'cruiser_config.csv' file when it doesn't exist, avoiding
+  a 'something went wrong'-type fo message to show up the first time the game is launched or after
+  the file was deleted.

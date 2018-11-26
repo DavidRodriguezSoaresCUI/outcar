@@ -74,9 +74,9 @@
         <item>Touch to continue ..</item>
     </string-array>
     <string-array name="touch2goBack">
-        <item>Back</item>
-        <item>Retour</item>
-        <item>Zurück</item>
+        <item>Back\t</item>
+        <item>Retour\t</item>
+        <item>Zurück\t</item>
     </string-array>
     <string-array name="exit_to_main_menu">
         <item>Return to the main menu</item>
