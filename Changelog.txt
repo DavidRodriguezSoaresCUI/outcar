@@ -50,3 +50,10 @@
 >>>Note: these may still be buggy
 >>Added a 'release' folder where we'll put compiled ans signes APKs of each version.
 
+>v1.0.8 (SP1) : (26.11.2018)
+>>Tutorial: It's now aware of the 'Need to refuel' and 'Display Pause button' configuration options
+  and will skip the concerned pages when appropriate. Also the 'go back' option is removed from the
+  last page for technical and design-related concerns.
+>>Bugfix: the tutorial will now create a 'cruiser_config.csv' file when it doesn't exist, avoiding
+  a 'something went wrong'-type fo message to show up the first time the game is launched or after
+  the file was deleted.

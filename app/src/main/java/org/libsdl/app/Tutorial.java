@@ -13,6 +13,8 @@ import com.outcar.game.R;
 
 public class Tutorial extends Activity {
     private int language, state, maxState, skippable;
+    private int ptsBonusAvoid, ptsBonusRefuel, ptsPenaltyCrash, ptsPenaltyNoFuel;
+    private boolean error, need_to_refuel, display_pause_button;
     private View tutorial_view;
     private TextView tutorial_text;
     private ImageView tutorial_text_background;
@@ -50,6 +52,104 @@ public class Tutorial extends Activity {
                 tutorial_text_background.getPaddingTop(),
                 tutorial_text_background.getPaddingRight(),
                 tutorial_text_background.getPaddingBottom() + 100);
+
+
+
+
+
+
+
+
+
+
+        ptsBonusAvoid        = 0;
+        ptsBonusRefuel       = 0;
+        ptsPenaltyCrash      = 0;
+        ptsPenaltyNoFuel     = 0;
+        need_to_refuel       = false;
+        display_pause_button = false;
+        error                = false;
+
+        String pers_info_file_folder = Environment.getExternalStorageDirectory().toString()
+                + File.separator + getString( R.string.app_name );
+        String game_config_file =  pers_info_file_folder
+                + File.separator + getString(R.string.game_config_file);
+
+        // We make sure that the configuration file exists
+        File game_config = new File( game_config_file );
+        if ( !game_config.exists() )
+        {
+            try{
+                game_config.createNewFile();
+                BufferedWriter writer = new BufferedWriter( new FileWriter( game_config ));
+                try {
+                    writer.append( Res.getString( R.string.game_config_file_1stline ) );
+                    writer.append( '\n' );
+                    writer.append( Res.getString( R.string.game_config_file_default_values ) );
+                    writer.close();
+                } catch ( Exception e ) {
+                    e.printStackTrace(); // Dealing with exceptions ..
+                }
+            } catch ( IOException e ) {
+                e.printStackTrace(); // Dealing with exceptions ..
+            }
+        }
+
+        try {
+            File file = new File(game_config_file);
+            String line = null;
+
+            // Reads configuration info from file to retrieve point bonuses/penalties
+            if ( file.exists() ) {
+                BufferedReader csvReader = new BufferedReader(new FileReader( file ));
+
+                while( (line = csvReader.readLine()) != null )
+                {
+                    if( !line.contains( "//" ) )
+                        break;
+                }
+
+                csvReader.close();
+            }
+
+            if( line == null ) // if the file or the line wasn't found, we load the defaults
+            {
+                line = Res.getString( R.string.game_config_file_default_values );
+            }
+
+            String[] data = line.split( "," );
+            int ptsIndex = Res.getInteger( R.integer.pts_index );
+            if( data.length != Res.getInteger( R.integer.config_items ) )
+            {
+                error = true;
+            }
+            else
+            {
+                need_to_refuel = (Integer.valueOf(
+                        data[ptsIndex-2].replace( " ", "" ) ) != 0);
+                display_pause_button = (Integer.valueOf(
+                        data[ptsIndex-1].replace( " ", "" ) ) != 0);
+                ptsBonusAvoid    = Integer.valueOf(
+                        data[ ptsIndex ].replace( " ", "" ) );
+                ptsBonusRefuel   = Integer.valueOf(
+                        data[ptsIndex+1].replace( " ", "" ) );
+                ptsPenaltyCrash  = Integer.valueOf(
+                        data[ptsIndex+2].replace( " ", "" ) );
+                ptsPenaltyNoFuel = Integer.valueOf(
+                        data[ptsIndex+3].replace( " ", "" ) );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+
 
         update_tutorial_page();
     }
@@ -112,6 +212,7 @@ public class Tutorial extends Activity {
                 setTutorialText();
                 tutorial_view.setBackgroundResource( R.drawable.bkgrd_tuto_00 );
                 tutorial_text_background.setVisibility(View.GONE);
+                touch_go_back.setVisibility(View.GONE);
                 end_tutorial_checkBox.setText( Res.getStringArray(
                         R.array.end_tutorial_checkBox )[language] );
                 end_tutorial_checkBox.setVisibility(View.VISIBLE);
@@ -150,80 +251,6 @@ public class Tutorial extends Activity {
             return;
         }
 
-        int ptsBonusAvoid    = 0;
-        int ptsBonusRefuel   = 0;
-        int ptsPenaltyCrash  = 0;
-        int ptsPenaltyNoFuel = 0;
-        boolean error = false;
-
-        String pers_info_file_folder = Environment.getExternalStorageDirectory().toString()
-                + File.separator + getString( R.string.app_name );
-        String game_config_file =  pers_info_file_folder
-                + File.separator + getString(R.string.game_config_file);
-
-        // We make sure that the configuration file exists
-        File game_config = new File( game_config_file );
-        if ( !game_config.exists() )
-        {
-            try{
-                game_config.createNewFile();
-                BufferedWriter writer = new BufferedWriter( new FileWriter( game_config ));
-                try {
-                    writer.append( Res.getString( R.string.game_config_file_1stline ) );
-                    writer.append( '\n' );
-                    writer.append( Res.getString( R.string.game_config_file_default_values ) );
-                    writer.close();
-                } catch ( Exception e ) {
-                    e.printStackTrace(); // Dealing with exceptions ..
-                }
-            } catch ( IOException e ) {
-                e.printStackTrace(); // Dealing with exceptions ..
-            }
-        }
-
-        try {
-            File file = new File(game_config_file);
-            String line = null;
-
-            // Reads configuration info from file to retrieve point bonuses/penalties
-            if ( file.exists() ) {
-                BufferedReader csvReader = new BufferedReader(new FileReader( file ));
-
-                while( (line = csvReader.readLine()) != null )
-                {
-                    if( !line.contains( "//" ) )
-                        break;
-                }
-
-                csvReader.close();
-            }
-
-            if( line == null ) // if the file or the line wasn't found, we load the defaults
-            {
-                line = Res.getString( R.string.game_config_file_default_values );
-            }
-
-            String[] data = line.split( "," );
-            int ptsIndex = Res.getInteger( R.integer.pts_index );
-            if( data.length != Res.getInteger( R.integer.config_items ) )
-            {
-                error = true;
-            }
-            else
-            {
-                ptsBonusAvoid    = Integer.valueOf(
-                        data[ ptsIndex ].replace( " ", "" ) );
-                ptsBonusRefuel   = Integer.valueOf(
-                        data[ptsIndex+1].replace( " ", "" ) );
-                ptsPenaltyCrash  = Integer.valueOf(
-                        data[ptsIndex+2].replace( " ", "" ) );
-                ptsPenaltyNoFuel = Integer.valueOf(
-                        data[ptsIndex+3].replace( " ", "" ) );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         if( error ) // an error occurred, we set a default error message as text
         {
             tutorial_text.setText( Res.getString( R.string.std_error_msg ) );
@@ -256,17 +283,33 @@ public class Tutorial extends Activity {
 
     public void onTutorialClicked( View v ) {
         if ( state + 1 < maxState ) {
-            state++;
+            state = changePage( state, +1 );
             update_tutorial_page();
         }
     }
 
     public void onTutorialGoBackClicked( View v ) {
         if ( 0 <= state - 1 ) {
-            state--;
+            state = changePage( state, -1 );
             update_tutorial_page();
             Toast.makeText(Tutorial.this, "State:"+String.valueOf(state), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private int changePage( int previousPage, int change )
+    {
+        int newpage = previousPage + change;
+
+        if ( newpage == 3 && !display_pause_button )
+        {
+            newpage += change;
+        }
+        if ( newpage == 5 && !display_pause_button )
+        {
+            newpage += 4 * change;
+        }
+
+        return newpage;
     }
 
     public void onEnd_tutorial_checkBox_Clicked( View v ) {
