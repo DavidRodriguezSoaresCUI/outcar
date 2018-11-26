@@ -39,7 +39,7 @@
 >>User interaction with the pause button is now logged as well.
 
 >v1.0.7 (SP1) : (26.11.2018)
->>Applied changes to tutorial background 2,3,4 and 6 (marked as 'v2'); Making the fingerprint
+>>Applied changes to tutorial background 2,3,4 and 6; Making the fingerprint
   more visible (bigger and slightly highlighted. Also, the previously missing 'score box' is now
   present in the tutorial background.
 >>Changed 'Tutorial.java' accordingly.
