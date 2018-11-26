@@ -48,4 +48,5 @@
   These are switches to modify key aspects of the game, along with the already-present
    'Display numeric clock'.
 >>>Note: these may still be buggy
+>>Added a 'release' folder where we'll put compiled ans signes APKs of each version.
 
