@@ -53,15 +53,6 @@ public class Tutorial extends Activity {
                 tutorial_text_background.getPaddingRight(),
                 tutorial_text_background.getPaddingBottom() + 100);
 
-
-
-
-
-
-
-
-
-
         ptsBonusAvoid        = 0;
         ptsBonusRefuel       = 0;
         ptsPenaltyCrash      = 0;
@@ -141,15 +132,6 @@ public class Tutorial extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
-
 
         update_tutorial_page();
     }
