@@ -320,8 +320,10 @@ void verify_conf(info_exchange *state)
     state->time_left = (uint32_t) state->time_total * 1000;
     state->fuel = state->max_fuel;
 
-    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60000,
-            (state->time_left / 1000) % 60);
+    uint8_t temp_min = (uint8_t) (state->time_left / 60000);
+    uint8_t temp_sec = (uint8_t) (((int) round(state->time_left / 1000.0)) % 60);
+
+    sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
 #ifdef DISPLAY_DEBUG_MSG
     push_string_linked(&(state->debug_messages), "Conf. verfied !");
 #endif

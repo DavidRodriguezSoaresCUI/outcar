@@ -60,4 +60,8 @@
 
 >v1.0.9 (SP1) : (02.12.2018)
 >>Game: A 'pre-race countdown' was implemented, and some placeholder resources along with it.
->>>A timer bug was introduced unfortunately (see 'Todo.txt').
+>>Game logic bugfix: The 'time_left' variable was being decremented by chunks of 1000+ε [ms] and
+  this caused second-skipping issues (it didn't affect the duration of the game, only the digital
+  clock skipped seconds). The logic was changed to correct this behaviour.
+
+

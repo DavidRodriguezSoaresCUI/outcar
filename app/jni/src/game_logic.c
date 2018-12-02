@@ -125,61 +125,52 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     state->time_last_check_tick = time_curr;
 
     // per second events
-    if (time_curr - state->time_last_second_tick >= 1000)
+    uint32_t time_since_last_second_tick = time_curr - state->time_last_second_tick;
+    // Note: This condition is designed to be passed once every second. The '-1' is here because it
+    // would otherwise be triggered the very first time because of how 'time_left' is initialized
+    // and the second part of the condition allows it to be triggered for the last time.
+    if (((state->time_left - time_since_last_second_tick) / 1000) < ((state->time_left-1) / 1000) ||
+        state->time_left < time_since_last_second_tick)
     {
-        // fuel
+        // FUEL
         if (state->need_to_refuel)
         {
-            if (state->fuel > MIN_FUEL + 1)
-            {
+            if (state->fuel > MIN_FUEL + 1) {
                 state->fuel--;
-#ifdef DISPLAY_DEBUG_MSG
-            char tmp[100];
-            sprintf( tmp, "fuel:%03d", state->fuel );
-            push_string_linked( &(state->debug_messages), tmp );
-#endif
             }
-            else
+            else {
                 out_of_fuel(state);
+            }
         }
-
         calc_fuel_pointer_position(state);
 
-        // remaining time update
-        // TODO: Is this condition necessary/correct ? And is this time_left calculation accurate ?
-
-
-        // remaining time update (old version)
-        /*if (state->time_left > (time_curr - state->time_last_second_tick))
-        {
-            state->time_left = state->time_left + state->time_last_second_tick - time_curr;
-#ifdef DISPLAY_DEBUG_MSG
-            char tmp[20];
-            sprintf(tmp, "timer: %d", state->time_left);
-            push_string_linked(&(state->debug_messages), tmp);
-#endif
-        }*/
-
+        // TIMER
         // The time went out; The game is over
-        if (state->time_left <= time_diff)
+        if (state->time_left <= time_since_last_second_tick)
         {
             state->time_left = 0;
             state->pause = SDL_TRUE;
             state->end = SDL_TRUE;
             state->time_game_end = SDL_GetTicks();
-            show_end_screen(NULL, NULL, 0, SDL_TRUE); // Necessary to bugfix (see implementation)
+            show_end_screen(NULL, NULL, 0, SDL_TRUE); // Necessary for a bugfix (see implementation)
+        }
+        // The game continues: remaining time update
+        else
+        {
+            state->time_left = state->time_left - time_since_last_second_tick;
         }
 
-        // remaining time update
-        state->time_left = state->time_left + state->time_last_second_tick - time_curr;
+        // NUMERIC CLOCK
         // |-> for the renderer
         uint8_t temp_min = (uint8_t) (state->time_left / 60000);
-        uint8_t temp_sec = (uint8_t) ((state->time_left / 1000) % 60);
+        uint8_t temp_sec = (uint8_t) (((int) round(state->time_left / 1000.0)) % 60);
 
-        if (temp_min < 100)
+        if (temp_min < 100){
             sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
-        else
+        }
+        else {
             sprintf(state->numeric_clock, "99:59");
+        }
 
         // updating timer
         state->time_last_second_tick = time_curr;
@@ -195,7 +186,7 @@ void countdown_to_race(info_exchange *state)
 {
     uint32_t time_curr = SDL_GetTicks();
     uint32_t time_diff_last = time_curr - state->time_last_second_tick;
-    state->scroll_state = 0;
+    state->scroll_state = 0; // To make sure the road is displayed correctly
 
     if ((state->current_texture_fx).texture == FX_NONE) {
         // First time : display a '3'
@@ -210,7 +201,7 @@ void countdown_to_race(info_exchange *state)
         state->time_last_second_tick = time_curr;
 
         // If 'GO!' is reached, begin the race
-        if ((time_curr - state->time_game_start) >= 3000) {
+        if ((state->current_texture_fx).texture == FX_CTDWN_GO) {
             state->countdown = SDL_FALSE;
             state->time_game_start = time_curr;
             state->time_last_check_tick = time_curr;
