@@ -162,7 +162,6 @@
         uint32_t time_game_start;
         uint32_t time_game_end;
         uint32_t time_last_second_tick;
-        uint32_t time_next_second_check;
         uint32_t time_last_check_tick;
         uint32_t time_last_show_fuel_tick;
         uint32_t time_last_car_gen;
