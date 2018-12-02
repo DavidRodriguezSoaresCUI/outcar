@@ -33,13 +33,6 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         calc_fuel_pointer_position(state);
     }
 
-    if (state->fuel_countdown)
-    {
-        if (state->fuel_up_msg_time_left > time_diff)
-            state->fuel_up_msg_time_left -= time_diff;
-        else state->fuel_countdown = SDL_FALSE;
-    }
-
     // adding scroll/movement values (only if player has fuel!)
     if (state->fuel)
     {
@@ -153,7 +146,11 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         calc_fuel_pointer_position(state);
 
         // remaining time update
-        if (state->time_left > (time_curr - state->time_last_second_tick))
+        // TODO: Is this condition necessary/correct ? And is this time_left calculation accurate ?
+
+
+        // remaining time update (old version)
+        /*if (state->time_left > (time_curr - state->time_last_second_tick))
         {
             state->time_left = state->time_left + state->time_last_second_tick - time_curr;
 #ifdef DISPLAY_DEBUG_MSG
@@ -161,8 +158,10 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             sprintf(tmp, "timer: %d", state->time_left);
             push_string_linked(&(state->debug_messages), tmp);
 #endif
-        }
-        else
+        }*/
+
+        // The time went out; The game is over
+        if (state->time_left <= time_diff)
         {
             state->time_left = 0;
             state->pause = SDL_TRUE;
@@ -170,6 +169,9 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             state->time_game_end = SDL_GetTicks();
             show_end_screen(NULL, NULL, 0, SDL_TRUE); // Necessary to bugfix (see implementation)
         }
+
+        // remaining time update
+        state->time_left = state->time_left + state->time_last_second_tick - time_curr;
         // |-> for the renderer
         uint8_t temp_min = (uint8_t) (state->time_left / 60000);
         uint8_t temp_sec = (uint8_t) ((state->time_left / 1000) % 60);
@@ -187,6 +189,33 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     }
 
     return 0;
+}
+
+void countdown_to_race(info_exchange *state)
+{
+    uint32_t time_curr = SDL_GetTicks();
+    uint32_t time_diff_last = time_curr - state->time_last_second_tick;
+    state->scroll_state = 0;
+
+    if ((state->current_texture_fx).texture == FX_NONE) {
+        // First time : display a '3'
+        (state->current_texture_fx).texture = FX_CTDWN_3;
+        (state->current_texture_fx).end_timestamp = time_curr + 1000;
+        state->time_last_second_tick = time_curr;
+    }
+    else if (time_diff_last >= 1000) {
+        // A second has passed; display : '2', '1' or 'GO!'
+        (state->current_texture_fx).texture--;
+        (state->current_texture_fx).end_timestamp = time_curr + 1000;
+        state->time_last_second_tick = time_curr;
+
+        // If 'GO!' is reached, begin the race
+        if ((time_curr - state->time_game_start) >= 3000) {
+            state->countdown = SDL_FALSE;
+            state->time_game_start = time_curr;
+            state->time_last_check_tick = time_curr;
+        }
+    }
 }
 
 void touch_event_handler(info_exchange *state, int lane_relative_width)
@@ -299,7 +328,7 @@ void out_of_fuel(info_exchange *state)
     state->refueling = SDL_TRUE;
     push_uint16_linked(state->auto_refuel_times, get_timer(state));
     (state->current_texture_fx).texture = FX_NO_FUEL;
-    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 1500;
 
     SCORE_NOFUEL(state)
 }
@@ -309,9 +338,9 @@ void manual_refuel(info_exchange *state)
     if (state->fuel <= state->max_fuel * 0.25)
     {
         SCORE_REFUEL(state)
+        (state->current_texture_fx).texture = FX_REFUEL;
+        (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
         state->refueling = SDL_TRUE;
-        state->fuel_countdown = SDL_TRUE;
-        state->fuel_up_msg_time_left = 3000;
         push_uint16_linked(state->refuel_times, get_timer(state));
     }
     else

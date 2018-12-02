@@ -45,11 +45,12 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     //init_var->time_left;
     while ((init_var->numeric_clock = malloc(6 * sizeof(char))) == NULL);
     //init_var->scroll_state;
-    init_var->pause = SDL_FALSE;
-    init_var->quit = SDL_FALSE;
-    init_var->end = SDL_FALSE;
+    init_var->countdown  = SDL_TRUE;
+    init_var->pause      = SDL_FALSE;
+    init_var->quit       = SDL_FALSE;
+    init_var->end        = SDL_FALSE;
     init_var->player_hit = SDL_FALSE;
-    init_var->refueling = SDL_FALSE;
+    init_var->refueling  = SDL_FALSE;
     //init_var->fuel;
     init_var->fuel_pointer_position = 120;
     init_var->time_game_start = SDL_GetTicks();
@@ -77,7 +78,6 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     //init_var->e_accel_pos; //unused
     //init_var->e_screen_rot; //unused
 
-    init_var->fuel_countdown = SDL_FALSE;
     //init_var->debug_messages = (string_linked*) malloc( sizeof(string_linked) );
 #ifdef DISPLAY_DEBUG_MSG
     (init_var->debug_messages).first = NULL;

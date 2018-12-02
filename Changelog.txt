@@ -57,3 +57,7 @@
 >>Bugfix: the tutorial will now create a 'cruiser_config.csv' file when it doesn't exist, avoiding
   a 'something went wrong'-type fo message to show up the first time the game is launched or after
   the file was deleted.
+
+>v1.0.9 (SP1) : (02.12.2018)
+>>Game: A 'pre-race countdown' was implemented, and some placeholder resources along with it.
+>>>A timer bug was introduced unfortunately (see 'Todo.txt').

@@ -3,7 +3,7 @@
     <!-- Edit these when necessary -->
     <string name="app_name" translatable="false">Cal Cruiser</string>
     <string name="ori_app_name" translatable="false">Swiss Cruiser</string> <!-- can be ignored -->
-    <string name="app_version" translatable="false">SP1 1.0.8 (pre-release)</string>
+    <string name="app_version" translatable="false">SP1 1.0.9 (pre-release)</string>
     <string name="email_dest_database">example@example.com</string>
 
     <string name="title_activity_main" translatable="false">MainActivity</string>

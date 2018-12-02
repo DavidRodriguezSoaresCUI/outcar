@@ -1,4 +1,9 @@
 
+>There is a bug introduced in 1.0.9: When the countdown ends, the clock goes from 5:00 to 4:58 and
+ I'm not sure why.
+>>A job for anyone.
+
+
 >Show something when refueling (positive feedback to the user).
 >>A job for anyone.
 >>>Done in v1.0.5, but may need more work on the aesthetic front

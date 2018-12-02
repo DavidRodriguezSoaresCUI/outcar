@@ -2,29 +2,33 @@
 
 // textures
 // |--> Game textures
-SDL_Texture *road_left = NULL;
+SDL_Texture *road_left   = NULL;
 SDL_Texture *road_middle = NULL;
-SDL_Texture *road_right = NULL;
-SDL_Texture *opp_car[4] = {NULL};
-SDL_Texture *player_car = NULL;
+SDL_Texture *road_right  = NULL;
+SDL_Texture *opp_car[4]  = {NULL};
+SDL_Texture *player_car  = NULL;
 // |--> UI textures
-SDL_Texture *font = NULL;
+SDL_Texture *font          = NULL;
 SDL_Texture *clock_texture = NULL;
-SDL_Texture *fuel_gauge = NULL;
+SDL_Texture *fuel_gauge    = NULL;
 SDL_Texture *fuel_gauge_blank = NULL;
-SDL_Texture *fuel_pointer = NULL;
-SDL_Texture *lane_touch_guide = NULL;
-SDL_Texture *btn_fuel_refill = NULL;
+SDL_Texture *fuel_pointer     = NULL;
+SDL_Texture *lane_touch_guide    = NULL;
+SDL_Texture *btn_fuel_refill     = NULL;
 SDL_Texture *btn_fuel_gauge_show = NULL;
 SDL_Texture *action_button_replacement = NULL;
-SDL_Texture *btn_pause = NULL;
-SDL_Texture *btn_play = NULL;
+SDL_Texture *btn_pause   = NULL;
+SDL_Texture *btn_play    = NULL;
 SDL_Texture *score_background = NULL;
-SDL_Texture *dark_fader = NULL;
-SDL_Texture *hit_fx = NULL;
-SDL_Texture *hit_fx2 = NULL;
-SDL_Texture *no_fuel_fx = NULL;
-SDL_Texture *fuel_up = NULL;
+SDL_Texture *dark_fader   = NULL;
+SDL_Texture *hit_fx       = NULL;
+SDL_Texture *hit_fx2      = NULL;
+SDL_Texture *no_fuel_fx   = NULL;
+SDL_Texture *fuel_up      = NULL;
+SDL_Texture *countdown_GO = NULL;
+SDL_Texture *countdown_1  = NULL;
+SDL_Texture *countdown_2  = NULL;
+SDL_Texture *countdown_3  = NULL;
 SDL_Texture *texture_fx[FX_NONE];
 
 char score_txt[6];
@@ -44,20 +48,31 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     opp_car[3] = load_texture("res/black_viper_scale_100px.png", renderer);
     player_car = load_texture("res/car.png", renderer);
     font = load_texture("res/geebeeyay-8x8.png", renderer);
-    btn_pause = load_texture("res/pause_120px.png", renderer);
-    btn_play = load_texture("res/play_120px.png", renderer);
-    fuel_pointer = load_texture("res/fuel_pointer_3.png", renderer);
+    btn_pause     = load_texture("res/pause_120px.png", renderer);
+    btn_play      = load_texture("res/play_120px.png", renderer);
+    fuel_pointer  = load_texture("res/fuel_pointer_3.png", renderer);
     clock_texture = load_texture("res/lcd_clock.png", renderer);
     lane_touch_guide = load_texture("res/road_lane_touch_guide_120px.png", renderer);
     score_background = load_texture("res/score_background.png", renderer);
-    dark_fader = load_texture("res/dark_fader.png", renderer);
-    fuel_up = load_texture("res/fuel_up.png", renderer);
+    dark_fader   = load_texture("res/dark_fader.png", renderer);
+    fuel_up      = load_texture("res/fuel_up.png", renderer);
+    countdown_GO = load_texture("res/countdown_GO.png", renderer);
+    countdown_1  = load_texture("res/countdown_1.png", renderer);
+    countdown_2  = load_texture("res/countdown_2.png", renderer);
+    countdown_3  = load_texture("res/countdown_3.png", renderer);
 
     hit_fx = load_texture("res/crash_b_fx.png", renderer);
     hit_fx2 = load_texture("res/crash_fx_360x240.png", renderer);
     no_fuel_fx = load_texture("res/no_fuel_fx_360x240.png", renderer);
+
+    // Indexing textures to be displayed
     texture_fx[0] = hit_fx2;
     texture_fx[1] = no_fuel_fx;
+    texture_fx[2] = fuel_up;
+    texture_fx[3] = countdown_GO;
+    texture_fx[4] = countdown_1;
+    texture_fx[5] = countdown_2;
+    texture_fx[6] = countdown_3;
 
     if (LEFT_HANDED == (state->hand & LEFT_HANDED))
     {
@@ -115,6 +130,8 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     SDL_SetTextureAlphaMod(hit_fx2, 120);
     SDL_SetTextureBlendMode(no_fuel_fx, SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(no_fuel_fx, 120);
+    SDL_SetTextureBlendMode(fuel_up, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(fuel_up, 180);
     SDL_SetTextureBlendMode(dark_fader, SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(lane_touch_guide, 80);
     SDL_SetTextureBlendMode(lane_touch_guide, SDL_BLENDMODE_BLEND);
@@ -400,11 +417,6 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
 
             curr = next;
         }
-
-        if (state->fuel_countdown)
-            render_texture_scaling(fuel_up, renderer, 10 * state->scaling_mode,
-                                   10 * state->scaling_mode, fuel_up_w * state->scaling_mode,
-                                   fuel_up_h * state->scaling_mode, NULL);
     }
 
 #ifdef DISPLAY_DEBUG_MSG

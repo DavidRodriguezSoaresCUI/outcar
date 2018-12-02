@@ -133,8 +133,12 @@ int main(int argc, char **argv)
     while (!program_state.quit)
     {
         input_events(&program_state, &e);
-        if (!program_state.pause)
+        if (program_state.countdown) {
+            countdown_to_race(&program_state);
+        }
+        else if (!program_state.pause) {
             game_logic(&program_state, &f_scrollstate);
+        }
 
         rendering_state(&program_state, renderer);
     }

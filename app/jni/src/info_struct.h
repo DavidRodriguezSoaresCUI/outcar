@@ -78,10 +78,15 @@
     } int_linked;
 
     typedef enum texture_fx_e {
-        FX_CRASH = 0,
-        FX_NO_FUEL = 1,
-        FX_ELSE = 2,
-        FX_NONE = 3} texture_fx_e;
+        FX_CRASH    = 0,
+        FX_NO_FUEL  = 1,
+        FX_REFUEL   = 2,
+        FX_CTDWN_GO = 3,
+        FX_CTDWN_1  = 4,
+        FX_CTDWN_2  = 5,
+        FX_CTDWN_3  = 6,
+        FX_ELSE     = 7,
+        FX_NONE     = 8 } texture_fx_e;
 
     typedef struct timed_texture_fx
     {
@@ -116,27 +121,27 @@
 	    SDL_Rect clock_texture_char_size; // initialised by rendering_init_textures!
 
         // -- game statistics and info --
-        char *date_at_launch;
-        uint16_linked *hit_times;
-        uint16_linked *refuel_times;
-        uint16_linked *auto_refuel_times;
-        uint16_linked *show_times;
-        uint16_linked *void_times;
-        uint16_linked *pause_time; // in s
-        uint32_linked *pause_duration; // in ms
-        int32_t score;
+        char*          date_at_launch;
+        uint16_linked* hit_times;
+        uint16_linked* refuel_times;
+        uint16_linked* auto_refuel_times;
+        uint16_linked* show_times;
+        uint16_linked* void_times;
+        uint16_linked* pause_time; // in s
+        uint32_linked* pause_duration; // in ms
+        int32_t        score;
         char score_hist[HIST_SCORES][HIST_SCORES_LEN];
 
         // -- game settings --
         uint16_t show_fuel_duration_ms; // Config
         handedness_e hand;
         uint16_t max_fuel;  // Config
-        uint8_t rel_speed; // Config
+        uint8_t  rel_speed; // Config
         uint16_t time_total; // Config
         //uint8_t difficulty;
-        uint8_t display_numeric_clock; // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t need_to_refuel;        // boolean: SDL_FALSE or SDL_TRUE
-        uint8_t display_pause_button;  // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  display_numeric_clock; // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  need_to_refuel;        // boolean: SDL_FALSE or SDL_TRUE
+        uint8_t  display_pause_button;  // boolean: SDL_FALSE or SDL_TRUE
         uint16_t avoid_reward;
         uint16_t refuel_reward;
         uint16_t crash_penalty;
@@ -144,8 +149,9 @@
 
         // -- game state --
         uint32_t time_left; // in milliseconds
-    	char *numeric_clock;
+    	char*    numeric_clock;
 	    uint16_t scroll_state; // between 0 and 89
+        uint8_t  countdown;  // boolean: SDL_FALSE or SDL_TRUE
         uint8_t  pause;      // boolean: SDL_FALSE or SDL_TRUE
         uint8_t  quit;       // boolean: SDL_FALSE or SDL_TRUE
         uint8_t  end;        // boolean: SDL_FALSE or SDL_TRUE
@@ -162,8 +168,6 @@
         SDL_Rect play_area;
         SDL_Rect menu_area;
         // |->fuel up message countdown data
-        uint8_t fuel_countdown;
-        uint32_t fuel_up_msg_time_left;
         int_linked new_score_points;
         timed_texture_fx current_texture_fx;
 

@@ -14,6 +14,8 @@
         info_exchange* state,
         double* partial_scroll_state);
 
+	void countdown_to_race(info_exchange *state);
+
 	void touch_event_handler(
         info_exchange *state,
         int lane_relative_width);
