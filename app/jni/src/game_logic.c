@@ -24,7 +24,8 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     // refueling mechanic
     if (state->refueling)
     {
-        if (state->fuel + time_diff < state->max_fuel) state->fuel += time_diff;
+        if (state->fuel + 30 * (double) time_diff / 1000 < state->max_fuel)
+            state->fuel += 30 * (double) time_diff / 1000;
         else
         {
             state->fuel = state->max_fuel;
@@ -141,9 +142,9 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             {
                 state->fuel--;
 #ifdef DISPLAY_DEBUG_MSG
-            char tmp[100];
-            sprintf( tmp, "fuel:%03d", state->fuel );
-            push_string_linked( &(state->debug_messages), tmp );
+                char tmp[100];
+                sprintf( tmp, "fuel:%03d", state->fuel );
+                push_string_linked( &(state->debug_messages), tmp );
 #endif
             }
             else
@@ -230,7 +231,7 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
         {
             // A touch event happened on the fuel control area
             int touch_x_handed = touch_relative_x;
-            if (RIGHT_HANDED == (state->hand & RIGHT_HANDED)) // horizontal flip for handedness
+            if (state->hand == RIGHT_HANDED) // horizontal flip for handedness
                 touch_x_handed = state->menu_area.w - touch_relative_x;
 
             if (touch_x_handed > state->menu_area.x &&
@@ -259,7 +260,7 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
 void calc_fuel_pointer_position(info_exchange *state)
 {
     state->fuel_pointer_position =
-            (uint8_t) round((double) state->fuel / (state->max_fuel) * 132.0);
+            (uint8_t) round( state->fuel / (state->max_fuel) * 132.0);
 }
 
 // freeing up memory starting from a point in the chained list until the end

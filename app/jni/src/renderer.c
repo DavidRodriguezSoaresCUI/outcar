@@ -59,7 +59,7 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     texture_fx[0] = hit_fx2;
     texture_fx[1] = no_fuel_fx;
 
-    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+    if (state->hand == LEFT_HANDED)
     {
         // the user is either left-handed or ambidextruous
         btn_fuel_refill     = load_texture("res/buton_refuel_dark_90px_padded_2.png", renderer);
@@ -283,7 +283,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     }
     // Handedness correction
     int pos01, pos02, pos03;
-    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+    if (state->hand == LEFT_HANDED)
     {
         pos01 = 0;
         pos02 = state->menu_area.h;
@@ -329,7 +329,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
             rect_clock_temp.w = state->menu_area.h * 2 - 20 * state->scaling_mode;
             rect_clock_temp.h = state->menu_area.h - 20 * state->scaling_mode;
 
-            if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+            if (state->hand == LEFT_HANDED)
                 rect_clock_temp.x = state->menu_area.h * 2 + 10 * state->scaling_mode;
             else
                 rect_clock_temp.x = 10 * state->scaling_mode;
@@ -353,7 +353,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         // render pause/play button
         if (state->display_pause_button)
         {
-            int pause_btn_location = (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+            int pause_btn_location = (state->hand == LEFT_HANDED) ?
                                      state->play_area.x + 20 * state->scaling_mode :
                                      state->play_area.x + 20 * state->scaling_mode +
                                      2 * state->road_size * state->scaling_mode;

@@ -122,14 +122,14 @@
     #define CONF_SHOW_DURATION_MIN   1000
     #define CONF_SHOW_DURATION_MAX   5000
     #define CONF_SHOW_DURATION_STD   2000
-    #define CONF_DSPLY_NUM_CLK_MIN   0
-    #define CONF_DSPLY_NUM_CLK_MAX   1
+    //#define CONF_DSPLY_NUM_CLK_MIN   0
+    //#define CONF_DSPLY_NUM_CLK_MAX   1
     #define CONF_DSPLY_NUM_CLK_STD   1
-    #define CONF_NEED_TO_REFUEL_MIN  0
-    #define CONF_NEED_TO_REFUEL_MAX  1
+    //#define CONF_NEED_TO_REFUEL_MIN  0
+    //#define CONF_NEED_TO_REFUEL_MAX  1
     #define CONF_NEED_TO_REFUEL_STD  1
-    #define CONF_DSPLY_PAUSE_BTN_MIN 0
-    #define CONF_DSPLY_PAUSE_BTN_MAX 1
+    //#define CONF_DSPLY_PAUSE_BTN_MIN 0
+    //#define CONF_DSPLY_PAUSE_BTN_MAX 1
     #define CONF_DSPLY_PAUSE_BTN_STD 1
     #define CONF_AVOID_REWARD_MIN    0
     #define CONF_AVOID_REWARD_MAX    1000

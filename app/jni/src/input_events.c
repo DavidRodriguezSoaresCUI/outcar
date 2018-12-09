@@ -74,11 +74,11 @@ int input_events(info_exchange *state, SDL_Event *events)
 
                     float e_touch_rel_x = state->e_touch.x * state->display.w;
                     float pos_pause_btn_left =
-                            (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+                            (state->hand == LEFT_HANDED) ?
                             state->play_area.x :
                             state->play_area.x + 2 * state->road_size * state->scaling_mode;
                     float pos_pause_btn_right =
-                            (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+                            (state->hand == LEFT_HANDED) ?
                             state->play_area.x + 2 * state->road_size * state->scaling_mode :
                             state->play_area.x + 3 * state->road_size * state->scaling_mode;
 
