@@ -135,7 +135,7 @@ typedef struct info_exchange
     // -- game settings --
     uint16_t show_fuel_duration_ms; // Config
     handedness_e hand;
-    double max_fuel;  // Config
+    uint16_t max_fuel;  // Config
     uint8_t  rel_speed; // Config
     uint16_t time_total; // Config
     //uint8_t difficulty;

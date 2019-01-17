@@ -207,7 +207,7 @@ void load_conf(info_exchange *state)
     }
 
     state->time_total            = (uint16_t) conf_data_i[CONF_GAME_DURATION];
-    state->max_fuel              = (double)  conf_data_i[CONF_FUEL_DURATION];
+    state->max_fuel              = (uint16_t) conf_data_i[CONF_FUEL_DURATION];
     state->rel_speed             = (uint8_t)  conf_data_i[CONF_REL_SPEED];
     state->show_fuel_duration_ms = (uint16_t) conf_data_i[CONF_SHOW_DURATION];
     state->display_numeric_clock = (uint8_t)  conf_data_i[CONF_DSPLY_NUM_CLK];
@@ -259,11 +259,11 @@ void verify_conf(info_exchange *state)
                    CONF_GAME_DURATION_MAX,
                    CONF_GAME_DURATION_STD);
 
-    if (!(state->max_fuel >= CONF_FUEL_DURATION_MIN && state->max_fuel <= CONF_FUEL_DURATION_MAX))
-    {
-        SDL_Log("warning: max_fuel OOB\n");
-        state->max_fuel = CONF_FUEL_DURATION_STD;
-    }
+    check_bounds16(&(state->max_fuel),
+                   "warning: max_fuel OOB\n",
+                   CONF_FUEL_DURATION_MIN,
+                   CONF_FUEL_DURATION_MAX,
+                   CONF_FUEL_DURATION_STD);
 
     check_bounds8(&(state->rel_speed),
                   "warning: rel_speed OOB\n",
@@ -344,7 +344,7 @@ void log_results(const info_exchange state)
     // Creating the CSV-compliant data line
     char *dataline = NULL;
     if (asprintf(&dataline,
-             "%s,%s,%s,%s,%s,\"%d,%f,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
+             "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
              argv[ARGV_IDCODE],
              argv[ARGV_AGE],
              argv[ARGV_SEX],
