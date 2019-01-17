@@ -106,11 +106,19 @@ void free_info_exchange(info_exchange *free_var)
 
 void init_handedness(info_exchange *init_var)
 {
-    init_var->hand = NO_HANDED;
-    if (strchr(init_var->argv[ARGV_HAND], ARGV_HAND_L) != NULL)
-        init_var->hand |= LEFT_HANDED;
-    if (strchr(init_var->argv[ARGV_HAND], ARGV_HAND_R) != NULL)
-        init_var->hand |= RIGHT_HANDED;
+    // if left handed, we set as such then return
+    if (*init_var->argv[ARGV_HAND] == ARGV_HAND_L)
+    {
+        init_var->hand = LEFT_HANDED;
+        return;
+    }
+    // if not LEFT AND RIGHT handed then config error
+    else if (*init_var->argv[ARGV_HAND] != ARGV_HAND_R)
+    {
+        SDL_Log("WARN: invalid handedness conf\n");
+    }
+    // by default right handed
+    init_var->hand = RIGHT_HANDED;
 }
 
 void calc_scaling(info_exchange *state)
@@ -511,17 +519,18 @@ void delete_string_linked(string_linked *chain, string_lt *link)
     if (currLink == link)
     {
         chain->first = currLink->next;
-        if(currLink->str != NULL) { free(currLink->str); }
+        if (currLink->str != NULL)
+        { free(currLink->str); }
         free(currLink);
         return;
     }
 
     string_lt *prevLink = NULL;
-    while(currLink != NULL)
+    while (currLink != NULL)
     {
         if (currLink == link)
         {
-            if(currLink == chain->last)
+            if (currLink == chain->last)
             {
                 chain->last = prevLink;
             }
@@ -547,7 +556,8 @@ void free_string_linked(string_linked *chain)
     while (currLink != NULL)
     {
         nextLink = currLink->next;
-        if(currLink->str != NULL) { free(currLink->str); }
+        if (currLink->str != NULL)
+        { free(currLink->str); }
         free(currLink);
         currLink = nextLink;
     }
@@ -591,11 +601,11 @@ void delete_int_linked(int_linked *chain, int_lt *link)
     }
 
     int_lt *prevLink = NULL;
-    while(currLink != NULL)
+    while (currLink != NULL)
     {
         if (currLink == link)
         {
-            if(currLink == chain->last)
+            if (currLink == chain->last)
             {
                 chain->last = prevLink;
             }
@@ -625,7 +635,7 @@ void free_int_linked(int_linked *chain)
     }
 }
 
-char* points_s_to_i(int val)
+char *points_s_to_i(int val)
 {
     char *points = NULL;
     asprintf(&points, "%c%04d", (val < 0) ? '-' : '+', abs(val));

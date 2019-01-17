@@ -139,6 +139,18 @@
             en dépassant une ligne de voitures (+%d pts.) ou en prenant de l’essence (+%d pts.).
             Vous perdez des points lorsque vous touchez un autre véhicule (-%d pts.).</item>
     </string-array>
+    <!-- Tutorial scores text when the reuel mechanic is disabled -->
+    <string-array name="instr_cruiser_1_no_refuel_mechanic">
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.). Vous perdez des points lorsque vous
+            touchez un autre véhicule (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.). Vous perdez des points lorsque vous
+            touchez un autre véhicule (-%d pts.).</item>
+        <item>Ce jeu fonctionne sur un système de points.\n\nVous gagnez des points
+            en dépassant une ligne de voitures (+%d pts.). Vous perdez des points lorsque vous
+            touchez un autre véhicule (-%d pts.).</item>
+    </string-array>
     <string-array name="instr_cruiser_2">
         <item>L\'interface ressemble à ceci.\n\nVotre score est affiché en haut de l\'écran</item>
         <item>L\'interface ressemble à ceci.\n\nVotre score est affiché en haut de l\'écran</item>

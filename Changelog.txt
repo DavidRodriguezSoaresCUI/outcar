@@ -64,4 +64,10 @@
   this caused second-skipping issues (it didn't affect the duration of the game, only the digital
   clock skipped seconds). The logic was changed to correct this behaviour.
 
+>v1.0.10 (SP1) : (17.01.2019)
+>>Git: Fused uncommited changes to 'master'
+>>Attila: fixed refuel animation, reduced redundancy, better asset 'fuel_up.png'
+>>Bugfix Tutorial: Optional pages should work with game configuration now
+
+
 

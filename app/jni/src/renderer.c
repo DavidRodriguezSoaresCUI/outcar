@@ -8,17 +8,17 @@ SDL_Texture *road_right  = NULL;
 SDL_Texture *opp_car[4]  = {NULL};
 SDL_Texture *player_car  = NULL;
 // |--> UI textures
-SDL_Texture *font          = NULL;
-SDL_Texture *clock_texture = NULL;
-SDL_Texture *fuel_gauge    = NULL;
+SDL_Texture *font             = NULL;
+SDL_Texture *clock_texture    = NULL;
+SDL_Texture *fuel_gauge       = NULL;
 SDL_Texture *fuel_gauge_blank = NULL;
 SDL_Texture *fuel_pointer     = NULL;
-SDL_Texture *lane_touch_guide    = NULL;
-SDL_Texture *btn_fuel_refill     = NULL;
-SDL_Texture *btn_fuel_gauge_show = NULL;
+SDL_Texture *lane_touch_guide = NULL;
+SDL_Texture *btn_fuel_refill  = NULL;
+SDL_Texture *btn_fuel_gauge_show       = NULL;
 SDL_Texture *action_button_replacement = NULL;
-SDL_Texture *btn_pause   = NULL;
-SDL_Texture *btn_play    = NULL;
+SDL_Texture *btn_pause        = NULL;
+SDL_Texture *btn_play         = NULL;
 SDL_Texture *score_background = NULL;
 SDL_Texture *dark_fader   = NULL;
 SDL_Texture *hit_fx       = NULL;
@@ -74,7 +74,7 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
     texture_fx[5] = countdown_2;
     texture_fx[6] = countdown_3;
 
-    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+    if (state->hand == LEFT_HANDED)
     {
         // the user is either left-handed or ambidextruous
         btn_fuel_refill     = load_texture("res/buton_refuel_dark_90px_padded_2.png", renderer);
@@ -300,7 +300,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     }
     // Handedness correction
     int pos01, pos02, pos03;
-    if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+    if (state->hand == LEFT_HANDED)
     {
         pos01 = 0;
         pos02 = state->menu_area.h;
@@ -346,7 +346,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
             rect_clock_temp.w = state->menu_area.h * 2 - 20 * state->scaling_mode;
             rect_clock_temp.h = state->menu_area.h - 20 * state->scaling_mode;
 
-            if (LEFT_HANDED == (state->hand & LEFT_HANDED))
+            if (state->hand == LEFT_HANDED)
                 rect_clock_temp.x = state->menu_area.h * 2 + 10 * state->scaling_mode;
             else
                 rect_clock_temp.x = 10 * state->scaling_mode;
@@ -370,7 +370,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         // render pause/play button
         if (state->display_pause_button)
         {
-            int pause_btn_location = (LEFT_HANDED == (state->hand & LEFT_HANDED)) ?
+            int pause_btn_location = (state->hand == LEFT_HANDED) ?
                                      state->play_area.x + 20 * state->scaling_mode :
                                      state->play_area.x + 20 * state->scaling_mode +
                                      2 * state->road_size * state->scaling_mode;

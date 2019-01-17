@@ -24,7 +24,8 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
     // refueling mechanic
     if (state->refueling)
     {
-        if (state->fuel + time_diff < state->max_fuel) state->fuel += time_diff;
+        if (state->fuel + 30 * (double) time_diff / 1000 < state->max_fuel)
+            state->fuel += 30 * (double) time_diff / 1000;
         else
         {
             state->fuel = state->max_fuel;
@@ -135,16 +136,19 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
         // FUEL
         if (state->need_to_refuel)
         {
-            if (state->fuel > MIN_FUEL + 1) {
+            if (state->fuel > MIN_FUEL + 1)
+            {
                 state->fuel--;
             }
-            else {
+            else
+            {
                 out_of_fuel(state);
             }
         }
         calc_fuel_pointer_position(state);
 
         // TIMER
+
         // The time went out; The game is over
         if (state->time_left <= time_since_last_second_tick)
         {
@@ -160,17 +164,14 @@ int game_logic(info_exchange *state, double *partial_scroll_state)
             state->time_left = state->time_left - time_since_last_second_tick;
         }
 
-        // NUMERIC CLOCK
         // |-> for the renderer
         uint8_t temp_min = (uint8_t) (state->time_left / 60000);
         uint8_t temp_sec = (uint8_t) (((int) round(state->time_left / 1000.0)) % 60);
 
-        if (temp_min < 100){
+        if (temp_min < 100)
             sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
-        }
-        else {
+        else
             sprintf(state->numeric_clock, "99:59");
-        }
 
         // updating timer
         state->time_last_second_tick = time_curr;
@@ -250,7 +251,7 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
         {
             // A touch event happened on the fuel control area
             int touch_x_handed = touch_relative_x;
-            if (RIGHT_HANDED == (state->hand & RIGHT_HANDED)) // horizontal flip for handedness
+            if (state->hand == RIGHT_HANDED) // horizontal flip for handedness
                 touch_x_handed = state->menu_area.w - touch_relative_x;
 
             if (touch_x_handed > state->menu_area.x &&
@@ -279,7 +280,7 @@ void touch_event_handler(info_exchange *state, int lane_relative_width)
 void calc_fuel_pointer_position(info_exchange *state)
 {
     state->fuel_pointer_position =
-            (uint8_t) round((double) state->fuel / (state->max_fuel) * 132.0);
+            (uint8_t) round( state->fuel / (state->max_fuel) * 132.0);
 }
 
 // freeing up memory starting from a point in the chained list until the end
@@ -299,7 +300,7 @@ void player_collision(info_exchange *state)
 
     push_uint16_linked(state->hit_times, get_timer(state));
     (state->current_texture_fx).texture = FX_CRASH;
-    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 1500;
     // play crash sound effect
     if (play_sfx(state->audio_device_id, state->sfx_wav_length, state->sfx_wav_buffer) != 0)
     {
@@ -319,7 +320,7 @@ void out_of_fuel(info_exchange *state)
     state->refueling = SDL_TRUE;
     push_uint16_linked(state->auto_refuel_times, get_timer(state));
     (state->current_texture_fx).texture = FX_NO_FUEL;
-    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 1500;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
 
     SCORE_NOFUEL(state)
 }
