@@ -138,6 +138,18 @@ public class Tutorial extends Activity {
 
     private void update_tutorial_page()
     {
+        /* Pages:
+         * 0:Welcome
+         * 1:Point system
+         * 2:Interface
+         * 3:Pause
+         * 4:Steering
+         * 5-6:Show fuel
+         * 7:Refuel
+         * 8:Incentivise refueling
+         * 9:End of Tutorial
+         *
+         */
         switch (state){
             case 0:
                 setTutorialText();
@@ -220,14 +232,18 @@ public class Tutorial extends Activity {
 
     private void setTutorialText_forScores()
     {
+        // We get the ident for all supported formats
         int txt_ident = Res.getIdentifier(
                 "instr_cruiser_" + String.valueOf( state ),
                 "array", Tutorial.this.getPackageName() );
         int txt_ident_no_oof_penalty = Res.getIdentifier(
                 "instr_cruiser_" + String.valueOf( state ) + "_no_oof_penalty",
                 "array", Tutorial.this.getPackageName() );
+        int txt_ident_no_refuel_mechanic = Res.getIdentifier(
+                "instr_cruiser_" + String.valueOf( state ) + "_no_refuel_mechanic",
+                "array", Tutorial.this.getPackageName() );
 
-        if ( txt_ident == 0 )
+        if ( txt_ident == 0 || txt_ident_no_oof_penalty == 0 || txt_ident_no_refuel_mechanic == 0 )
         {
             Toast.makeText(Tutorial.this, R.string.std_error_msg, Toast.LENGTH_SHORT).show();
             return;
@@ -240,8 +256,19 @@ public class Tutorial extends Activity {
         }
 
         // We get the base text and then the placeholders are replaced by the values
-        String baseText = Res.getStringArray(
-                (ptsPenaltyNoFuel == 0) ? txt_ident_no_oof_penalty : txt_ident )[language];
+        String baseText = null;
+        if ( !need_to_refuel )
+        {
+            baseText = Res.getStringArray( txt_ident_no_refuel_mechanic )[language];
+        }
+        else if ( ptsPenaltyNoFuel == 0 )
+        {
+            baseText = Res.getStringArray( txt_ident_no_oof_penalty )[language];
+        }
+        else
+        {
+            baseText = Res.getStringArray( txt_ident )[language];
+        }
 
         if ( baseText == null )
         {
@@ -250,11 +277,20 @@ public class Tutorial extends Activity {
         }
 
         String formatedText;
-        if ( ptsPenaltyNoFuel == 0 ) {
+        if ( !need_to_refuel )
+        {
+            formatedText = String.format( Locale.US, baseText,
+                    ptsBonusAvoid,
+                    ptsPenaltyCrash );
+        }
+        else if ( ptsPenaltyNoFuel == 0 )
+        {
             formatedText = String.format( Locale.US, baseText,
                     ptsBonusAvoid, ptsBonusRefuel,
                     ptsPenaltyCrash );
-        } else {
+        }
+        else
+        {
             formatedText = String.format( Locale.US, baseText,
                     ptsBonusAvoid, ptsBonusRefuel,
                     ptsPenaltyCrash, ptsPenaltyNoFuel );
@@ -286,7 +322,7 @@ public class Tutorial extends Activity {
         {
             newpage += change;
         }
-        if ( newpage == 5 && !display_pause_button )
+        if ( (newpage == 5 || newpage == 8) && !need_to_refuel )
         {
             newpage += 4 * change;
         }

@@ -57,3 +57,17 @@
 >>Bugfix: the tutorial will now create a 'cruiser_config.csv' file when it doesn't exist, avoiding
   a 'something went wrong'-type fo message to show up the first time the game is launched or after
   the file was deleted.
+
+>v1.0.9 (SP1) : (02.12.2018)
+>>Game: A 'pre-race countdown' was implemented, and some placeholder resources along with it.
+>>Game logic bugfix: The 'time_left' variable was being decremented by chunks of 1000+ε [ms] and
+  this caused second-skipping issues (it didn't affect the duration of the game, only the digital
+  clock skipped seconds). The logic was changed to correct this behaviour.
+
+>v1.0.10 (SP1) : (17.01.2019)
+>>Git: Fused uncommited changes to 'master'
+>>Attila: fixed refuel animation, reduced redundancy, better asset 'fuel_up.png'
+>>Bugfix Tutorial: Optional pages should work with game configuration now
+
+
+

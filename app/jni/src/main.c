@@ -133,8 +133,12 @@ int main(int argc, char **argv)
     while (!program_state.quit)
     {
         input_events(&program_state, &e);
-        if (!program_state.pause)
+        if (program_state.countdown) {
+            countdown_to_race(&program_state);
+        }
+        else if (!program_state.pause) {
             game_logic(&program_state, &f_scrollstate);
+        }
 
         rendering_state(&program_state, renderer);
     }
@@ -203,7 +207,7 @@ void load_conf(info_exchange *state)
     }
 
     state->time_total            = (uint16_t) conf_data_i[CONF_GAME_DURATION];
-    state->max_fuel              = (double)  conf_data_i[CONF_FUEL_DURATION];
+    state->max_fuel              = (uint16_t) conf_data_i[CONF_FUEL_DURATION];
     state->rel_speed             = (uint8_t)  conf_data_i[CONF_REL_SPEED];
     state->show_fuel_duration_ms = (uint16_t) conf_data_i[CONF_SHOW_DURATION];
     state->display_numeric_clock = (uint8_t)  conf_data_i[CONF_DSPLY_NUM_CLK];
@@ -255,11 +259,11 @@ void verify_conf(info_exchange *state)
                    CONF_GAME_DURATION_MAX,
                    CONF_GAME_DURATION_STD);
 
-    if (!(state->max_fuel >= CONF_FUEL_DURATION_MIN && state->max_fuel <= CONF_FUEL_DURATION_MAX))
-    {
-        SDL_Log("warning: max_fuel OOB\n");
-        state->max_fuel = CONF_FUEL_DURATION_STD;
-    }
+    check_bounds16(&(state->max_fuel),
+                   "warning: max_fuel OOB\n",
+                   CONF_FUEL_DURATION_MIN,
+                   CONF_FUEL_DURATION_MAX,
+                   CONF_FUEL_DURATION_STD);
 
     check_bounds8(&(state->rel_speed),
                   "warning: rel_speed OOB\n",
@@ -316,8 +320,11 @@ void verify_conf(info_exchange *state)
     state->time_left = (uint32_t) state->time_total * 1000;
     state->fuel = state->max_fuel;
 
-    sprintf(state->numeric_clock, "%02d:%02d", state->time_left / 60000,
-            (state->time_left / 1000) % 60);
+    uint8_t temp_min = (uint8_t) (state->time_left / 60000);
+    uint8_t temp_sec = (uint8_t) (((int) round(state->time_left / 1000.0)) % 60);
+
+    sprintf(state->numeric_clock, "%02d:%02d", temp_min, temp_sec);
+
 #ifdef DISPLAY_DEBUG_MSG
     push_string_linked(&(state->debug_messages), "Conf. verfied !");
 #endif
@@ -337,7 +344,7 @@ void log_results(const info_exchange state)
     // Creating the CSV-compliant data line
     char *dataline = NULL;
     if (asprintf(&dataline,
-             "%s,%s,%s,%s,%s,\"%d,%f,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
+             "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
              argv[ARGV_IDCODE],
              argv[ARGV_AGE],
              argv[ARGV_SEX],

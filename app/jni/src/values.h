@@ -68,9 +68,9 @@
     #define ARGV_HAND_R  'R'
 
     /* Configuration norm :
-     *  0: uint8_t, Game duration [s]
-     *  1: uint8_t, Fuel tank duration [s]
-     *  2: uint8_t, Speed [%]
+     *  0: uint8_t,  Game duration [s]
+     *  1: uint16_t, Fuel tank duration [s]
+     *  2: uint8_t,  Speed [%]
      *  3: uint16_t, Show Fuel duration [ms]
      *  4: uint16_t, Display numeric clock [boolean = {0,1}] (0=no 1=yes)
      *  5: uint16_t, Need to refuel [boolean = {0,1}] (0=no 1=yes)

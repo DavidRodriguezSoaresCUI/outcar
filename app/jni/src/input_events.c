@@ -69,7 +69,8 @@ int input_events(info_exchange *state, SDL_Event *events)
                 state->e_touch = events->tfinger;
 
                 // Pause button interaction are enabled only if the button is displayed
-                if (state->display_pause_button)
+                // and the game isn't in pre-race countdown
+                if (state->display_pause_button && !state->countdown)
                 {
 
                     float e_touch_rel_x = state->e_touch.x * state->display.w;

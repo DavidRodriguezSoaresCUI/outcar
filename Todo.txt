@@ -1,11 +1,16 @@
 
->Show something when refueling (positive feedback to the user).
+>Make better assets ("out of fuel" image_fx)
 >>A job for anyone.
->>>Done in v1.0.5, but may need more work on the aesthetic front
 
->Show something when gaining/losing points (feedback to the user).
->>A job for DRS (There is something I want to try with this).
->>>Done in v1.0.6, but may need more work on the aesthetic front
+>Add sound assets ("out of fuel" sound_fx, "refueling" sound_fx, "game over" sound_fx)
+ and code them into the game.
+>>A job for anyone.
+
+>Update the Manual
+>>A job for anyone.
+
+>Check whether the tutorial is bug-free. If so, disable short toast with state.
+>>A job for anyone.
 
 >Bonus ? : Change how the score is displayed in the configuration file (size?/color?).
 >New idea : Make it possible to disable the score display in the configuration.
@@ -13,10 +18,18 @@
 
 #############################################################################
 
+>Show something when refueling (positive feedback to the user).
+>>A job for anyone.
+>>>Done in v1.0.5, but may need more work on the aesthetic front
+
 >Record when the pause button is pressed and for how long the game is paused in new fields of
  the database.
 >>A job for anyone.
 >>>Done in v1.0.6
+
+>Show something when gaining/losing points (feedback to the user).
+>>A job for DRS (There is something I want to try with this).
+>>>Done in v1.0.6, but may need more work on the aesthetic front
 
 >Modify the tutorial : make fingerprint more visible.
 >>A job for DRS.
