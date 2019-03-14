@@ -1,4 +1,3 @@
-
 >Make better assets ("out of fuel" image_fx)
 >>A job for anyone.
 
@@ -6,14 +5,7 @@
  and code them into the game.
 >>A job for anyone.
 
->Update the Manual
->>A job for anyone.
-
 >Check whether the tutorial is bug-free. If so, disable short toast with state.
->>A job for anyone.
-
->Bonus ? : Change how the score is displayed in the configuration file (size?/color?).
->New idea : Make it possible to disable the score display in the configuration.
 >>A job for anyone.
 
 #############################################################################
@@ -37,9 +29,24 @@
 
 >Add a configuration option, to enable/disable the need to refuel. This will also affect the
  tutorial and the in-game user interface.
->>A job for anyone.
+                   >>A job for anyone.
 >>>Done in v1.0.7
 
 >Add a configuration option, to enable/disable the pause button.
 >>A job for anyone.
 >>>Done in v1.0.7
+
+>Make better assets ("countdown*" image_fx)
+>>A job for Attila.
+>>>Done in v1.0.11
+
+>Update the Manual
+>>A job for DRS.
+>>>Done in v1.0.11
+
+#############################################################################
+
+>Bonus ? : Change how the score is displayed in the configuration file (size?/color?).
+>New idea : Make it possible to disable the score display in the configuration.
+>>A job for anyone.
+>>>Abandoned idea

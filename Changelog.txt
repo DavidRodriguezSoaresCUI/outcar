@@ -69,5 +69,10 @@
 >>Attila: fixed refuel animation, reduced redundancy, better asset 'fuel_up.png'
 >>Bugfix Tutorial: Optional pages should work with game configuration now
 
+>v1.0.11 (SP1) : (14.03.2019)
+>>Git: Fused uncommited changes to 'master' and fixed branches errors
+>>Attila: better asset 'countdown*'
+>>Updated manual
+
 
 
