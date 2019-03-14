@@ -1,7 +1,7 @@
 .gradle/
 .idea/
 app/build/
-app/app.iml
+*.iml
 app/.externalNativeBuild/
 build
 local.properties
