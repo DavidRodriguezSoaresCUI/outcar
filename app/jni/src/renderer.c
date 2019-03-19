@@ -63,7 +63,7 @@ int rendering_init_textures(SDL_Renderer *renderer, info_exchange *state)
 
     hit_fx = load_texture("res/crash_b_fx.png", renderer);
     hit_fx2 = load_texture("res/crash_fx_360x240.png", renderer);
-    no_fuel_fx = load_texture("res/no_fuel_fx_360x240.png", renderer);
+    no_fuel_fx = load_texture("res/no_fuel_fx_360x240.2.png", renderer);
 
     // Indexing textures to be displayed
     texture_fx[0] = hit_fx2;
