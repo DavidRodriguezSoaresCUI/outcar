@@ -302,7 +302,7 @@ void player_collision(info_exchange *state)
     (state->current_texture_fx).texture = FX_CRASH;
     (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 1500;
     // play crash sound effect
-    if (play_sfx(state->audio_device_id, state->sfx_wav_length, state->sfx_wav_buffer) != 0)
+    if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_CRASH], state->sfx_wav_buffer[SFX_CRASH]) != 0)
     {
         log_SDL_error("play sfx error");
         state->quit = SDL_TRUE;
@@ -318,11 +318,17 @@ void out_of_fuel(info_exchange *state)
 {
     state->fuel = MIN_FUEL;
     state->refueling = SDL_TRUE;
+    SCORE_NOFUEL(state)
+
     push_uint16_linked(state->auto_refuel_times, get_timer(state));
     (state->current_texture_fx).texture = FX_NO_FUEL;
     (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
-
-    SCORE_NOFUEL(state)
+    // play crash sound effect
+    if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_NO_FUEL], state->sfx_wav_buffer[SFX_NO_FUEL]) != 0)
+    {
+        log_SDL_error("play sfx error");
+        state->quit = SDL_TRUE;
+    }
 }
 
 void manual_refuel(info_exchange *state)
@@ -334,6 +340,12 @@ void manual_refuel(info_exchange *state)
         (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
         state->refueling = SDL_TRUE;
         push_uint16_linked(state->refuel_times, get_timer(state));
+        // play crash sound effect
+        if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_REFUEL], state->sfx_wav_buffer[SFX_REFUEL]) != 0)
+        {
+            log_SDL_error("play sfx error");
+            state->quit = SDL_TRUE;
+        }
     }
     else
     {

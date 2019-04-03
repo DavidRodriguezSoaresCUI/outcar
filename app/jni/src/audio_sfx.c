@@ -13,12 +13,14 @@ int init_sfx(char* path, SDL_AudioDeviceID* device_id, uint32_t* wav_length, uin
     }
 
     // open audio device
-
-    *device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
     if (*device_id == 0)
     {
-        SDL_Log("OpenAudioDevice error: %s", SDL_GetError());
-        return -2;
+        *device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
+        if (*device_id == 0)
+        {
+            SDL_Log("OpenAudioDevice error: %s", SDL_GetError());
+            return -2;
+        }
     }
 
     return 0;
