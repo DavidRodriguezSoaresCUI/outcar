@@ -2,7 +2,6 @@
 .idea/
 app/build/
 *.iml
-app/*.iml
 app/.externalNativeBuild/
 build
 local.properties
