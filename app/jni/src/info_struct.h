@@ -89,6 +89,13 @@ typedef enum texture_fx_e
     FX_ELSE     = 7,
     FX_NONE     = 8 } texture_fx_e;
 
+typedef enum sound_fx_e
+{
+    SFX_CRASH    = 0,
+    SFX_NO_FUEL  = 1,
+    SFX_REFUEL   = 2,
+    SFX_NONE     = 3 } sound_fx_e;
+
 
 typedef struct timed_texture_fx
 {
@@ -184,8 +191,8 @@ typedef struct info_exchange
 
     // -- sfx --
     SDL_AudioDeviceID audio_device_id;
-    uint32_t sfx_wav_length;
-    uint8_t *sfx_wav_buffer;
+    uint32_t sfx_wav_length[SFX_NONE];
+    uint8_t *sfx_wav_buffer[SFX_NONE];
 
 #ifdef DISPLAY_DEBUG_MSG
     string_linked debug_messages;

@@ -188,6 +188,7 @@ void calc_rendering_areas(info_exchange *state)
     state->play_area.w = 3 * state->road_size * state->scaling_mode;
     state->play_area.h = 5 * state->road_size * state->scaling_mode;
     state->menu_area.w = state->play_area.w;
+
     SDL_QueryTexture(btn_fuel_refill, NULL, NULL, NULL, &state->menu_area.h);
     state->menu_area.h = state->menu_area.h * state->scaling_mode;
     if (state->display.h > state->display.w)
@@ -200,6 +201,7 @@ void calc_rendering_areas(info_exchange *state)
         state->play_area.x = 0;
         state->menu_area.x = 0;
     }
+
     state->menu_area.y = state->display.h - state->menu_area.h;
     state->play_area.y = state->menu_area.y - state->play_area.h;
 }

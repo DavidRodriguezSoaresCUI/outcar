@@ -120,10 +120,30 @@ int main(int argc, char **argv)
 
     // init audio
 
-    if (init_sfx("res/Roland-GR-1-Trumpet-C5.wav", &program_state.audio_device_id,
-                 &program_state.sfx_wav_length, &program_state.sfx_wav_buffer) != 0)
+    if (init_sfx("res/Roland-GR-1-Trumpet-C5.wav",
+                 &program_state.audio_device_id,
+                 &(program_state.sfx_wav_length[SFX_CRASH]),
+                 &(program_state.sfx_wav_buffer[SFX_CRASH])) != 0)
     {
-        log_SDL_error("init sfx");
+        log_SDL_error("init sfx error");
+        program_state.quit = SDL_TRUE;
+    }
+
+    if (init_sfx("res/engine_fx_refuel.wav",
+                 &program_state.audio_device_id,
+                 &(program_state.sfx_wav_length[SFX_REFUEL]),
+                 &(program_state.sfx_wav_buffer[SFX_REFUEL])) != 0)
+    {
+        log_SDL_error("init sfx error");
+        program_state.quit = SDL_TRUE;
+    }
+
+    if (init_sfx("res/engine_fx_nofuel.wav",
+                 &program_state.audio_device_id,
+                 &(program_state.sfx_wav_length[SFX_NO_FUEL]),
+                 &(program_state.sfx_wav_buffer[SFX_NO_FUEL])) != 0)
+    {
+        log_SDL_error("init sfx error");
         program_state.quit = SDL_TRUE;
     }
 
@@ -153,7 +173,9 @@ int main(int argc, char **argv)
     // Cleanup and exit
     free_slots(program_state.opp_cars);
     textures_free();
-    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer);
+    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_CRASH]);
+    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_NO_FUEL]);
+    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_REFUEL]);
     free_info_exchange(&program_state);
     IMG_Quit();
     SDL_Quit();
