@@ -1,12 +1,4 @@
->Make better assets ("out of fuel" image_fx)
->>A job for anyone.
 
->Add sound assets ("out of fuel" sound_fx, "refueling" sound_fx, "game over" sound_fx)
- and code them into the game.
->>A job for anyone.
-
->Check whether the tutorial is bug-free. If so, disable short toast with state.
->>A job for anyone.
 
 #############################################################################
 
@@ -43,6 +35,15 @@
 >Update the Manual
 >>A job for DRS.
 >>>Done in v1.0.11
+
+>Add sound assets ("out of fuel" sound_fx, "refueling" sound_fx, "game over" sound_fx)
+ and code them into the game.
+>>A job for anyone.
+>>>Done in v1.0.12
+
+>Check whether the tutorial is bug-free. If so, disable short toast with state.
+>>A job for anyone.
+>>>Done in v1.0.12
 
 #############################################################################
 

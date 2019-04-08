@@ -74,5 +74,12 @@
 >>Attila: better asset 'countdown*'
 >>Updated manual
 
+>v1.0.12 (SP1) : (08.04.2019)
 
+>>Add sound assets ("out of fuel" sound_fx, "refueling" sound_fx, "game over" sound_fx)
+ and code them into the game.
+>>Disable short toast in tutorial.
+>>Game logic bugfix : We spent many hours trying to correct a bug that came across when introducing
+  more sound_fx. The game would deadlock before displaying countdown. Long story short,
+  an important time value was incorrectly initiated.
 

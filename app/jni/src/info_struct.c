@@ -65,7 +65,6 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     (init_var->new_score_points).last = NULL;
     (init_var->current_texture_fx).texture = FX_NONE;
     (init_var->current_texture_fx).end_timestamp = 0;
-    log_SDL_error("put texture to FX_NONE\n");
 
     // -- positions --
     init_var->player_car_pos_logical = 1;

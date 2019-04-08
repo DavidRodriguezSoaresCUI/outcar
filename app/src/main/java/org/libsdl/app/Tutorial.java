@@ -310,7 +310,7 @@ public class Tutorial extends Activity {
         if ( 0 <= state - 1 ) {
             state = changePage( state, -1 );
             update_tutorial_page();
-            Toast.makeText(Tutorial.this, "State:"+String.valueOf(state), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Tutorial.this, "State:"+String.valueOf(state), Toast.LENGTH_SHORT).show();
         }
     }
 
