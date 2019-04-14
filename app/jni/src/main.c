@@ -364,6 +364,34 @@ void log_results(const info_exchange state)
         return;
 
     // Creating the CSV-compliant data line
+    /* Here is the ordered list of expected values :
+     * Code,
+     * Age,
+     * Sexe,
+     * Main,
+     * Date/Heure,
+         * Options du jeux (Game duration,
+         * Fuel tank duration,
+         * Speed,
+         * Show Fuel duration,
+         * Display numeric clock,
+         * Need to refuel,
+         * Display Pause button),
+     * Gameplay duration,
+     * Score,
+     * Hit Count,
+     * Hit Times,
+     * Refuel Count,
+     * Refuel Times,
+     * Auto Refuel Count,
+     * Auto Refuel Times,
+     * Show Count,
+     * Show Times,
+     * Void Count,
+     * Void Times,
+     * Pause Times,
+     * Pause Duration [ms]
+    */
     char *dataline = NULL;
     if (asprintf(&dataline,
              "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",

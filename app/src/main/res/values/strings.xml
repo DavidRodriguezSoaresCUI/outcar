@@ -3,7 +3,7 @@
     <!-- Edit these when necessary -->
     <string name="app_name" translatable="false">Cal Cruiser</string>
     <string name="ori_app_name" translatable="false">Swiss Cruiser</string> <!-- can be ignored -->
-    <string name="app_version" translatable="false">SP1 1.0.12 (pre-release)</string>
+    <string name="app_version" translatable="false">SP1 1.0.13 (pre-release)</string>
     <string name="email_dest_database">example@example.com</string>
 
     <string name="title_activity_main" translatable="false">MainActivity</string>
@@ -37,8 +37,8 @@
     <string name="game_config_file_default_values">300,30,100,2000,1,1,1,33,300,100,66</string>
     <string name="stat_db_file">cruiserdb.%s.csv</string>
     <string name="stat_db_file_1stline">//Code,Age,Sexe,Main,Date/Heure,
-        Options du jeux (Game duration,Fuel tank duration,Speed,Show Fuel duration,
-        Display numeric clock,Need to refuel,Display Pause button),Durée du jeu,Score,Hit Count,
+        Options du jeu (Game duration;Fuel tank duration;Speed;Show Fuel duration;
+        Display numeric clock;Need to refuel;Display Pause button),Gameplay duration,Score,Hit Count,
         Hit Times,Refuel Count,Refuel Times,Auto Refuel Count,Auto Refuel Times,Show Count,
         Show Times,Void Count,Void Times,Pause Times,Pause Duration [ms]</string>
 
