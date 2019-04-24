@@ -32,7 +32,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program (see gpl.txt).
+along with this program (see LICENSE).
 
 Contact the authors : David.Rodriguez.1@etu.unige.ch
                       Attila.Nacsa@etu.unige.ch
