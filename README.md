@@ -1,6 +1,6 @@
 # outcar
 
-OutCar is a game developed for University of Geneva, for psychology studies. The game consists of avoiding traffic and refuelling periodically (just by pressing a button).
+OutCar is a game developed for University of Geneva, for psychology studies. The game consists of avoiding traffic and refueling periodically (just by pressing a button).
 
 This game is still under active development as of April 2019.
 
@@ -19,7 +19,7 @@ Cruiser'.
 
 OutCar is available under the GNU GPLv3 license. Here is the disclaimer :
 "OutCar is a game developed for University of Geneva, for psychology studies. 
-The game consists of avoiding traffic and refuelling periodically.
+The game consists of avoiding traffic and refueling periodically.
 Copyright (C) 2018-2019 David Rodriguez, Attila Nacsa, Mark Tropin
 
 This program is free software; you can redistribute it and/or modify
