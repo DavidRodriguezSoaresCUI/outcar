@@ -26,7 +26,8 @@ void log_results(const info_exchange state);
 int load_score(info_exchange *state);
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     /* Argument norm
      * 0: Useless
      * 1: Integer, ID/Code
