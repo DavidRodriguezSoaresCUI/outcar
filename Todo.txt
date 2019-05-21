@@ -1,3 +1,4 @@
+
 EVERY OBJECTIVE COMPETED
 BETA TESTING PENDING
 
@@ -48,6 +49,10 @@ COMPETED OBJECTIVES, BY CHRONOLOGICAL ORDER
 >Check whether the tutorial is bug-free. If so, disable short toast with state.
 >>A job for anyone.
 >>>Done in v1.0.12
+
+>Add a switch for audiovisual negative feedback in cruiser config
+>>A job for anyone.
+>>>Done in v1.0.14
 
 #############################################################################
 

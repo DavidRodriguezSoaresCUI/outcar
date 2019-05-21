@@ -254,13 +254,13 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
         curr_el = curr_el->next_el;
     }
 
-    // texture FX rendering
+    // texture FX rendering and player car transparency management
+    // if there is a texture on screen (supposedly FX_CRASH,FX_NO_FUEL or FX_REFUEL)
     if ((state->current_texture_fx).texture != FX_NONE)
     {
         timed_texture_fx *t_fx = &(state->current_texture_fx);
-
-        if (t_fx->end_timestamp < state->time_last_check_tick)
-        {
+        // timeout management
+        if (t_fx->end_timestamp < state->time_last_check_tick) {
             t_fx->texture = FX_NONE;
             t_fx->end_timestamp = 0;
             SDL_SetTextureAlphaMod(player_car, 255);
@@ -270,8 +270,13 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
             render_texture_scaling(texture_fx[t_fx->texture], renderer, 0, scaled_road_size * 2,
                                    scaled_road_size * 3, scaled_road_size * 2, NULL);
         }
-        if (t_fx->texture != FX_CRASH)
+        if (t_fx->texture == FX_CRASH)
         {
+            SDL_SetTextureAlphaMod(player_car, 100);
+        }
+    }
+    else if( (state->disable_all_feedback) && state->player_hit ) {
+        if ( state->time_last_check_tick < state->time_player_hit ) {
             SDL_SetTextureAlphaMod(player_car, 100);
         }
     }

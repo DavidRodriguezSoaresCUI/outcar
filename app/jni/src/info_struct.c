@@ -59,6 +59,7 @@ void init_info_exchange(info_exchange *init_var, int argc, char **argv)
     init_var->time_last_second_tick = init_var->time_game_start;
     //init_var->time_last_check_tick;
     init_var->time_last_show_fuel_tick = 0;
+    init_var->time_player_hit = 0;
     //init_var->play_area;
     //init_var->menu_area;
     (init_var->new_score_points).first = NULL;

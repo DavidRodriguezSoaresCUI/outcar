@@ -3,7 +3,7 @@
     <!-- Edit these when necessary -->
     <string name="app_name" translatable="false">Cal Cruiser</string>
     <string name="ori_app_name" translatable="false">Swiss Cruiser</string> <!-- can be ignored -->
-    <string name="app_version" translatable="false">SP1 1.0.13 (pre-release)</string>
+    <string name="app_version" translatable="false">SP1 1.0.14 (pre-release)</string>
     <string name="email_dest_database">example@example.com</string>
 
     <string name="title_activity_main" translatable="false">MainActivity</string>
@@ -33,14 +33,16 @@
     <string name="game_config_file_1stline">// Game duration [s],Fuel tank duration [s],Speed [%],
         Show Fuel duration [ms],Display numeric clock [0=no 1=yes],Need to refuel [0=no 1=yes],
         Display Pause button [0=no 1=yes],Avoid crash reward [pts],Refuel Reward [pts],
-        Crash penalty [pts],Out of Fuel penalty [pts]</string>
-    <string name="game_config_file_default_values">300,30,100,2000,1,1,1,33,300,100,66</string>
+        Crash penalty [pts],Out of Fuel penalty [pts],Disable OutOfFuel feedback [0=no 1=yes],
+        Disable all audiovisual feedback [0=no 1=yes]</string>
+    <string name="game_config_file_default_values">300,30,100,2000,1,1,1,33,300,100,66,0,0</string>
     <string name="stat_db_file">cruiserdb.%s.csv</string>
     <string name="stat_db_file_1stline">//Code,Age,Sexe,Main,Date/Heure,
         Options du jeu (Game duration;Fuel tank duration;Speed;Show Fuel duration;
-        Display numeric clock;Need to refuel;Display Pause button),Gameplay duration,Score,Hit Count,
-        Hit Times,Refuel Count,Refuel Times,Auto Refuel Count,Auto Refuel Times,Show Count,
-        Show Times,Void Count,Void Times,Pause Times,Pause Duration [ms]</string>
+        Display numeric clock;Need to refuel;Display Pause button;Disable OutOfFuel feedback;
+        Disable all audiovisual feedback),Gameplay duration,Score,Hit Count,Hit Times,
+        Refuel Count,Refuel Times,Auto Refuel Count,Auto Refuel Times,Show Count,Show Times,
+        Void Count,Void Times,Pause Times,Pause Duration [ms]</string>
 
     <!-- Strings used in hidden menu (untranslated) -->
     <string name="send_email_chooser_title">Send email…</string>

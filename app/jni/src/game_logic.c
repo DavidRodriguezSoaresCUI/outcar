@@ -299,11 +299,17 @@ void free_slots(opp_car_list *in)
 void player_collision(info_exchange *state)
 {
     state->player_hit = SDL_TRUE;
+    state->time_player_hit = state->time_last_check_tick + CAR_HIT_TRANSPARENCY_TIMEOUT;
     SCORE_CRASH(state)
 
     push_uint16_linked(state->hit_times, get_timer(state));
+
+    // if we want to disable texture/sound feedback, this function ends here
+    if ( state->disable_all_feedback ) { return; }
+
     (state->current_texture_fx).texture = FX_CRASH;
-    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 1500;
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + TEXTURE_TIMEOUT;
+
     // play crash sound effect
     if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_CRASH], state->sfx_wav_buffer[SFX_CRASH]) != 0)
     {
@@ -324,11 +330,16 @@ void out_of_fuel(info_exchange *state)
     SCORE_NOFUEL(state)
 
     push_uint16_linked(state->auto_refuel_times, get_timer(state));
+
+    // if we want to disable texture/sound feedback, this function ends here
+    if ( state->disable_all_feedback || state->no_OOF_feedback ) { return; }
+
+    // play crash sound effect and show transparent texture
     (state->current_texture_fx).texture = FX_NO_FUEL;
-    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
-    // play crash sound effect
-    if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_NO_FUEL], state->sfx_wav_buffer[SFX_NO_FUEL]) != 0)
-    {
+    (state->current_texture_fx).end_timestamp = state->time_last_check_tick + TEXTURE_TIMEOUT;
+
+    if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_NO_FUEL],
+                 state->sfx_wav_buffer[SFX_NO_FUEL]) != 0) {
         log_SDL_error("play sfx error");
         state->quit = SDL_TRUE;
     }
@@ -339,10 +350,14 @@ void manual_refuel(info_exchange *state)
     if (state->fuel <= state->max_fuel * 0.25)
     {
         SCORE_REFUEL(state)
-        (state->current_texture_fx).texture = FX_REFUEL;
-        (state->current_texture_fx).end_timestamp = state->time_last_check_tick + 2000;
         state->refueling = SDL_TRUE;
         push_uint16_linked(state->refuel_times, get_timer(state));
+
+        // if we want to disable texture/sound feedback, this function ends here
+        if ( state->disable_all_feedback ) { return; }
+
+        (state->current_texture_fx).texture = FX_REFUEL;
+        (state->current_texture_fx).end_timestamp = state->time_last_check_tick + TEXTURE_TIMEOUT;
         // play crash sound effect
         if (play_sfx(state->audio_device_id, state->sfx_wav_length[SFX_REFUEL], state->sfx_wav_buffer[SFX_REFUEL]) != 0)
         {

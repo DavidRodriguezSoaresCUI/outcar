@@ -15,6 +15,8 @@
     //#define DISPLAY_DEBUG_INFO
     #define DEBUG_MSG_TIMEOUT 5000
     #define SCORE_POINT_MSG_TIMEOUT 1500
+    #define CAR_HIT_TRANSPARENCY_TIMEOUT 1500
+    #define TEXTURE_TIMEOUT 2000
 
     #define GAME_OVER_MAX_TRANSPARENCY 210
 
@@ -91,21 +93,25 @@
     #define CONF_REFUEL_REWARD      8
     #define CONF_CRASH_PENALTY      9
     #define CONF_NOFUEL_PENALTY    10
-    #define CONF_EXPECTED_NB_ITEMS 11
+    #define CONF_NO_OOF_FEEDBACK   11
+    #define CONF_DISABLE_ALL_FDBCK 12
+    #define CONF_EXPECTED_NB_ITEMS 13
 
     /* Norm :
      *
-     *   20 <= CONF_GAME_DURATION   <=  600; STD= 120
-     *   20 <= CONF_FUEL_DURATION   <=  300; STD=  40
-     *   50 <= CONF_REL_SPEED       <=  200; STD= 100
-     * 1000 <= CONF_SHOW_DURATION   <= 5000; STD=2000
-     *    0 <= CONF_DSPLY_NUM_CLK   <=    1; STD=   1
-     *    0 <= CONF_NEED_TO_REFUEL  <=    1; STD=   1
-     *    0 <= CONF_DSPLY_PAUSE_BTN <=    1; STD=   1
-     *    0 <= CONF_AVOID_REWARD    <= 1000; STD=  33
-     *    0 <= CONF_REFUEL_REWARD   <= 3000; STD= 300
-     *    0 <= CONF_CRASH_PENALTY   <= 1000; STD= 100
-     *    0 <= CONF_NOFUEL_PENALTY  <= 1000; STD= 100
+     *   20 <= CONF_GAME_DURATION     <=  600; STD= 120
+     *   20 <= CONF_FUEL_DURATION     <=  300; STD=  40
+     *   50 <= CONF_REL_SPEED         <=  200; STD= 100
+     * 1000 <= CONF_SHOW_DURATION     <= 5000; STD=2000
+     *    0 <= CONF_DSPLY_NUM_CLK     <=    1; STD=   1
+     *    0 <= CONF_NEED_TO_REFUEL    <=    1; STD=   1
+     *    0 <= CONF_DSPLY_PAUSE_BTN   <=    1; STD=   1
+     *    0 <= CONF_AVOID_REWARD      <= 1000; STD=  33
+     *    0 <= CONF_REFUEL_REWARD     <= 3000; STD= 300
+     *    0 <= CONF_CRASH_PENALTY     <= 1000; STD= 100
+     *    0 <= CONF_NOFUEL_PENALTY    <= 1000; STD= 100
+     *    0 <= CONF_NO_OOF_FEEDBACK   <=    1; STD=   0
+     *    0 <= CONF_DISABLE_ALL_FDBCK <=    1; STD=   0
      *
      *    Note : When the configuration file's values are outside the defined bounds,
      *    the 'STD' value is used instead.
@@ -130,18 +136,20 @@
     #define CONF_NEED_TO_REFUEL_STD  1
     //#define CONF_DSPLY_PAUSE_BTN_MIN 0
     //#define CONF_DSPLY_PAUSE_BTN_MAX 1
-    #define CONF_DSPLY_PAUSE_BTN_STD 1
-    #define CONF_AVOID_REWARD_MIN    0
-    #define CONF_AVOID_REWARD_MAX    1000
-    #define CONF_AVOID_REWARD_STD    33
-    #define CONF_REFUEL_REWARD_MIN   0
-    #define CONF_REFUEL_REWARD_MAX   3000
-    #define CONF_REFUEL_REWARD_STD   300
-    #define CONF_CRASH_PENALTY_MIN   0
-    #define CONF_CRASH_PENALTY_MAX   1000
-    #define CONF_CRASH_PENALTY_STD   100
-    #define CONF_NOFUEL_PENALTY_MIN  0
-    #define CONF_NOFUEL_PENALTY_MAX  1000
-    #define CONF_NOFUEL_PENALTY_STD  100
+    #define CONF_DSPLY_PAUSE_BTN_STD   1
+    #define CONF_AVOID_REWARD_MIN      0
+    #define CONF_AVOID_REWARD_MAX      1000
+    #define CONF_AVOID_REWARD_STD      33
+    #define CONF_REFUEL_REWARD_MIN     0
+    #define CONF_REFUEL_REWARD_MAX     3000
+    #define CONF_REFUEL_REWARD_STD     300
+    #define CONF_CRASH_PENALTY_MIN     0
+    #define CONF_CRASH_PENALTY_MAX     1000
+    #define CONF_CRASH_PENALTY_STD     100
+    #define CONF_NOFUEL_PENALTY_MIN    0
+    #define CONF_NOFUEL_PENALTY_MAX    1000
+    #define CONF_NOFUEL_PENALTY_STD    100
+    #define CONF_NO_OOF_FEEDBACK_STD   0
+    #define CONF_DISABLE_ALL_FDBCK_STD 0
 
 #endif

@@ -86,3 +86,11 @@
 >>Bugfix: Malformed 'stat_db_file_1stline' in 'strings.xml' caused misalignment in output database file
 >>Manual: multiple typo correction and info update
 
+>v1.0.14 (SP1) : (21.05.2019)
+>>Cruiser: Add two switches for audiovisual feedback in cruiser config (disable outOfFuel and/or all).
+>>>Optimisation: When audio feedback is deactivated, the correspondant audio file isn't loaded or freed.
+>>Cruiser: Fixed the way transparency was handled regarding player's car (in collision events).
+>>>This fixes the player's car being transparent during countdown !
+>>Cruiser: Some code cleanup, commenting and a few grobal constants declared.
+>>Manual: Converted LibreOffice document to LaTeX project, added backup contact, minor fixes.
+

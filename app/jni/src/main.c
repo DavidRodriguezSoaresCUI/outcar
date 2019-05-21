@@ -26,8 +26,7 @@ void log_results(const info_exchange state);
 int load_score(info_exchange *state);
 
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     /* Argument norm
      * 0: Useless
      * 1: Integer, ID/Code
@@ -56,20 +55,17 @@ int main(int argc, char **argv)
     double f_scrollstate = 0;
 
     // Init and screen setup, verifies whether everything is okay
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         log_SDL_error("SDL_Init");
         EXIT_ON_FAILURE
     }
 
-    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
-    {
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
         SDL_Log("SDL_image init failed: %s\n", IMG_GetError());
         EXIT_ON_FAILURE
     }
 
-    if (SDL_GetCurrentDisplayMode(0, &program_state.display))
-    {
+    if (SDL_GetCurrentDisplayMode(0, &program_state.display)) {
         log_SDL_error("GetDisplayMode");
         EXIT_ON_FAILURE
     }
@@ -84,8 +80,7 @@ int main(int argc, char **argv)
                                           SDL_WINDOWPOS_UNDEFINED, program_state.display.w,
                                           program_state.display.h,
                                           SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-    if (window == NULL)
-    {
+    if (window == NULL) {
         log_SDL_error("CreateWindow");
         EXIT_ON_FAILURE
     }
@@ -95,8 +90,7 @@ int main(int argc, char **argv)
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1,
                                                 SDL_RENDERER_ACCELERATED |
                                                 SDL_RENDERER_PRESENTVSYNC);
-    if (renderer == NULL)
-    {
+    if (renderer == NULL) {
         log_SDL_error("CreateRenderer");
         cleanup (window);
         EXIT_ON_FAILURE
@@ -113,38 +107,37 @@ int main(int argc, char **argv)
     struct tm tm = *localtime(&t);
     if (asprintf(&(program_state.date_at_launch), "%d-%02d-%02d %02d:%02d:%02d\n",
                  tm.tm_year + 1900,
-                 tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec) == -1)
-    {
+                 tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec) == -1) {
         program_state.quit = SDL_TRUE;
     }
 
     // init audio
+    if ( !(program_state.disable_all_feedback) ) {
+        if (init_sfx("res/Roland-GR-1-Trumpet-C5.wav",
+                     &program_state.audio_device_id,
+                     &(program_state.sfx_wav_length[SFX_CRASH]),
+                     &(program_state.sfx_wav_buffer[SFX_CRASH])) != 0) {
+            log_SDL_error("init sfx error");
+            program_state.quit = SDL_TRUE;
+        }
 
-    if (init_sfx("res/Roland-GR-1-Trumpet-C5.wav",
-                 &program_state.audio_device_id,
-                 &(program_state.sfx_wav_length[SFX_CRASH]),
-                 &(program_state.sfx_wav_buffer[SFX_CRASH])) != 0)
-    {
-        log_SDL_error("init sfx error");
-        program_state.quit = SDL_TRUE;
-    }
+        if (init_sfx("res/engine_fx_refuel.wav",
+                     &program_state.audio_device_id,
+                     &(program_state.sfx_wav_length[SFX_REFUEL]),
+                     &(program_state.sfx_wav_buffer[SFX_REFUEL])) != 0) {
+            log_SDL_error("init sfx error");
+            program_state.quit = SDL_TRUE;
+        }
 
-    if (init_sfx("res/engine_fx_refuel.wav",
-                 &program_state.audio_device_id,
-                 &(program_state.sfx_wav_length[SFX_REFUEL]),
-                 &(program_state.sfx_wav_buffer[SFX_REFUEL])) != 0)
-    {
-        log_SDL_error("init sfx error");
-        program_state.quit = SDL_TRUE;
-    }
-
-    if (init_sfx("res/engine_fx_nofuel.wav",
-                 &program_state.audio_device_id,
-                 &(program_state.sfx_wav_length[SFX_NO_FUEL]),
-                 &(program_state.sfx_wav_buffer[SFX_NO_FUEL])) != 0)
-    {
-        log_SDL_error("init sfx error");
-        program_state.quit = SDL_TRUE;
+        if ( !(program_state.no_OOF_feedback) ) {
+            if (init_sfx("res/engine_fx_nofuel.wav",
+                         &program_state.audio_device_id,
+                         &(program_state.sfx_wav_length[SFX_NO_FUEL]),
+                         &(program_state.sfx_wav_buffer[SFX_NO_FUEL])) != 0) {
+                log_SDL_error("init sfx error");
+                program_state.quit = SDL_TRUE;
+            }
+        }
     }
 
     // main program loop
@@ -173,9 +166,16 @@ int main(int argc, char **argv)
     // Cleanup and exit
     free_slots(program_state.opp_cars);
     textures_free();
-    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_CRASH]);
-    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_NO_FUEL]);
-    exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_REFUEL]);
+
+    if ( !(program_state.disable_all_feedback) ) {
+        exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_CRASH]);
+        exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_REFUEL]);
+
+        if ( !(program_state.no_OOF_feedback) ) {
+            exit_sfx(program_state.audio_device_id, program_state.sfx_wav_buffer[SFX_NO_FUEL]);
+        }
+    }
+
     free_info_exchange(&program_state);
     IMG_Quit();
     SDL_Quit();
@@ -239,6 +239,8 @@ void load_conf(info_exchange *state)
     state->refuel_reward         = (uint16_t) conf_data_i[CONF_REFUEL_REWARD];
     state->crash_penalty         = (uint16_t) conf_data_i[CONF_CRASH_PENALTY];
     state->nofuel_penalty        = (uint16_t) conf_data_i[CONF_NOFUEL_PENALTY];
+    state->no_OOF_feedback       = (uint8_t)  conf_data_i[CONF_NO_OOF_FEEDBACK];
+    state->disable_all_feedback  = (uint8_t)  conf_data_i[CONF_DISABLE_ALL_FDBCK];
 
     for (i = 0; i < nb_items; i++) // freeing memory
     {
@@ -335,6 +337,14 @@ void verify_conf(info_exchange *state)
                    CONF_NOFUEL_PENALTY_MAX,
                    CONF_NOFUEL_PENALTY_STD);
 
+    check_bounds8_bool(&(state->no_OOF_feedback),
+                       "warning: no OutOfFuel feedback OOB\n",
+                       CONF_NO_OOF_FEEDBACK_STD);
+
+    check_bounds8_bool(&(state->disable_all_feedback),
+                       "warning: disable all feedback OOB\n",
+                       CONF_DISABLE_ALL_FDBCK_STD);
+
 #endif
     state->display_numeric_clock =
             (state->display_numeric_clock == 0) ? (uint8_t) SDL_FALSE : (uint8_t) SDL_TRUE;
@@ -376,7 +386,9 @@ void log_results(const info_exchange state)
          * Show Fuel duration,
          * Display numeric clock,
          * Need to refuel,
-         * Display Pause button),
+         * Display Pause button,
+         * Disable OutOfFuel feedback,
+         * Disable negative audiovisual feedback),
      * Gameplay duration,
      * Score,
      * Hit Count,
@@ -394,7 +406,7 @@ void log_results(const info_exchange state)
     */
     char *dataline = NULL;
     if (asprintf(&dataline,
-             "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
+             "%s,%s,%s,%s,%s,\"%d,%d,%d,%d,%d,%d,%d,%d,%d\",%d,%d,%d,%s,%d,%s,%d,%s,%d,%s,%d,%s,%s,%s",
              argv[ARGV_IDCODE],
              argv[ARGV_AGE],
              argv[ARGV_SEX],
@@ -407,6 +419,8 @@ void log_results(const info_exchange state)
              state.display_numeric_clock,
              state.need_to_refuel,
              state.display_pause_button,
+             state.no_OOF_feedback,
+             state.disable_all_feedback,
              timer,
              state.score,
              uint16_linked_count(state.hit_times),

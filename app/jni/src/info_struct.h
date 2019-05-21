@@ -153,6 +153,8 @@ typedef struct info_exchange
     uint16_t refuel_reward;
     uint16_t crash_penalty;
     uint16_t nofuel_penalty;
+    uint8_t  no_OOF_feedback;       // boolean: SDL_FALSE or SDL_TRUE
+    uint8_t  disable_all_feedback;  // boolean: SDL_FALSE or SDL_TRUE
 
     // -- game state --
     uint32_t time_left; // in milliseconds
@@ -172,6 +174,7 @@ typedef struct info_exchange
     uint32_t time_last_check_tick;
     uint32_t time_last_show_fuel_tick;
     uint32_t time_last_car_gen;
+    uint32_t time_player_hit;
     SDL_Rect play_area;
     SDL_Rect menu_area;
     // |->fuel up message countdown data
