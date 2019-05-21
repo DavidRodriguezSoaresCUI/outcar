@@ -255,7 +255,7 @@ void rendering_state(info_exchange *state, SDL_Renderer *renderer)
     }
 
     // texture FX rendering and player car transparency management
-    // if there is a texture on screen (supposedly FX_CRASH,FX_NO_FUEL or FX_REFUEL)
+    // if there is a texture on screen
     if ((state->current_texture_fx).texture != FX_NONE)
     {
         timed_texture_fx *t_fx = &(state->current_texture_fx);
