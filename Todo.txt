@@ -50,7 +50,7 @@ COMPETED OBJECTIVES, BY CHRONOLOGICAL ORDER
 >>A job for anyone.
 >>>Done in v1.0.12
 
->Add a switch for audiovisual negative feedback in cruiser config
+>Added 2 switches for audiovisual feedback in cruiser config
 >>A job for anyone.
 >>>Done in v1.0.14
 
