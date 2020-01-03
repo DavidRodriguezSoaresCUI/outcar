@@ -2,7 +2,7 @@
 
 OutCar is a game developed for University of Geneva, for psychology studies. The game consists of avoiding traffic and refueling periodically (just by pressing a button).
 
-This game is still under active development as of April 2019.
+This game was under active development until May 2019. The last version was v1.0.14.
 
 **SP1** stands for *Service Pack 1*, for this is the first major update since the initial
 release.
